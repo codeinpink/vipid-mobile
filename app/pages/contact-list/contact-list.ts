@@ -24,9 +24,8 @@ export class ContactListPage implements OnInit {
     }
 
     onContactSelect(contact: Contact) {
-        console.log(contact);
         this.nav.push(ContactDetailPage, {
-            contact: contact
+            id: contact.id
         });
     }
 
