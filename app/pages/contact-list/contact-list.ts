@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Contact } from '../../shared/contact.model';
+import { ContactService } from '../../shared/contact.service';
 
 /*
   Generated class for the ContactListPage page.
@@ -9,7 +11,18 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   templateUrl: 'build/pages/contact-list/contact-list.html',
+    providers: [ContactService]
 })
-export class ContactListPage {
-  constructor(private nav: NavController) {}
+export class ContactListPage implements OnInit {
+    contacts: Contact[];
+
+    constructor(private nav: NavController, private contactService: ContactService) {}
+
+    getContacts() {
+        this.contactService.getContacts().then(contacts => this.contacts = contacts);
+    }
+
+    ngOnInit() {
+        this.getContacts();
+    }
 }
