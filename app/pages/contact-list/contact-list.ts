@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
+import { ContactDetailPage } from '../contact-detail/contact-detail';
 
 /*
   Generated class for the ContactListPage page.
@@ -20,6 +21,13 @@ export class ContactListPage implements OnInit {
 
     getContacts() {
         this.contactService.getContacts().then(contacts => this.contacts = contacts);
+    }
+
+    onContactSelect(contact: Contact) {
+        console.log(contact);
+        this.nav.push(ContactDetailPage, {
+            contact: contact
+        });
     }
 
     ngOnInit() {

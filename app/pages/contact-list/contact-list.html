@@ -10,7 +10,7 @@
 
 <ion-content padding class="contact-list">
     <ion-list>
-        <ion-item *ngFor="let contact of contacts">
+        <ion-item *ngFor="let contact of contacts" (click)="onContactSelect(contact)">
             {{ contact.name }}
         </ion-item>
     </ion-list>

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { Contact } from '../../shared/contact.model';
 
 /*
   Generated class for the ContactDetailPage page.
@@ -10,6 +11,12 @@ import { NavController } from 'ionic-angular';
 @Component({
   templateUrl: 'build/pages/contact-detail/contact-detail.html',
 })
-export class ContactDetailPage {
-  constructor(private nav: NavController) {}
+export class ContactDetailPage implements OnInit {
+  contact: Contact;
+
+  constructor(private nav: NavController, private navParams: NavParams) {}
+
+  ngOnInit() {
+    this.contact = this.navParams.get('contact');
+  }
 }
