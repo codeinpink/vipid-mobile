@@ -23,6 +23,7 @@ export class ContactService {
         contact.title = data.title;
         contact.company = data.company;
         contact.location = data.location;
+        contact.id = CONTACTS.length + 1;
 
         CONTACTS.push(contact);
     }
