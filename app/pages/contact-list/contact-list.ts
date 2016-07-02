@@ -23,6 +23,10 @@ export class ContactListPage implements OnInit {
         this.contactService.getContacts().then(contacts => this.contacts = contacts);
     }
 
+    onPersonAddClick() {
+        console.log('onPersonAddClick');
+    }
+
     onContactSelect(contact: Contact) {
         this.nav.push(ContactDetailPage, {
             id: contact.id
