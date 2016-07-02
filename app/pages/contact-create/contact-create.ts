@@ -1,15 +1,24 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { FormBuilder, ControlGroup, Validators } from '@angular/common';
 
-/*
-  Generated class for the ContactCreatePage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
-  templateUrl: 'build/pages/contact-create/contact-create.html',
+    templateUrl: 'build/pages/contact-create/contact-create.html',
 })
 export class ContactCreatePage {
-  constructor(private nav: NavController) {}
+    contactForm: ControlGroup;
+
+    constructor(private nav: NavController, private formBuilder: FormBuilder) {
+        this.contactForm = this.formBuilder.group({
+            name: ['', Validators.required],
+            title: ['', Validators.required],
+            company: ['', Validators.required],
+            location: ['', Validators.required]
+        });
+    }
+
+    onSubmit(contact) {
+        console.log('onSubmit');
+    }
 }

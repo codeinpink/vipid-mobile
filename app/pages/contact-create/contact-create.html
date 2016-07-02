@@ -9,5 +9,23 @@
 </ion-navbar>
 
 <ion-content padding class="contact-create">
-  
+    <form [ngFormModel]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
+        <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" [ngFormControl]="contactForm.controls['name']"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Title</ion-label>
+            <ion-input type="text" [ngFormControl]="contactForm.controls['title']"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Company</ion-label>
+            <ion-input type="text" [ngFormControl]="contactForm.controls['company']"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Location</ion-label>
+            <ion-input type="text" [ngFormControl]="contactForm.controls['location']"></ion-input>
+        </ion-item>
+        <button block [disabled]="!contactForm.valid">Create Contact</button>
+    </form>
 </ion-content>
