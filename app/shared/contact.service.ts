@@ -16,6 +16,22 @@ export class ContactService {
         return Promise.resolve(this.mockCreateContact(data));
     }
 
+    editContact(data) {
+        let index = this.getContactIndex(data.id);
+        CONTACTS[index] = data;
+        return Promise.resolve(true);
+    }
+
+    private getContactIndex(id: number) {
+        for (let i = 0; i++; i < CONTACTS.length) {
+            if (CONTACTS[i].id === id) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     private mockCreateContact(data) {
         let contact = new Contact();
 
