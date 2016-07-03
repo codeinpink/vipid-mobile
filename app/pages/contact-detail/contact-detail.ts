@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
+import { ContactEditPage } from '../contact-edit/contact-edit';
 
 /*
   Generated class for the ContactDetailPage page.
@@ -24,7 +25,7 @@ export class ContactDetailPage implements OnInit {
   }
 
   onEditClick() {
-      console.log('onEditClick');
+      this.nav.push(ContactEditPage);
   }
 
   ngOnInit() {
