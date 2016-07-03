@@ -24,9 +24,11 @@ export class ContactDetailPage implements OnInit {
     this.contactService.getContact(id).then(contact => this.contact = contact);
   }
 
-  onEditClick() {
-      this.nav.push(ContactEditPage);
-  }
+    onEditClick() {
+        this.nav.push(ContactEditPage, {
+            id: this.contact.id
+        });
+    }
 
   ngOnInit() {
     this.getContact();
