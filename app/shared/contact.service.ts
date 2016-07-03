@@ -23,13 +23,16 @@ export class ContactService {
     }
 
     private getContactIndex(id: number) {
-        for (let i = 0; i++; i < CONTACTS.length) {
+        let index = -1;
+
+        for (let i = 0; i < CONTACTS.length; i++) {
             if (CONTACTS[i].id === id) {
-                return i;
+                index = i;
+                break;
             }
         }
 
-        return -1;
+        return index;
     }
 
     private mockCreateContact(data) {
