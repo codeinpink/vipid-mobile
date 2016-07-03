@@ -38,8 +38,10 @@ export class ContactEditPage implements OnInit {
         });
     }
 
-    onSubmit() {
-        console.log('onSubmit');
+    onSubmit(contact) {
+        this.contactService.editContact(contact).then(_ => {
+            this.nav.pop();
+        });
     }
 
     ngOnInit() {
