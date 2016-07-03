@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
+import { FormBuilder, ControlGroup, Validators } from '@angular/common';
 
 /*
   Generated class for the ContactEditPage page.
@@ -15,12 +16,30 @@ import { ContactService } from '../../shared/contact.service';
 })
 export class ContactEditPage implements OnInit {
     contact: Contact;
+    contactForm: ControlGroup;
 
-    constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService) {}
+    constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService,
+                private formBuilder: FormBuilder) {}
+
+    initializeForm() {
+        this.contactForm = this.formBuilder.group({
+            name: [this.contact.name, Validators.required],
+            title: [this.contact.title, Validators.required],
+            company: [this.contact.company, Validators.required],
+            location: [this.contact.location, Validators.required]
+        });
+    }
 
     getContact() {
-        var id = +this.navParams.get('id');
-        this.contactService.getContact(id).then(contact => this.contact = contact);
+        let id = +this.navParams.get('id');
+        this.contactService.getContact(id).then(contact => {
+            this.contact = contact;
+            this.initializeForm();
+        });
+    }
+
+    onSubmit() {
+        console.log('onSubmit');
     }
 
     ngOnInit() {
