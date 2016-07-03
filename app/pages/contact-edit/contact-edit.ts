@@ -40,6 +40,8 @@ export class ContactEditPage implements OnInit {
 
     onSubmit(contact) {
         contact.id = this.contact.id;
+        contact.picture = this.contact.picture;
+
         this.contactService.editContact(contact).then(_ => {
             this.nav.pop();
         });
