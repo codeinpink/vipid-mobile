@@ -9,8 +9,20 @@
 
 <ion-content padding class="contact-detail">
     <div *ngIf="contact">
-        {{ contact.name }} <br>
-        {{ contact.company }} <br>
-        {{ contact.location }} <br>
+        <ion-grid>
+            <ion-row>
+                <ion-col width-33>
+                    <ion-img src="img/profile/{{ contact.picture }}"></ion-img>
+                </ion-col>
+                <ion-col width-66>
+                    <ion-item-group>
+                        <ion-item>{{ contact.name }}</ion-item>
+                        <ion-item>{{ contact.title }}</ion-item>
+                        <ion-item>{{ contact.company }}</ion-item>
+                        <ion-item>{{ contact.location }}</ion-item>
+                    </ion-item-group>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </div>
 </ion-content>
