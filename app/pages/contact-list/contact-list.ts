@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
-import { ContactCreatePage } from '../contact-create/contact-create';
+import { ContactAddMenuPage } from '../contact-add-menu/contact-add-menu';
 
 /*
   Generated class for the ContactListPage page.
@@ -25,7 +25,7 @@ export class ContactListPage implements OnInit {
     }
 
     onPersonAddClick() {
-        this.nav.push(ContactCreatePage);
+        this.nav.push(ContactAddMenuPage);
     }
 
     onContactSelect(contact: Contact) {
