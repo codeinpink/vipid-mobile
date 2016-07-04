@@ -19,7 +19,7 @@ export class UserFindPage implements OnInit {
     constructor(private nav: NavController, private formBuilder: FormBuilder, private userService: UserService) {}
 
     onSubmit(data) {
-        this.userService.getUserByEmailOrPhone(data.email, data.phone).then(user => {
+        this.userService.getUserByEmailOrPhone(data.email, +data.phone).then(user => {
             console.log(user);
         });
     }
