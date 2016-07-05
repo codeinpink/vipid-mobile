@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Modal } from 'ionic-angular';
 import { FormBuilder, ControlGroup, Validators } from '@angular/common';
 import { UserService } from '../../shared/user.service';
+import { UserAddConfirmationModal } from './user-add-confirmation';
 
 /*
   Generated class for the UserFindPage page.
@@ -25,6 +26,12 @@ export class UserFindPage implements OnInit {
             this.searchComplete = true;
             this.results.push(user);
         });
+    }
+
+    onSearchResultClick(user) {
+        console.log(user);
+        let modal = Modal.create(UserAddConfirmationModal, {'user': user});
+        this.nav.present(modal);
     }
 
     ngOnInit() {

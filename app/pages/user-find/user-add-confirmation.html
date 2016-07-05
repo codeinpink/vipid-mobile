@@ -1,0 +1,28 @@
+<ion-navbar *navbar>
+    <ion-buttons start>
+        <button (click)="close()">
+            Cancel
+        </button>
+    </ion-buttons>
+    <ion-title>Add Contact</ion-title>
+</ion-navbar>
+<ion-content padding class="user-add-confirmation">
+    <ion-grid>
+        <ion-row>
+            <ion-col width-33>
+                <ion-img src="img/profile/{{ user.picture }}"></ion-img>
+            </ion-col>
+            <ion-col width-66>
+                <ion-item-group>
+                    <ion-item>{{ user.name }}</ion-item>
+                    <ion-item>{{ user.title }}</ion-item>
+                    <ion-item>{{ user.company }}</ion-item>
+                    <ion-item>{{ user.location }}</ion-item>
+                    <ion-item>
+                        <button block (click)="onAddClick()">Add</button>
+                    </ion-item>
+                </ion-item-group>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
