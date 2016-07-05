@@ -15,12 +15,15 @@ import { UserService } from '../../shared/user.service';
 })
 export class UserFindPage implements OnInit {
     searchForm: ControlGroup;
+    searchComplete: boolean;
+    results: any;
 
     constructor(private nav: NavController, private formBuilder: FormBuilder, private userService: UserService) {}
 
     onSubmit(data) {
         this.userService.getUserByEmailOrPhone(data.email, +data.phone).then(user => {
-            console.log(user);
+            this.searchComplete = true;
+            this.results.push(user);
         });
     }
 
@@ -29,5 +32,8 @@ export class UserFindPage implements OnInit {
             email: [],
             phone: []
         });
+
+        this.searchComplete = false;
+        this.results = [];
     }
 }

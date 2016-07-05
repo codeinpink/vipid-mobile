@@ -14,4 +14,17 @@
         </ion-item>
         <button block [disabled]="!searchForm.controls.email.value && !searchForm.controls.phone.value">Find Contact</button>
     </form>
+    <div *ngIf="searchComplete">
+        <h2>Results</h2>
+        <ion-list>
+            <ion-item *ngFor="let result of results">
+                <ion-avatar item-left>
+                    <img src="img/profile/{{ result.picture }}">
+                </ion-avatar>
+                <h2>{{ result.name }}</h2>
+                <h3>{{ result.company }}</h3>
+                <p>{{ result.title }}</p>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-content>
