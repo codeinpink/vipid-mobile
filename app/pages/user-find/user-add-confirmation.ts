@@ -1,21 +1,24 @@
 import {Component} from '@angular/core';
 import {Modal, NavController, ViewController, NavParams} from 'ionic-angular';
 import {User} from '../../shared/user.model';
+import {ContactService} from '../../shared/contact.service';
 
 @Component({
-  templateUrl: 'build/pages/user-find/user-add-confirmation.html'
-
+    templateUrl: 'build/pages/user-find/user-add-confirmation.html',
+    providers: [ContactService]
 })
 export class UserAddConfirmationModal {
     user: User;
 
-    constructor(private viewCtrl: ViewController, navParams: NavParams) {
-        console.log(navParams);
+    constructor(private viewCtrl: ViewController, private nav: NavController, navParams: NavParams,
+        private contactService: ContactService) {
         this.user = navParams.get('user');
     }
 
     onAddClick() {
-        console.log('onAddClick');
+        this.contactService.addContact(this.user).then(_ => {
+            this.close();
+        });
     }
 
     close() {

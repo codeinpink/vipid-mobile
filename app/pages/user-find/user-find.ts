@@ -29,7 +29,6 @@ export class UserFindPage implements OnInit {
     }
 
     onSearchResultClick(user) {
-        console.log(user);
         let modal = Modal.create(UserAddConfirmationModal, {'user': user});
         this.nav.present(modal);
     }
