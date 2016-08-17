@@ -14,6 +14,7 @@
 </ion-navbar>
 
 <ion-content padding class="contact-list">
+
     <ion-list>
         <ion-item *ngFor="let contact of contacts" (click)="onContactSelect(contact)">
             <ion-avatar item-left>
@@ -24,4 +25,8 @@
             <p>{{ contact.title }}</p>
         </ion-item>
     </ion-list>
+
 </ion-content>
+<button fab fab-bottom fab-right style="z-index: 9999;" (click)="onPersonAddClick()">
+    <ion-icon name="add"></ion-icon>
+</button>
