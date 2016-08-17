@@ -12,7 +12,7 @@ import { FormBuilder, ControlGroup, Validators } from '@angular/common';
 */
 @Component({
     templateUrl: 'build/pages/contact-edit/contact-edit.html',
-    providers: [ContactService]
+    providers: [FormBuilder, ContactService]
 })
 export class ContactEditPage implements OnInit {
     contact: Contact;

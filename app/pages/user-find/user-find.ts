@@ -12,7 +12,7 @@ import { UserAddConfirmationModal } from './user-add-confirmation';
 */
 @Component({
   templateUrl: 'build/pages/user-find/user-find.html',
-  providers: [UserService]
+  providers: [FormBuilder, UserService]
 })
 export class UserFindPage implements OnInit {
     searchForm: ControlGroup;

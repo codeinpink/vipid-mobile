@@ -6,7 +6,7 @@ import { ContactService } from '../../shared/contact.service';
 
 @Component({
     templateUrl: 'build/pages/contact-create/contact-create.html',
-    providers: [ContactService]
+    providers: [FormBuilder, ContactService]
 })
 export class ContactCreatePage {
     contactForm: ControlGroup;
