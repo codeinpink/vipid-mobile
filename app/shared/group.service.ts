@@ -8,7 +8,7 @@ export class GroupService {
         return Promise.resolve(GROUPS);
     }
 
-    getContact(id: number) {
+    getGroup(id: number) {
         return Promise.resolve(this.getGroups().then(groups => groups.filter(group => group.id === id)[0]));
     }
 }

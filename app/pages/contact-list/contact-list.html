@@ -5,6 +5,16 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar>
+    <ion-buttons left>
+        <ion-item style="background: transparent;">
+            <!-- Pop up doesn't have a title because of this; way around that? -->
+            <ion-label></ion-label>
+            <ion-select [(ngModel)]="group" (ionChange)="filterByGroup(group)" style="max-width: 100%; padding-left: 0;">
+                <ion-option selected="true" checked="true" value="-1">All Contacts</ion-option>
+                <ion-option *ngFor="let group of groups" value="{{ group.id }}">{{ group.name }}</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-buttons>
     <ion-title>ContactList</ion-title>
     <ion-buttons end>
         <button (click)="onPersonAddClick()">
@@ -16,7 +26,7 @@
 <ion-content padding class="contact-list">
 
     <ion-list>
-        <ion-item *ngFor="let contact of contacts" (click)="onContactSelect(contact)">
+        <ion-item *ngFor="let contact of filteredContacts" (click)="onContactSelect(contact)">
             <ion-avatar item-left>
                 <img src="img/profile/{{ contact.picture }}">
             </ion-avatar>
