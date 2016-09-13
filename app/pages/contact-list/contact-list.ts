@@ -21,6 +21,7 @@ export class ContactListPage implements OnInit {
     contacts: Contact[];
     filteredContacts: Contact[];
     groups: Group[];
+    showSearch: Boolean;
 
     constructor(private nav: NavController, private contactService: ContactService, private groupService: GroupService) {}
 
@@ -60,7 +61,33 @@ export class ContactListPage implements OnInit {
         });
     }
 
+    filterContacts(ev: any) {
+        let val = ev.target.value;
+
+        if (val.trim() === '') {
+            this.resetContacts();
+        } else {
+            this.filteredContacts = this.contacts.filter((contact) => {
+                return (contact.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            })
+        }
+    }
+
+    toggleSearch() {
+        this.showSearch = !this.showSearch;
+    }
+
+    resetContacts() {
+        this.filteredContacts = this.contacts;
+    }
+
+    clearSearch() {
+        this.resetContacts();
+        this.toggleSearch();
+    }
+
     ngOnInit() {
+        this.showSearch = false;
         this.getContacts();
         this.getGroups();
     }
