@@ -11,4 +11,14 @@ export class GroupService {
     getGroup(id: number) {
         return Promise.resolve(this.getGroups().then(groups => groups.filter(group => group.id === id)[0]));
     }
+
+    createGroup(name: string) {
+        let group = new Group();
+
+        group.name = name;
+
+        GROUPS.push(group);
+
+        return Promise.resolve();
+    }
 }

@@ -10,7 +10,8 @@
             <!-- Pop up doesn't have a title because of this; way around that? -->
             <ion-label></ion-label>
             <ion-select [(ngModel)]="group" (ionChange)="filterByGroup(group)" style="max-width: 100%; padding-left: 0;">
-                <ion-option selected="true" checked="true" value="-1">All Contacts</ion-option>
+                <ion-option selected="true" checked="true" value="-2">All Contacts</ion-option>
+                <ion-option value="-1">Create New Group</ion-option>
                 <ion-option *ngFor="let group of groups" value="{{ group.id }}">{{ group.name }}</ion-option>
             </ion-select>
         </ion-item>

@@ -1,0 +1,13 @@
+<ion-navbar *navbar>
+    <ion-title>GroupCreate</ion-title>
+</ion-navbar>
+
+<ion-content padding class="group-create">
+    <form [ngFormModel]="groupForm" (ngSubmit)="onSubmit(groupForm.value)">
+        <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" [ngFormControl]="groupForm.controls['name']"></ion-input>
+        </ion-item>
+        <button block [disabled]="!groupForm.valid">Create Group</button>
+    </form>
+</ion-content>

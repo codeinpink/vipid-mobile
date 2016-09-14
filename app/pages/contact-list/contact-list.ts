@@ -6,6 +6,7 @@ import { Group } from '../../shared/group.model';
 import { GroupService } from '../../shared/group.service';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
 import { ContactAddMenuPage } from '../contact-add-menu/contact-add-menu';
+import { GroupCreatePage } from '../group-create/group-create';
 
 /*
   Generated class for the ContactListPage page.
@@ -50,8 +51,14 @@ export class ContactListPage implements OnInit {
         id = +id;
 
         // "All Contacts"
-        if (id === -1) {
+        if (id === -2) {
             this.filteredContacts = this.contacts;
+            return;
+        }
+
+        // "Create New Group"
+        if (id === -1) {
+            this.nav.push(GroupCreatePage);
             return;
         }
 
