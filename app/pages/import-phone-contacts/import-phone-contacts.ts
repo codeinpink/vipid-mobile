@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Contacts, Contact } from 'ionic-native';
+import { Contacts } from 'ionic-native';
 
 /*
   Generated class for the ImportPhoneContactsPage page.
@@ -12,11 +12,11 @@ import { Contacts, Contact } from 'ionic-native';
     templateUrl: 'build/pages/import-phone-contacts/import-phone-contacts.html',
 })
 export class ImportPhoneContactsPage implements OnInit {
-    contacts: Contact[];
+    contacts: any;
 
     constructor(private nav: NavController) {}
 
     ngOnInit() {
-        this.contacts = Contact.filter("*");
+        this.contacts = Contacts.find(["*"]);
     }
 }
