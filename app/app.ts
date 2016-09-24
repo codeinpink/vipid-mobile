@@ -6,7 +6,7 @@ import {Platform, ionicBootstrap, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 import {ContactListPage} from './pages/contact-list/contact-list';
-import {ImportPhoneContactsPage} from './pages/import-phone-contacts/import-phone-contacts';
+import {ImportContactsMenuPage} from './pages/import-contacts-menu/import-contacts-menu';
 
 
 declare var nfc: any;
@@ -32,7 +32,7 @@ export class MyApp {
 
         this.pages = [
             {title: 'Contacts', component: ContactListPage },
-            {title: 'Import', component: ImportPhoneContactsPage},
+            {title: 'Import', component: ImportContactsMenuPage},
             {title: 'Export', component: {}},
             {title: 'Settings', component: {}}
         ];
