@@ -1,0 +1,16 @@
+<ion-navbar *navbar>
+    <ion-title>ImportPhoneContacts</ion-title>
+</ion-navbar>
+
+<ion-content padding class="import-phone-contacts">
+    <ion-list>
+        <ion-item *ngFor="let contact of contacts" (click)="onContactSelect(contact)">
+            <ion-avatar item-left>
+                <img src="img/profile/{{ contact.picture }}">
+            </ion-avatar>
+            <h2>{{ contact.name }}</h2>
+            <h3>{{ contact.company }}</h3>
+            <p>{{ contact.title }}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>
