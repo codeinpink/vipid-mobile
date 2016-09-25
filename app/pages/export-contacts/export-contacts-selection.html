@@ -1,0 +1,25 @@
+<ion-navbar *navbar>
+    <ion-buttons left>
+        <button (click)="dismiss()">
+            Cancel
+        </button>
+    </ion-buttons>
+    <ion-title>Select Export Location</ion-title>
+</ion-navbar>
+<ion-content padding class="export-contacts-selection-page">
+    <ion-list>
+        <ion-item>
+            <ion-checkbox [(ngModel)]="methods.phone"></ion-checkbox>
+            <ion-label>Phone</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-checkbox [(ngModel)]="methods.outlook"></ion-checkbox>
+            <ion-label>Outlook</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-checkbox [(ngModel)]="methods.gmail"></ion-checkbox>
+            <ion-label>Gmail</ion-label>
+        </ion-item>
+    </ion-list>
+    <button full (click)="exportContacts()">Export</button>
+</ion-content>

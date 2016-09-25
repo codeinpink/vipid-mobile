@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Modal } from 'ionic-angular';
 import { ContactService } from '../../shared/contact.service';
+import {ExportContactsSelectionPage} from './export-contacts-selection';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class ExportContactsPage implements OnInit {
     }
 
     export() {
-
+        let modal = Modal.create(ExportContactsSelectionPage, {contacts: this.getCheckedContacts()});
+        this.nav.present(modal);
     }
 
     ngOnInit() {
