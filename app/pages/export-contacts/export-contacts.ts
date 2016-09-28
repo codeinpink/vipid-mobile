@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Modal } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { ContactService } from '../../shared/contact.service';
 import {ExportContactsSelectionPage} from './export-contacts-selection';
 
@@ -11,20 +11,20 @@ import {ExportContactsSelectionPage} from './export-contacts-selection';
 export class ExportContactsPage implements OnInit {
     contacts: any[]; // bypass "this property does not exist" for Contact class
 
-    constructor(private nav: NavController, private contactService: ContactService) {}
+    constructor(private nav: NavController, private modalCtrl: ModalController, private contactService: ContactService) {}
 
     getContacts() {
         this.contactService.getContacts().then(contacts => {
             this.contacts = contacts;
 
             for (let c of this.contacts) {
-                c.checked = false;
+                c.selected = false;
             }
         });
     }
 
     getCheckedContacts() {
-        return this.contacts.filter(contact => contact.checked);
+        return this.contacts.filter(contact => contact.selected);
     }
 
     getCheckedContactsCount() {
@@ -36,8 +36,8 @@ export class ExportContactsPage implements OnInit {
     }
 
     export() {
-        let modal = Modal.create(ExportContactsSelectionPage, {contacts: this.getCheckedContacts()});
-        this.nav.present(modal);
+        let modal = this.modalCtrl.create(ExportContactsSelectionPage, {contacts: this.getCheckedContacts()});
+        modal.present(modal);
     }
 
     ngOnInit() {

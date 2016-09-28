@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Modal } from 'ionic-angular';
-import { FormBuilder, ControlGroup, Validators } from '@angular/common';
+import { NavController, ModalController } from 'ionic-angular';
+import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserService } from '../../shared/user.service';
 import { UserAddConfirmationModal } from './user-add-confirmation';
 
@@ -15,11 +16,11 @@ import { UserAddConfirmationModal } from './user-add-confirmation';
   providers: [FormBuilder, UserService]
 })
 export class UserFindPage implements OnInit {
-    searchForm: ControlGroup;
+    searchForm: FormGroup;
     searchComplete: boolean;
     results: any;
 
-    constructor(private nav: NavController, private formBuilder: FormBuilder, private userService: UserService) {}
+    constructor(private nav: NavController, private modalCtrl: ModalController, private formBuilder: FormBuilder, private userService: UserService) {}
 
     onSubmit(data) {
         this.userService.getUserByEmailOrPhone(data.email, +data.phone).then(user => {
@@ -29,8 +30,8 @@ export class UserFindPage implements OnInit {
     }
 
     onSearchResultClick(user) {
-        let modal = Modal.create(UserAddConfirmationModal, {'user': user});
-        this.nav.present(modal);
+        let modal = this.modalCtrl.create(UserAddConfirmationModal, {'user': user});
+        modal.present(modal);
     }
 
     ngOnInit() {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FormBuilder, ControlGroup, Validators } from '@angular/common';
+import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ContactService } from '../../shared/contact.service';
 
 
@@ -9,7 +10,7 @@ import { ContactService } from '../../shared/contact.service';
     providers: [FormBuilder, ContactService]
 })
 export class ContactCreatePage {
-    contactForm: ControlGroup;
+    contactForm: FormGroup;
 
     constructor(private nav: NavController, private formBuilder: FormBuilder,
                 private contactService: ContactService) {

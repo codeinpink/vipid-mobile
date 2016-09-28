@@ -1,11 +1,13 @@
-<ion-navbar *navbar>
-    <ion-title>ContactDetail</ion-title>
-    <ion-buttons end>
-        <button (click)="onEditClick()">
-            <ion-icon name="create"></ion-icon>
-        </button>
-    </ion-buttons>
-</ion-navbar>
+<ion-header>
+    <ion-navbar>
+        <ion-title>ContactDetail</ion-title>
+        <ion-buttons end>
+            <button (click)="onEditClick()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
 
 <ion-content padding class="contact-detail">
     <div *ngIf="contact">

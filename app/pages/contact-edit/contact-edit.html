@@ -1,10 +1,12 @@
-<ion-navbar *navbar>
-    <ion-title>ContactEdit</ion-title>
-</ion-navbar>
+<ion-header>
+    <ion-navbar>
+        <ion-title>ContactEdit</ion-title>
+    </ion-navbar>
+</ion-header>
 
 <ion-content padding class="contact-edit">
     <div *ngIf="contact && contactForm">
-        <form [ngFormModel]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
             <ion-grid>
                 <ion-row>
                     <ion-col width-33>
@@ -14,19 +16,19 @@
                         <ion-item-group>
                             <ion-item>
                                 <ion-label floating>Name</ion-label>
-                                <ion-input type="text" [ngFormControl]="contactForm.controls['name']"></ion-input>
+                                <ion-input type="text" [formControl]="contactForm.controls['name']"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <ion-label floating>Title</ion-label>
-                                <ion-input type="text" [ngFormControl]="contactForm.controls['title']"></ion-input>
+                                <ion-input type="text" [formControl]="contactForm.controls['title']"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <ion-label floating>Company</ion-label>
-                                <ion-input type="text" [ngFormControl]="contactForm.controls['company']"></ion-input>
+                                <ion-input type="text" [formControl]="contactForm.controls['company']"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <ion-label floating>Location</ion-label>
-                                <ion-input type="text" [ngFormControl]="contactForm.controls['location']"></ion-input>
+                                <ion-input type="text" [formControl]="contactForm.controls['location']"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <button block [disabled]="!contactForm.valid">Update Contact</button>

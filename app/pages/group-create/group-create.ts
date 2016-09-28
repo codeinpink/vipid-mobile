@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FormBuilder, ControlGroup, Validators } from '@angular/common';
+import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { GroupService } from '../../shared/group.service';
 
 
@@ -9,7 +10,7 @@ import { GroupService } from '../../shared/group.service';
     providers: [FormBuilder, GroupService]
 })
 export class GroupCreatePage {
-    groupForm: ControlGroup;
+    groupForm: FormGroup;
 
     constructor(private nav: NavController, private formBuilder: FormBuilder, private groupService: GroupService) {
         this.groupForm = this.formBuilder.group({

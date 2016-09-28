@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
-import { FormBuilder, ControlGroup, Validators } from '@angular/common';
+import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 /*
   Generated class for the ContactEditPage page.
@@ -16,7 +17,7 @@ import { FormBuilder, ControlGroup, Validators } from '@angular/common';
 })
 export class ContactEditPage implements OnInit {
     contact: Contact;
-    contactForm: ControlGroup;
+    contactForm: FormGroup;
 
     constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService,
                 private formBuilder: FormBuilder) {}

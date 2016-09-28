@@ -1,16 +1,18 @@
-<ion-navbar *navbar>
-    <ion-title>UserFind</ion-title>
-</ion-navbar>
+<ion-header>
+    <ion-navbar>
+        <ion-title>UserFind</ion-title>
+    </ion-navbar>
+</ion-header>
 
 <ion-content padding class="user-find">
-    <form [ngFormModel]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
         <ion-item>
             <ion-label floating>Email</ion-label>
-            <ion-input type="text" [ngFormControl]="searchForm.controls['email']"></ion-input>
+            <ion-input type="text" [formControl]="searchForm.controls['email']"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Phone Number</ion-label>
-            <ion-input type="text" [ngFormControl]="searchForm.controls['phone']"></ion-input>
+            <ion-input type="text" [formControl]="searchForm.controls['phone']"></ion-input>
         </ion-item>
         <button block [disabled]="!searchForm.controls.email.value && !searchForm.controls.phone.value">Find Contact</button>
     </form>
