@@ -5,4 +5,5 @@ export class Contact {
     company: string;
     location: string;
     picture: string;
+    tags: string[];
 }
