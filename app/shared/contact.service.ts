@@ -1,15 +1,23 @@
 import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable}     from 'rxjs/Observable';
 import {CONTACTS} from './mock-contacts';
 import {Contact} from './contact.model';
+import 'rxjs/Rx'; // for other Observable methods
 
 @Injectable()
 export class ContactService {
-    getContacts() {
-        return Promise.resolve(CONTACTS);
+    private contactsUrl = 'http://localhost:8000/api/contacts';
+
+    constructor(private http: Http) {}
+
+    getContacts(): Observable<Contact[]> {
+        return this.http.get(this.contactsUrl).map(() => this.extractData)
+            .catch(this.handleError);
     }
 
     getContact(id: number) {
-        return Promise.resolve(this.getContacts().then(contacts => contacts.filter(contact => contact.id === id)[0]));
+        return this.getContacts().map(contacts => contacts.filter(contact => contact.id === id)[0]);
     }
 
     addContact(data) {
@@ -45,5 +53,24 @@ export class ContactService {
         contact.id = CONTACTS.length + 1;
 
         CONTACTS.push(contact);
+    }
+
+    private extractData(res: Response) {
+        let body = res.json();
+        return body.data || {};
+  }
+  private handleError (error: Response | any) {
+      // In a real world app, we might use a remote logging infrastructure
+      let errMsg: string;
+
+      if (error instanceof Response) {
+          const body = error.json() || '';
+          const err = body.error || JSON.stringify(body);
+          errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      } else {
+          errMsg = error.message ? error.message : error.toString();
+      }
+          console.error(errMsg);
+          return Observable.throw(errMsg);
     }
 }

@@ -14,7 +14,7 @@ export class ExportContactsPage implements OnInit {
     constructor(private nav: NavController, private modalCtrl: ModalController, private contactService: ContactService) {}
 
     getContacts() {
-        this.contactService.getContacts().then(contacts => {
+        this.contactService.getContacts().subscribe(contacts => {
             this.contacts = contacts;
 
             for (let c of this.contacts) {

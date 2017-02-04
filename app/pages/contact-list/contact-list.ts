@@ -27,7 +27,7 @@ export class ContactListPage implements OnInit {
     constructor(private nav: NavController, private contactService: ContactService, private groupService: GroupService) {}
 
     getContacts() {
-        this.contactService.getContacts().then(contacts => {
+        this.contactService.getContacts().subscribe(contacts => {
             this.contacts = contacts;
             this.filteredContacts = contacts;
         });

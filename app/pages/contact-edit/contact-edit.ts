@@ -33,7 +33,7 @@ export class ContactEditPage implements OnInit {
 
     getContact() {
         let id = +this.navParams.get('id');
-        this.contactService.getContact(id).then(contact => {
+        this.contactService.getContact(id).subscribe(contact => {
             this.contact = contact;
             this.initializeForm();
         });
