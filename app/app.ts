@@ -3,17 +3,27 @@
 
 import {Component, ViewChild} from '@angular/core';
 import {Platform, ionicBootstrap, Nav} from 'ionic-angular';
+import { Http, RequestOptions, XHRBackend } from '@angular/http';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 import {ContactListPage} from './pages/contact-list/contact-list';
 import {ImportContactsMenuPage} from './pages/import-contacts-menu/import-contacts-menu';
 import {ExportContactsPage} from './pages/export-contacts/export-contacts';
-
+import { HttpService } from './shared/http.service';
 
 declare var nfc: any;
 
 @Component({
-  templateUrl: 'build/app.html'
+  templateUrl: 'build/app.html',
+  providers: [
+      {
+          provide: Http,
+          useFactory: (backend: XHRBackend, options: RequestOptions) => {
+              return new HttpService(backend, options);
+          },
+          deps: [XHRBackend, RequestOptions]
+      }
+  ]
 })
 export class MyApp {
     @ViewChild(Nav) nav: Nav;

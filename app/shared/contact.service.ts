@@ -7,7 +7,7 @@ import 'rxjs/Rx'; // for other Observable methods
 
 @Injectable()
 export class ContactService {
-    private contactsUrl = 'http://localhost:8000/api/contacts';
+    private contactsUrl = 'http://localhost:8000/api/contacts/';
 
     constructor(private http: Http) {}
 
