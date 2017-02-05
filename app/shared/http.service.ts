@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 export class HttpService extends Http {
     constructor(backend: XHRBackend, options: RequestOptions) {
         let token = localStorage.getItem('auth_token');
-        options.headers.set('Authorization', `Bearer ${token}`);
+        options.headers.set('Authorization', `Token ${token}`);
         super(backend, options);
     }
 }
