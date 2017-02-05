@@ -21,7 +21,7 @@ export class ContactDetailPage {
 
   getContact() {
     var id = +this.navParams.get('id');
-    this.contactService.getContact(id).map(contact => this.contact = contact);
+    this.contactService.getContact(id).subscribe(contact => this.contact = contact);
   }
 
     onEditClick() {

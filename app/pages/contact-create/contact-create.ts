@@ -23,6 +23,6 @@ export class ContactCreatePage {
     }
 
     onSubmit(contact) {
-        this.contactService.addContact(contact).then(_ => this.nav.pop());
+        this.contactService.addContact(contact).subscribe(_ => this.nav.pop());
     }
 }

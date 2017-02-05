@@ -29,11 +29,11 @@
     <ion-list>
         <ion-item *ngFor="let contact of filteredContacts" (click)="onContactSelect(contact)">
             <ion-avatar item-left>
-                <img src="img/profile/{{ contact.picture }}">
+                <img src="img/profile/{{ contact.profile.picture }}">
             </ion-avatar>
-            <h2>{{ contact.name }}</h2>
-            <h3>{{ contact.company }}</h3>
-            <p>{{ contact.title }}</p>
+            <h2>{{ contact.profile.name }}</h2>
+            <h3>{{ contact.profile.company }}</h3>
+            <p>{{ contact.profile.title }}</p>
         </ion-item>
     </ion-list>
 

@@ -16,7 +16,7 @@ export class UserAddConfirmationModal {
     }
 
     onAddClick() {
-        this.contactService.addContact(this.user).then(_ => {
+        this.contactService.addContact(this.user).subscribe(_ => {
             this.close();
         });
     }

@@ -8,11 +8,12 @@ import 'rxjs/Rx'; // for other Observable methods
 @Injectable()
 export class ContactService {
     private contactsUrl = 'http://localhost:8000/api/contacts/';
+    private contactDetailUrl = this.contactsUrl + '{ID}' + '/';
 
     constructor(private http: Http) {}
 
     getContacts(): Observable<Contact[]> {
-        return this.http.get(this.contactsUrl).map(() => this.extractData)
+        return this.http.get(this.contactsUrl).map(this.extractData)
             .catch(this.handleError);
     }
 
@@ -21,13 +22,21 @@ export class ContactService {
     }
 
     addContact(data) {
-        return Promise.resolve(this.mockCreateContact(data));
+        // This needs to be replaced with the current user's ID, prolly through a service
+        data.owner = 1;
+        return this.http.post(this.contactsUrl, data).map(this.extractData);
     }
 
     editContact(data) {
+        // This needs to be replaced with the current user's ID, prolly through a service
+        data.owner = 1;
         let index = this.getContactIndex(data.id);
         CONTACTS[index] = data;
-        return Promise.resolve(true);
+        return this.http.put(this.contactDetailUrl.replace('{ID}', data.id), data).map(this.extractData);
+    }
+
+    deleteContact(data) {
+        return this.http.delete(this.contactDetailUrl.replace('{ID}', data.id)).map(this.extractData);
     }
 
     private getContactIndex(id: number) {
@@ -57,7 +66,7 @@ export class ContactService {
 
     private extractData(res: Response) {
         let body = res.json();
-        return body.data || {};
+        return body || {};
   }
   private handleError (error: Response | any) {
       // In a real world app, we might use a remote logging infrastructure

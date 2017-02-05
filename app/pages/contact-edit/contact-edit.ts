@@ -43,7 +43,7 @@ export class ContactEditPage implements OnInit {
         contact.id = this.contact.id;
         contact.picture = this.contact.picture;
 
-        this.contactService.editContact(contact).then(_ => {
+        this.contactService.editContact(contact).subscribe(_ => {
             this.nav.pop();
         });
     }
