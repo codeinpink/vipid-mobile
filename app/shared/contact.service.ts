@@ -32,7 +32,7 @@ export class ContactService {
         data.owner = 1;
         let index = this.getContactIndex(data.id);
         CONTACTS[index] = data;
-        return this.http.put(this.contactDetailUrl.replace('{ID}', data.id), data).map(this.extractData);
+        return this.http.patch(this.contactDetailUrl.replace('{ID}', data.id), data).map(this.extractData);
     }
 
     deleteContact(data) {
@@ -50,18 +50,6 @@ export class ContactService {
         }
 
         return index;
-    }
-
-    private mockCreateContact(data) {
-        let contact = new Contact();
-
-        contact.name = data.name;
-        contact.title = data.title;
-        contact.company = data.company;
-        contact.location = data.location;
-        contact.id = CONTACTS.length + 1;
-
-        CONTACTS.push(contact);
     }
 
     private extractData(res: Response) {

@@ -23,12 +23,16 @@ export class ContactEditPage implements OnInit {
                 private formBuilder: FormBuilder) {}
 
     initializeForm() {
+
         this.contactForm = this.formBuilder.group({
-            name: [this.contact.name, Validators.required],
-            title: [this.contact.title, Validators.required],
-            company: [this.contact.company, Validators.required],
-            location: [this.contact.location, Validators.required]
+            name: [this.contact.profile.name, Validators.required],
+            profile: this.formBuilder.group({
+                title: [this.contact.profile.title, Validators.required],
+                company: [this.contact.profile.company, Validators.required],
+                location: [this.contact.profile.location, Validators.required]
+            })
         });
+        console.log(this.contactForm.controls);
     }
 
     getContact() {
@@ -41,9 +45,9 @@ export class ContactEditPage implements OnInit {
 
     onSubmit(contact) {
         contact.id = this.contact.id;
-        contact.picture = this.contact.picture;
+        contact.picture = this.contact.profile.picture;
 
-        this.contactService.editContact(contact).subscribe(_ => {
+        this.contactService.editContact(this.contact).subscribe(_ => {
             this.nav.pop();
         });
     }

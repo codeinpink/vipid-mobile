@@ -75,7 +75,7 @@ export class ContactListPage implements OnInit {
             this.resetContacts();
         } else {
             this.filteredContacts = this.contacts.filter((contact) => {
-                return (contact.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+                return (contact.profile.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
             })
         }
     }

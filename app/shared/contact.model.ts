@@ -1,9 +1,7 @@
+import {Profile} from './profile.model';
+
 export class Contact {
     id: number;
-    name: string;
-    title: string;
-    company: string;
-    location: string;
-    picture: string;
+    profile: Profile;
     tags: string[];
 }
