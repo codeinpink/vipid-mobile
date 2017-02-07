@@ -25,8 +25,8 @@ export class ContactEditPage implements OnInit {
     initializeForm() {
 
         this.contactForm = this.formBuilder.group({
-            name: [this.contact.profile.name, Validators.required],
             profile: this.formBuilder.group({
+                name: [this.contact.profile.name, Validators.required],
                 title: [this.contact.profile.title, Validators.required],
                 company: [this.contact.profile.company, Validators.required],
                 location: [this.contact.profile.location, Validators.required]

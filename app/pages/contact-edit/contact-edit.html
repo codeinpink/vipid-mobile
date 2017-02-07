@@ -16,7 +16,7 @@
                         <ion-item-group>
                             <ion-item>
                                 <ion-label floating>Name</ion-label>
-                                <ion-input type="text" formGroupName="profile" formControlName="name"></ion-input>
+                                <ion-input type="text" [formControl]="contactForm.controls['profile'].controls['name']"></ion-input>
                             </ion-item>
                             <ion-item>
                                 <ion-label floating>Title</ion-label>
