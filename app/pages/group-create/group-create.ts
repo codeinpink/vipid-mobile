@@ -19,6 +19,6 @@ export class GroupCreatePage {
     }
 
     onSubmit(group) {
-        this.groupService.createGroup(group).then(_ => this.nav.pop());
+        this.groupService.createGroup(group).subscribe(_ => this.nav.pop());
     }
 }

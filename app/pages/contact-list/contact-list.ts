@@ -34,7 +34,7 @@ export class ContactListPage implements OnInit {
     }
 
     getGroups() {
-        this.groupService.getGroups().then(groups => this.groups = groups);
+        this.groupService.getGroups().subscribe(groups => this.groups = groups);
     }
 
     onPersonAddClick() {
@@ -62,7 +62,7 @@ export class ContactListPage implements OnInit {
             return;
         }
 
-        this.groupService.getGroup(id).then(group => {
+        this.groupService.getGroup(id).subscribe(group => {
             // Check for contact ids that are in the group's list of contacts
             this.filteredContacts = this.contacts.filter(contact => group.contacts.map(c => c.id).indexOf(contact.id) !== -1);
         });
