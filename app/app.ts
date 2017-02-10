@@ -7,6 +7,7 @@ import { Http, RequestOptions, XHRBackend } from '@angular/http';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 import {ContactListPage} from './pages/contact-list/contact-list';
+import {GroupListPage} from './pages/group-list/group-list';
 import {ImportContactsMenuPage} from './pages/import-contacts-menu/import-contacts-menu';
 import {ExportContactsPage} from './pages/export-contacts/export-contacts';
 import { HttpService } from './shared/http.service';
@@ -43,6 +44,7 @@ export class MyApp {
 
         this.pages = [
             {title: 'Contacts', component: ContactListPage },
+            {title: 'Groups', component: GroupListPage},
             {title: 'Import', component: ImportContactsMenuPage},
             {title: 'Export', component: ExportContactsPage},
             {title: 'Settings', component: {}}
