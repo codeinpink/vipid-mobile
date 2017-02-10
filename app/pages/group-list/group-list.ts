@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Group } from '../../shared/group.model';
 import { GroupService } from '../../shared/group.service';
+import { GroupCreatePage } from '../group-create/group-create';
 
 
 @Component({
@@ -15,6 +16,10 @@ export class GroupListPage {
 
     constructor(private navCtrl: NavController, private groupService: GroupService) {
 
+    }
+
+    onAddClick() {
+        this.navCtrl.push(GroupCreatePage);
     }
 
     onGroupSelect(group: Group) {
