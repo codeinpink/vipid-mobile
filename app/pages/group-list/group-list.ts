@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { Group } from '../../shared/group.model';
 import { GroupService } from '../../shared/group.service';
 import { GroupCreatePage } from '../group-create/group-create';
+import { GroupDetailPage } from '../group-detail/group-detail';
 
 
 @Component({
@@ -23,7 +24,9 @@ export class GroupListPage {
     }
 
     onGroupSelect(group: Group) {
-
+        this.navCtrl.push(GroupDetailPage, {
+            group: group
+        });
     }
 
     filterGroups(ev: any) {
