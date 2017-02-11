@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ContactCreatePage } from '../contact-create/contact-create';
 import { UserFindPage } from '../user-find/user-find';
+import { NfcAddPage } from '../nfc-add/nfc-add';
 
 /*
   Generated class for the ContactAddMenuPage page.
@@ -21,5 +22,9 @@ export class ContactAddMenuPage {
 
     onCreateContactClick() {
         this.nav.push(ContactCreatePage);
+    }
+
+    onNFCAddClick() {
+        this.nav.push(NfcAddPage);
     }
 }

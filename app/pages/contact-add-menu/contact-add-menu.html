@@ -1,11 +1,25 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>ContactAddMenu</ion-title>
+        <ion-title>Add Contact</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding class="contact-add-menu">
-    <button block (click)="onFindContactClick()">Find Contact on VIP ID</button>
-    <br>
-    <button block light (click)="onCreateContactClick()">Create Contact</button>
+    <ion-card>
+        <ion-card-header>Method</ion-card-header>
+        <ion-list>
+            <button ion-item (click)="onFindContactClick()">
+                <ion-icon name="search" item-left></ion-icon>
+                Find Contact on VIP ID
+            </button>
+            <button ion-item (click)="onCreateContactClick()">
+                <ion-icon name="person-add" item-left></ion-icon>
+                Create Contact
+            </button>
+            <button ion-item (click)="onNFCAddClick()">
+                <ion-icon name="phone-portrait" item-left></ion-icon>
+                Add Via NFC
+            </button>
+        </ion-list>
+    </ion-card>
 </ion-content>
