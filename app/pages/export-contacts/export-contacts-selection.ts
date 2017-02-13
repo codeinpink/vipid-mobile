@@ -53,9 +53,11 @@ export class ExportContactsSelectionPage {
 
                 contact.displayName = "dankMemeMaster" + c.id;
                 contact.addresses = [];
+                //noinspection TypeScriptUnresolvedFunction
                 contact.addresses.push(address);
                 contact.name = name;
                 contact.organizations = [];
+                //noinspection TypeScriptUnresolvedFunction
                 contact.organizations.push(organization);
 
                 contact.save().then( response =>
