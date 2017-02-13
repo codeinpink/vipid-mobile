@@ -1,0 +1,27 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>nfcAdd</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="enabled != null">
+        <div *ngIf="enabled == true">
+            <p>Nice. NFC is enabled.</p>
+        </div>
+        <div *ngIf="enabled == 'NFC_DISABLED'">
+            <p>NFC is currently disabled on your device. Please enable it.</p>
+        </div>
+        <div *ngIf="enabled == 'NFC_NFC'">
+            <p>Your device does not support NFC.</p>
+        </div>
+        {{ enabled }}
+    </div>
+
+    <div *ngIf="message">
+        {{ message }}
+    </div>
+</ion-content>

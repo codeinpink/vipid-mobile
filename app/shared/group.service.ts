@@ -6,7 +6,7 @@ import {GROUPS} from './mock-groups';
 
 @Injectable()
 export class GroupService {
-    private groupsUrl = 'http://localhost:8000/api/groups/';
+    private groupsUrl = 'http://localhost:8000/api/contact-groups/';
     private grouptDetailUrl = this.groupsUrl + '{ID}' + '/';
 
     constructor(private http: Http) {}
