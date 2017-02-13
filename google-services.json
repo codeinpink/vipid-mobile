@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "522993124605",
+    "project_id": "firebase-ionapp"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522993124605:android:9378507ab4a27d5a",
+        "android_client_info": {
+          "package_name": "com.ionicframework.vipidmobile809332"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522993124605-ka6ssqpcdhua47n2q134e1blrocqgga3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionicframework.vipidmobile809332",
+            "certificate_hash": "ED0F3795198B50013B58B284F82B3B555096CBDA"
+          }
+        },
+        {
+          "client_id": "522993124605-nbheg7cbfmnarr9bm11vgkepj5kk5ivi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyCfOPCFlplIk9JETmDP7eiD_L-p6ix40"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
