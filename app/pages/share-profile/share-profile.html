@@ -1,0 +1,88 @@
+
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Select Information to Share</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="profile">
+        <ion-item-group>
+            <ion-item-divider color="light">Core Information</ion-item-divider>
+            <ion-item>
+                <ion-label stacked>Full Name</ion-label>
+                <ion-input type="text" value="{{ profile.name }}" disabled></ion-input>
+                <ion-toggle disabled checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Title</ion-label>
+                <ion-input type="text" value="{{ profile.title }}" disabled></ion-input>
+                <ion-toggle disabled checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Company</ion-label>
+                <ion-input type="text" value="{{ profile.company }}" disabled></ion-input>
+                <ion-toggle disabled checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Location</ion-label>
+                <ion-input type="text" value="{{ profile.location }}" disabled></ion-input>
+                <ion-toggle disabled checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Email</ion-label>
+                <ion-input type="text" value="{{ profile.email }}" disabled></ion-input>
+                <ion-toggle disabled checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Phone Number</ion-label>
+                <ion-input type="text" value="{{ profile.phone_number }}" disabled></ion-input>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+        </ion-item-group>
+
+        <ion-item-group>
+            <ion-item-divider color="light">Online Presence</ion-item-divider>
+            <ion-item>
+                <ion-label stacked>Website</ion-label>
+                <ion-input type="text" value="{{ profile.website }}" disabled></ion-input>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Linkedin</ion-label>
+                <ion-input type="text" value="{{ profile.linkedin }}" disabled></ion-input>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Twitter</ion-label>
+                <ion-input type="text" value="{{ profile.twitter }}" disabled></ion-input>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Github</ion-label>
+                <ion-input type="text" value="{{ profile.github }}" disabled></ion-input>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Facebook</ion-label>
+                <ion-input type="text" value="{{ profile.facebook }}" disabled></ion-input>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Youtube</ion-label>
+                <ion-input type="text" value="{{ profile.youtube }}" disabled></ion-input>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Instagram</ion-label>
+                <ion-input type="text" value="{{ profile.instagram }}" disabled></ion-input>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+        </ion-item-group>
+
+        <button ion-button block (click)="continue()">Add to Contacts</button>
+    </div>
+</ion-content>

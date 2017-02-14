@@ -10,7 +10,7 @@
 <ion-content padding>
     <div *ngIf="enabled != null">
         <div *ngIf="enabled == true">
-            <p>Nice. NFC is enabled.</p>
+            <p>The exchanging of user ids and random tokens will be done on this page.</p>
         </div>
         <div *ngIf="enabled == 'NFC_DISABLED'">
             <p>NFC is currently disabled on your device. Please enable it.</p>
@@ -24,4 +24,6 @@
     <div *ngIf="message">
         {{ message }}
     </div>
+
+    <button ion-button block (click)="continue()">Continue</button>
 </ion-content>

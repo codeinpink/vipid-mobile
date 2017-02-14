@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, AlertController} from 'ionic-angular';
 import {NFC, Ndef} from 'ionic-native';
+import {ShareProfilePage} from '../share-profile/share-profile';
 
 
 @Component({
@@ -12,6 +13,10 @@ export class NfcAddPage {
 
     constructor(private navCtrl: NavController, private alertCtrl: AlertController) {
 
+    }
+
+    continue() {
+        this.navCtrl.push(ShareProfilePage);
     }
 
     onPageWillEnter() {
