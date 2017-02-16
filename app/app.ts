@@ -6,6 +6,7 @@ import {Platform, ionicBootstrap, Nav} from 'ionic-angular';
 import { Http, RequestOptions, XHRBackend } from '@angular/http';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
+import {MyProfileEditPage} from './pages/my-profile-edit/my-profile-edit';
 import {ContactListPage} from './pages/contact-list/contact-list';
 import {GroupListPage} from './pages/group-list/group-list';
 import {ImportContactsMenuPage} from './pages/import-contacts-menu/import-contacts-menu';
@@ -31,6 +32,7 @@ export class MyApp {
 
     rootPage: any = ContactListPage;
     pages: any;
+    profile: any;
 
     constructor(platform: Platform) {
         platform.ready().then(() => {
@@ -41,6 +43,7 @@ export class MyApp {
             //nfc.addMimeTypeListener("text/json", {}, {}, {});
         });
 
+        this.profile = {component: MyProfileEditPage};
 
         this.pages = [
             {title: 'Contacts', component: ContactListPage },

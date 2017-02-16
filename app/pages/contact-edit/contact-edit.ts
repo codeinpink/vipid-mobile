@@ -2,54 +2,38 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
-import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ProfileForm } from '../../components/profile-form/profile-form';
 
-/*
-  Generated class for the ContactEditPage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
     templateUrl: 'build/pages/contact-edit/contact-edit.html',
-    providers: [FormBuilder, ContactService]
+    directives: [ProfileForm],
+    providers: [ContactService]
 })
 export class ContactEditPage implements OnInit {
     contact: Contact;
-    contactForm: FormGroup;
+    valid: boolean;
 
-    constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService,
-                private formBuilder: FormBuilder) {}
-
-    initializeForm() {
-
-        this.contactForm = this.formBuilder.group({
-            profile: this.formBuilder.group({
-                name: [this.contact.profile.name, Validators.required],
-                title: [this.contact.profile.title, Validators.required],
-                company: [this.contact.profile.company, Validators.required],
-                location: [this.contact.profile.location, Validators.required]
-            })
-        });
-        console.log(this.contactForm.controls);
-    }
+    constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService) {}
 
     getContact() {
         let id = +this.navParams.get('id');
         this.contactService.getContact(id).subscribe(contact => {
             this.contact = contact;
-            this.initializeForm();
         });
     }
 
-    onSubmit(contact) {
-        contact.id = this.contact.id;
-        contact.picture = this.contact.profile.picture;
+    onChanged(ev) {
+        this.contact.profile = ev.data;
+        this.valid = ev.valid;
+    }
 
-        this.contactService.editContact(contact).subscribe(_ => {
-            this.nav.pop();
-        });
+    onSave() {
+        if (this.valid) {
+            this.contactService.editContact(this.contact).subscribe(_ => {
+                this.nav.pop();
+            });
+        }
     }
 
     ngOnInit() {

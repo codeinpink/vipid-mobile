@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Edit My Profile</ion-title>
+        <ion-buttons end>
+            <button (click)="onSave()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="my-profile-edit">
+    <div *ngIf="profile">
+        <profile-form [profile]="profile" (onChanged)="onChanged($event)"></profile-form>
+    </div>
+</ion-content>

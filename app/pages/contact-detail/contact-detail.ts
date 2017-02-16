@@ -3,15 +3,12 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
 import { ContactEditPage } from '../contact-edit/contact-edit';
+import { ProfileDetail } from '../../components/profile-detail/profile-detail';
 
-/*
-  Generated class for the ContactDetailPage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/contact-detail/contact-detail.html',
+  directives: [ProfileDetail],
   providers: [ContactService]
 })
 export class ContactDetailPage {

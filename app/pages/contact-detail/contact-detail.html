@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>ContactDetail</ion-title>
+        <ion-title>View Contact</ion-title>
         <ion-buttons end>
             <button (click)="onEditClick()">
                 <ion-icon name="create"></ion-icon>
@@ -11,20 +11,6 @@
 
 <ion-content padding class="contact-detail">
     <div *ngIf="contact">
-        <ion-grid>
-            <ion-row>
-                <ion-col width-33>
-                    <ion-img src="img/profile/{{ contact.picture }}"></ion-img>
-                </ion-col>
-                <ion-col width-66>
-                    <ion-item-group>
-                        <ion-item>{{ contact.profile.name }}</ion-item>
-                        <ion-item>{{ contact.profile.title }}</ion-item>
-                        <ion-item>{{ contact.profile.company }}</ion-item>
-                        <ion-item>{{ contact.profile.location }}</ion-item>
-                    </ion-item-group>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+        <profile-detail [profile]="contact.profile" disabled="true"></profile-detail>
     </div>
 </ion-content>

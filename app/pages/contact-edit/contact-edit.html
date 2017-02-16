@@ -1,42 +1,16 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>ContactEdit</ion-title>
+        <ion-title>Edit Contact</ion-title>
+        <ion-buttons end>
+            <button (click)="onSave()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding class="contact-edit">
-    <div *ngIf="contact && contactForm">
-        <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
-            <ion-grid>
-                <ion-row>
-                    <ion-col width-33>
-                        <ion-img src="img/profile/{{ contact.profile.picture }}"></ion-img>
-                    </ion-col>
-                    <ion-col width-66>
-                        <ion-item-group>
-                            <ion-item>
-                                <ion-label floating>Name</ion-label>
-                                <ion-input type="text" [formControl]="contactForm.controls['profile'].controls['name']"></ion-input>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label floating>Title</ion-label>
-                                <ion-input type="text" [formControl]="contactForm.controls['profile'].controls['title']"></ion-input>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label floating>Company</ion-label>
-                                <ion-input type="text" [formControl]="contactForm.controls['profile'].controls['company']"></ion-input>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label floating>Location</ion-label>
-                                <ion-input type="text" [formControl]="contactForm.controls['profile'].controls['location']"></ion-input>
-                            </ion-item>
-                            <ion-item>
-                                <button block [disabled]="!contactForm.valid">Update Contact</button>
-                            </ion-item>
-                        </ion-item-group>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </form>
+    <div *ngIf="contact">
+        <profile-form [profile]="contact.profile" (onChanged)="onChanged($event)"></profile-form>
     </div>
 </ion-content>

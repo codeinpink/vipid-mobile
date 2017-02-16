@@ -1,0 +1,64 @@
+<div *ngIf="profile">
+    <form [formGroup]="profileForm">
+        <ion-img src="/img/profile/profile2.jpg"></ion-img>
+        <ion-item-group>
+            <ion-item-divider color="light">Core Information</ion-item-divider>
+            <ion-item>
+                <ion-label stacked>Full Name</ion-label>
+                <ion-input type="text" value="{{ profile.name }}" [formControl]="profileForm.controls['name']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Title</ion-label>
+                <ion-input type="text" value="{{ profile.title }}" [formControl]="profileForm.controls['title']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Company</ion-label>
+                <ion-input type="text" value="{{ profile.company }}" [formControl]="profileForm.controls['company']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Location</ion-label>
+                <ion-input type="text" value="{{ profile.location }}" [formControl]="profileForm.controls['location']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Email</ion-label>
+                <ion-input type="text" value="{{ profile.email }}" [formControl]="profileForm.controls['email']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Phone Number</ion-label>
+                <ion-input type="text" value="{{ profile.phone_number }}" [formControl]="profileForm.controls['phone_number']"></ion-input>
+            </ion-item>
+        </ion-item-group>
+
+        <ion-item-group>
+            <ion-item-divider color="light">Online Presence</ion-item-divider>
+            <ion-item>
+                <ion-label stacked>Website</ion-label>
+                <ion-input type="text" value="{{ profile.website }}" [formControl]="profileForm.controls['website']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Linkedin</ion-label>
+                <ion-input type="text" value="{{ profile.linkedin }}" [formControl]="profileForm.controls['linkedin']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Twitter</ion-label>
+                <ion-input type="text" value="{{ profile.twitter }}" [formControl]="profileForm.controls['twitter']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Github</ion-label>
+                <ion-input type="text" value="{{ profile.github }}" [formControl]="profileForm.controls['github']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Facebook</ion-label>
+                <ion-input type="text" value="{{ profile.facebook }}" [formControl]="profileForm.controls['facebook']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Youtube</ion-label>
+                <ion-input type="text" value="{{ profile.youtube }}" [formControl]="profileForm.controls['youtube']"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Instagram</ion-label>
+                <ion-input type="text" value="{{ profile.instagram }}" [formControl]="profileForm.controls['instagram']"></ion-input>
+            </ion-item>
+        </ion-item-group>
+    </form>
+</div>
