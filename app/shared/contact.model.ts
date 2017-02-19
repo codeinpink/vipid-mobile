@@ -4,4 +4,8 @@ export class Contact {
     id: number;
     profile: Profile;
     tags: string[];
+
+    constructor() {
+        this.profile = new Profile();
+    }
 }

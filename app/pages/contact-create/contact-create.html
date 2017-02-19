@@ -1,27 +1,14 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>ContactCreate</ion-title>
+        <ion-title>Create Contact</ion-title>
+        <ion-buttons end>
+            <button (click)="onSave()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding class="contact-create">
-    <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value)">
-        <ion-item>
-            <ion-label floating>Name</ion-label>
-            <ion-input type="text" [formControl]="contactForm.controls['name']"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label floating>Title</ion-label>
-            <ion-input type="text" [formControl]="contactForm.controls['title']"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label floating>Company</ion-label>
-            <ion-input type="text" [formControl]="contactForm.controls['company']"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label floating>Location</ion-label>
-            <ion-input type="text" [formControl]="contactForm.controls['location']"></ion-input>
-        </ion-item>
-        <button block [disabled]="!contactForm.valid">Create Contact</button>
-    </form>
+    <profile-form [profile]="contact.profile" (onChanged)="onChanged($event)"></profile-form>
 </ion-content>

@@ -1,28 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
+import { ProfileForm } from '../../components/profile-form/profile-form';
 
 
 @Component({
     templateUrl: 'build/pages/contact-create/contact-create.html',
-    providers: [FormBuilder, ContactService]
+    directives: [ProfileForm],
+    providers: [ContactService]
 })
 export class ContactCreatePage {
-    contactForm: FormGroup;
+    contact: Contact;
+    valid: boolean;
 
-    constructor(private nav: NavController, private formBuilder: FormBuilder,
-                private contactService: ContactService) {
-        this.contactForm = this.formBuilder.group({
-            name: ['', Validators.required],
-            title: ['', Validators.required],
-            company: ['', Validators.required],
-            location: ['', Validators.required]
-        });
+    constructor(private nav: NavController, private contactService: ContactService) {
+
     }
 
-    onSubmit(contact) {
-        this.contactService.addContact(contact).subscribe(_ => this.nav.pop());
+    onChanged(ev) {
+        this.contact.profile = ev.data;
+        this.valid = ev.valid;
+    }
+
+    onSave() {
+        if (this.valid) {
+            this.contactService.addContact(this.contact).subscribe(_ => {
+                this.nav.popToRoot();
+            });
+        }
+    }
+
+    ngOnInit() {
+        this.contact = new Contact();
     }
 }
