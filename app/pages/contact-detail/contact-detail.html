@@ -11,6 +11,6 @@
 
 <ion-content padding class="contact-detail">
     <div *ngIf="contact">
-        <profile-detail [profile]="contact.profile" disabled="true"></profile-detail>
+        <profile-detail [profile]="contact.profile" disabled="true" [hide_missing]="contact.profile_read_only"></profile-detail>
     </div>
 </ion-content>

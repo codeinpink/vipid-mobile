@@ -8,8 +8,13 @@ import { Component, Input } from '@angular/core';
 export class ProfileDetail {
     @Input() profile: any;
     @Input() disabled: boolean;
+    @Input() hide_missing: boolean;
 
     constructor() {
 
+    }
+
+    hideMissing(input: any) {
+        return this.hide_missing && input == null;
     }
 }

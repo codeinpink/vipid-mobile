@@ -6,23 +6,23 @@
             <ion-label stacked>Full Name</ion-label>
             <ion-input type="text" value="{{ profile.name }}" [disabled]="disabled"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.title)">
             <ion-label stacked>Title</ion-label>
             <ion-input type="text" value="{{ profile.title }}" [disabled]="disabled"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.company)">
             <ion-label stacked>Company</ion-label>
             <ion-input type="text" value="{{ profile.company }}" [disabled]="disabled"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.location)">
             <ion-label stacked>Location</ion-label>
             <ion-input type="text" value="{{ profile.location }}" [disabled]="disabled"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.email)">
             <ion-label stacked>Email</ion-label>
             <ion-input type="text" value="{{ profile.email }}" [disabled]="disabled"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.phone_number)">
             <ion-label stacked>Phone Number</ion-label>
             <ion-input type="text" value="{{ profile.phone_number }}" [disabled]="disabled"></ion-input>
         </ion-item>
@@ -30,31 +30,31 @@
 
     <ion-item-group>
         <ion-item-divider color="light">Online Presence</ion-item-divider>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.website)">
             <ion-label stacked>Website</ion-label>
             <ion-input type="text" value="{{ profile.website }}" disabled></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.linkedin)">
             <ion-label stacked>Linkedin</ion-label>
             <ion-input type="text" value="{{ profile.linkedin }}" disabled></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.twitter)">
             <ion-label stacked>Twitter</ion-label>
             <ion-input type="text" value="{{ profile.twitter }}" disabled></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.github)">
             <ion-label stacked>Github</ion-label>
             <ion-input type="text" value="{{ profile.github }}" disabled></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.facebook)">
             <ion-label stacked>Facebook</ion-label>
             <ion-input type="text" value="{{ profile.facebook }}" disabled></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.youtube)">
             <ion-label stacked>Youtube</ion-label>
             <ion-input type="text" value="{{ profile.youtube }}" disabled></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item [hidden]="hideMissing(profile.instagram)">
             <ion-label stacked>Instagram</ion-label>
             <ion-input type="text" value="{{ profile.instagram }}" disabled></ion-input>
         </ion-item>

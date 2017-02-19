@@ -18,7 +18,8 @@ export class ContactService {
     }
 
     getContact(id: number) {
-        return this.getContacts().map(contacts => contacts.filter(contact => contact.id === id)[0]);
+        return this.http.get(this.contactDetailUrl.replace('{ID}', id.toString())).map(this.extractData)
+            .catch(this.handleError);
     }
 
     addContact(data) {
