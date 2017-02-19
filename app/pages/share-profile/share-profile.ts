@@ -1,26 +1,42 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { UserProfileService } from '../../providers/user-profile/user-profile';
-import { Profile } from '../../shared/profile.model';
+import { ContactPermissionsService } from '../../providers/contact-permissions/contact-permissions';
+import { ContactPermissions } from '../../shared/contact-permissions.model';
+import { ContactPermissionsForm } from '../../components/contact-permissions-form/contact-permissions-form';
 
 
 @Component({
     templateUrl: 'build/pages/share-profile/share-profile.html',
-    providers: [UserProfileService]
+    directives: [ContactPermissionsForm],
+    providers: [UserProfileService, ContactPermissionsService]
 })
 export class ShareProfilePage {
-    profile: Profile;
+    permissions: ContactPermissions;
+    valid: boolean;
 
-    constructor(private navCtrl: NavController, private userProfileService: UserProfileService) {
+    constructor(private navCtrl: NavController, private userProfileService: UserProfileService,
+    private contactPermissionsService: ContactPermissionsService) {
 
     }
 
-    getProfile() {
-        this.userProfileService.getProfile(1).subscribe(profile => this.profile = profile);
+    getContactPermissions() {
+        this.contactPermissionsService.getContactPermissions(3).subscribe(permissions => this.permissions = permissions);
+    }
+
+    onChanged(ev) {
+        this.permissions = ev.data;
+        this.valid = ev.valid;
+    }
+
+    continue() {
+        if (this.valid) {
+            this.contactPermissionsService.updateContactPermissions(3, this.permissions).subscribe(_ => this.navCtrl.popToRoot());
+        }
     }
 
     ngOnInit() {
-        this.getProfile();
+        this.getContactPermissions();
     }
 
 }

@@ -1,0 +1,74 @@
+<form [formGroup]="form">
+    <ion-item-group>
+        <ion-item-divider color="light">Core Information</ion-item-divider>
+        <ion-item>
+            <ion-label stacked>Full Name</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.name }}" disabled></ion-input>
+            <ion-toggle disabled checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Title</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.title }}" disabled></ion-input>
+            <ion-toggle disabled checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Company</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.company }}" disabled></ion-input>
+            <ion-toggle disabled checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Location</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.location }}" disabled></ion-input>
+            <ion-toggle disabled checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.email }}" disabled></ion-input>
+            <ion-toggle disabled checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Phone Number</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.phone_number }}" disabled></ion-input>
+            <ion-toggle checked="{{ permissions.can_view_phone_number }}" formControlName="can_view_phone_number"></ion-toggle>
+        </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+        <ion-item-divider color="light">Online Presence</ion-item-divider>
+        <ion-item>
+            <ion-label stacked>Website</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.website }}" disabled></ion-input>
+            <ion-toggle checked="{{ permissions.can_view_website }}" formControlName="can_view_website"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Linkedin</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.linkedin }}" disabled></ion-input>
+            <ion-toggle checked="{{ permissions.can_view_linkedin }}" formControlName="can_view_linkedin"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Twitter</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.twitter }}" disabled></ion-input>
+            <ion-toggle checked="{{ permissions.can_view_twitter }}" formControlName="can_view_twitter"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Github</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.github }}" disabled></ion-input>
+            <ion-toggle checked="{{ permissions.can_view_github }}" formControlName="can_view_github"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Facebook</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.facebook }}" disabled></ion-input>
+            <ion-toggle checked="{{ permissions.can_view_facebook }}" formControlName="can_view_facebook"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Youtube</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.youtube }}" disabled></ion-input>
+            <ion-toggle checked="{{ permissions.can_view_youtube }}" formControlName="can_view_youtube"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Instagram</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.instagram }}" disabled></ion-input>
+            <ion-toggle type="text" checked="{{ permissions.can_view_instagram }}" formControlName="can_view_instagram"></ion-toggle>
+        </ion-item>
+    </ion-item-group>
+</form>
