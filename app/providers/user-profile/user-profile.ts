@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {Profile} from '../../shared/profile.model';
@@ -14,6 +14,13 @@ export class UserProfileService {
 
     getProfiles(): Observable<Profile[]> {
         return this.http.get(this.userProfilesUrl).map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    queryByEmail(email: string): Observable<Profile[]> {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('email', email)
+        return this.http.get(this.userProfilesUrl, {search: params}).map(this.extractData)
             .catch(this.handleError);
     }
 

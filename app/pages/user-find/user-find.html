@@ -1,32 +1,15 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>UserFind</ion-title>
+        <ion-title>Find User</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding class="user-find">
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
         <ion-item>
-            <ion-label floating>Email</ion-label>
+            <ion-label stacked>Email</ion-label>
             <ion-input type="text" [formControl]="searchForm.controls['email']"></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-label floating>Phone Number</ion-label>
-            <ion-input type="text" [formControl]="searchForm.controls['phone']"></ion-input>
-        </ion-item>
-        <button block [disabled]="!searchForm.controls.email.value && !searchForm.controls.phone.value">Find Contact</button>
+        <button block [disabled]="!searchForm.controls.email.value" style="margin-top:100px;">Find User</button>
     </form>
-    <div *ngIf="searchComplete">
-        <h2>Results</h2>
-        <ion-list>
-            <ion-item *ngFor="let result of results" (click)="onSearchResultClick(result)">
-                <ion-avatar item-left>
-                    <img src="img/profile/{{ result.picture }}">
-                </ion-avatar>
-                <h2>{{ result.name }}</h2>
-                <h3>{{ result.company }}</h3>
-                <p>{{ result.title }}</p>
-            </ion-item>
-        </ion-list>
-    </div>
 </ion-content>
