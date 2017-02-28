@@ -19,6 +19,10 @@ export class ShareableProfileForm {
 
     }
 
+    getProfileLink(permissions) {
+        return 'http://vipidapp.com/profiles/' + permissions.unique_link + '/';
+    }
+
     ngOnInit() {
         this.form = this.formBuilder.group({
             id: [this.permissions.id, Validators.required],
