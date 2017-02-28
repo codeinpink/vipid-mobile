@@ -11,4 +11,8 @@ export class ContactPermissions {
     can_view_facebook: boolean;
     can_view_instagram: boolean;
     can_view_youtube: boolean;
+
+    constructor() {
+        this.profile = new Profile();
+    }
 }

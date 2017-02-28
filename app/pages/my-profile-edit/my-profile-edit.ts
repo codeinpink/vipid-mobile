@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { UserProfileService } from '../../providers/user-profile/user-profile';
 import { Profile } from '../../shared/profile.model';
 import { ProfileForm } from '../../components/profile-form/profile-form';
+import { PopoverPage } from './popover';
 
 @Component({
     templateUrl: 'build/pages/my-profile-edit/my-profile-edit.html',
@@ -13,7 +14,7 @@ export class MyProfileEditPage {
     profile: Profile;
     valid: boolean;
 
-    constructor(private navCtrl: NavController, private userProfileService: UserProfileService) {
+    constructor(private navCtrl: NavController, private userProfileService: UserProfileService, private popoverCtrl: PopoverController) {
 
     }
 
@@ -29,6 +30,11 @@ export class MyProfileEditPage {
         if (this.valid) {
             this.userProfileService.updateProfile(1, this.profile).subscribe();
         }
+    }
+
+    onMoreClick() {
+        let popover = this.popoverCtrl.create(PopoverPage);
+        popover.present();
     }
 
     onChanged(ev) {

@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Create Shareable Profile</ion-title>
+        <ion-buttons end>
+            <button (click)="onSave()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="profile">
+        <shareable-profile-form [permissions]="profile" disabled="false" (onChanged)="onChanged($event)"></shareable-profile-form>
+    </div>
+</ion-content>
