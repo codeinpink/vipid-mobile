@@ -10,8 +10,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="shareable-profile-detail">
     <div *ngIf="profile">
+        <qr-code [data]="getProfileLink(profile)" [type]="8" [size]="300"></qr-code>
         <shareable-profile-form [permissions]="profile" disabled="true" (onChanged)="onChanged($event)"></shareable-profile-form>
     </div>
 </ion-content>
