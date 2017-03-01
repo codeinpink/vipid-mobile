@@ -3,9 +3,12 @@ import {ContactPermissions} from './contact-permissions.model';
 export class ShareableProfile extends ContactPermissions {
     title: string;
     unique_link: string;
+    groups: any;
 
     constructor() {
         super();
+
+        this.groups = [];
 
         this.can_view_phone_number = true;
         this.can_view_website = true;

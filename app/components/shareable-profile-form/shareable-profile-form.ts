@@ -28,6 +28,7 @@ export class ShareableProfileForm {
             id: [this.permissions.id, Validators.required],
             profile: [this.permissions.profile],
             title: [this.permissions.title, Validators.required],
+            groups: [this.permissions.groups],
             can_view_phone_number: [this.permissions.can_view_phone_number, Validators.required],
             can_view_website: [this.permissions.can_view_website, Validators.required],
             can_view_linkedin: [this.permissions.can_view_linkedin, Validators.required],
