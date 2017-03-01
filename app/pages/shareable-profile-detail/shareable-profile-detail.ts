@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import { ShareableProfile } from '../../shared/shareable-profile.model';
 import { ShareableProfileService } from '../../providers/shareable-profile/shareable-profile';
 import { ShareableProfileForm } from '../../components/shareable-profile-form/shareable-profile-form';
 import { ShareableProfileEditPage } from '../shareable-profile-edit/shareable-profile-edit';
+import { PopoverPage } from './popover';
 import { QRCodeComponent } from 'angular2-qrcode';
 
 
@@ -15,12 +16,17 @@ import { QRCodeComponent } from 'angular2-qrcode';
 export class ShareableProfileDetailPage {
     profile: ShareableProfile;
 
-    constructor(private navCtrl: NavController, private navParams: NavParams, private shareableProfileService: ShareableProfileService) {
+    constructor(private navCtrl: NavController, private navParams: NavParams, private shareableProfileService: ShareableProfileService, private popoverCtrl: PopoverController) {
 
     }
 
     getProfileLink(profile) {
         return 'http://vipidapp.com/profiles/' + profile.unique_link + '/';
+    }
+
+    onMoreClick() {
+        let popover = this.popoverCtrl.create(PopoverPage, {profile: this.profile});
+        popover.present();
     }
 
     onEditClick() {

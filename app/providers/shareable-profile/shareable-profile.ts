@@ -31,6 +31,11 @@ export class ShareableProfileService {
             .catch(this.handleError);
     }
 
+    deleteProfile(id: number) {
+        return this.http.delete(this.shareableProfileDetailUrl.replace('{ID}', id.toString()))
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body || {};
