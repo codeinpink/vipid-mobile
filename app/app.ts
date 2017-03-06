@@ -11,6 +11,7 @@ import {ContactListPage} from './pages/contact-list/contact-list';
 import {GroupListPage} from './pages/group-list/group-list';
 import {ImportContactsMenuPage} from './pages/import-contacts-menu/import-contacts-menu';
 import {ExportContactsPage} from './pages/export-contacts/export-contacts';
+import {UserSettingsPage} from './pages/user-settings/user-settings'
 import { HttpService } from './shared/http.service';
 
 declare var nfc: any;
@@ -50,7 +51,7 @@ export class MyApp {
             {title: 'Groups', component: GroupListPage},
             {title: 'Import', component: ImportContactsMenuPage},
             {title: 'Export', component: ExportContactsPage},
-            {title: 'Settings', component: {}}
+            {title: 'Settings', component: UserSettingsPage}
         ];
     }
 

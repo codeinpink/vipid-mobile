@@ -17,6 +17,7 @@ export class ContactRequestService {
 
     createContactRequest(data: any) {
         // This needs to be replaced with the current user's ID, prolly through a service
+        //noinspection JSAnnotator
         data.sender = 1;
         return this.http.post(this.contactRequestsUrl, data).map(this.extractData).catch(this.handleError);
     }
