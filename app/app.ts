@@ -2,7 +2,7 @@
 ///<reference path="../typings/globals/phonegap-nfc/index.d.ts" />
 
 import {Component, ViewChild} from '@angular/core';
-import {Platform, ionicBootstrap, Nav} from 'ionic-angular';
+import {Platform, ionicBootstrap, Nav, LoadingController} from 'ionic-angular';
 import { Http, RequestOptions, XHRBackend } from '@angular/http';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
@@ -21,10 +21,10 @@ declare var nfc: any;
   providers: [
       {
           provide: Http,
-          useFactory: (backend: XHRBackend, options: RequestOptions) => {
-              return new HttpService(backend, options);
+          useFactory: (backend: XHRBackend, options: RequestOptions, loadingCtrl: LoadingController) => {
+              return new HttpService(backend, options, loadingCtrl);
           },
-          deps: [XHRBackend, RequestOptions]
+          deps: [XHRBackend, RequestOptions, LoadingController]
       }
   ]
 })
