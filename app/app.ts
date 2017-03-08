@@ -18,15 +18,7 @@ import {HttpService} from './shared/http.service';
 
 @Component({
   templateUrl: 'build/app.html',
-  providers: [
-      {
-          provide: HttpService,
-          useFactory: (backend: XHRBackend, options: RequestOptions, loadingCtrl: LoadingController) => {
-              return new HttpService(backend, options, loadingCtrl);
-          },
-          deps: [XHRBackend, RequestOptions, LoadingController]
-      }
-  ]
+  providers: []
 })
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
@@ -66,4 +58,13 @@ export class MyApp {
     }
 }
 
-ionicBootstrap(MyApp);
+// https://github.com/driftyco/ionic/issues/7592
+ionicBootstrap(MyApp, [
+    {
+        provide: HttpService,
+        useFactory: (backend: XHRBackend, options: RequestOptions, loadingCtrl: LoadingController) => {
+            return new HttpService(backend, options, loadingCtrl);
+        },
+        deps: [XHRBackend, RequestOptions, LoadingController]
+    }
+]);

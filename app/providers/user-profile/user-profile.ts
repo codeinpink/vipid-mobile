@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, URLSearchParams} from '@angular/http';
-import {Observable}     from 'rxjs/Observable';
+import {Response, URLSearchParams} from '@angular/http';
+import {HttpService} from '../../shared/http.service';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {Profile} from '../../shared/profile.model';
 
@@ -9,8 +10,9 @@ import {Profile} from '../../shared/profile.model';
 export class UserProfileService {
     private userProfilesUrl = 'http://localhost:8000/api/user-profiles/';
     private userProfileDetailUrl = this.userProfilesUrl + '{ID}' + '/';
+    private userProfileRefreshUrl = this.userProfileDetailUrl + 'refresh/';
 
-    constructor(private http: Http) {}
+    constructor(private http: HttpService) {}
 
     getProfiles(): Observable<Profile[]> {
         return this.http.get(this.userProfilesUrl).map(this.extractData)
@@ -33,6 +35,12 @@ export class UserProfileService {
     // USER'S id, not the id of the profile
     updateProfile(id: number, data: any) {
         return this.http.patch(this.userProfileDetailUrl.replace('{ID}', id.toString()), data).map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    // USER'S id, not the id of the profile
+    refreshProfileData(id: number) {
+        return this.http.get(this.userProfileRefreshUrl.replace('{ID}', id.toString())).map(this.extractData)
             .catch(this.handleError);
     }
 

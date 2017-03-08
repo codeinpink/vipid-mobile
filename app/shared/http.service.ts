@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, XHRBackend, RequestOptionsArgs, Request, Response, RequestOptions} from '@angular/http';
-import {LoadingController, App} from 'ionic-angular';
+import {LoadingController} from 'ionic-angular';
 import {LoginPage} from '../pages/login/login';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';

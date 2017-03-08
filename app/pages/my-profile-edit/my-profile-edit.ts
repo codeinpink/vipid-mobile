@@ -4,6 +4,8 @@ import { UserProfileService } from '../../providers/user-profile/user-profile';
 import { Profile } from '../../shared/profile.model';
 import { ProfileForm } from '../../components/profile-form/profile-form';
 import { PopoverPage } from './popover';
+import { LinkedIn } from '../../providers/oauth/linkedin';
+import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 
 @Component({
     templateUrl: 'build/pages/my-profile-edit/my-profile-edit.html',
