@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Login</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <p *ngIf="errors" style="color: #ea6153;">{{ errors }}</p>
+        <ion-item>
+            <ion-label stacked>Username</ion-label>
+            <ion-input type="text" [formControl]="form.controls['username']"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Password</ion-label>
+            <ion-input type="password" [formControl]="form.controls['password']"></ion-input>
+        </ion-item>
+        <button ion-button round [disabled]="!form.valid">Log In</button>
+    </form>
+</ion-content>

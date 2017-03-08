@@ -2,7 +2,7 @@
 ///<reference path="../typings/globals/phonegap-nfc/index.d.ts" />
 
 import {Component, ViewChild} from '@angular/core';
-import {Platform, ionicBootstrap, Nav, LoadingController} from 'ionic-angular';
+import {Platform, ionicBootstrap, Nav, LoadingController, App} from 'ionic-angular';
 import { Http, RequestOptions, XHRBackend } from '@angular/http';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
@@ -12,19 +12,18 @@ import {GroupListPage} from './pages/group-list/group-list';
 import {ImportContactsMenuPage} from './pages/import-contacts-menu/import-contacts-menu';
 import {ExportContactsPage} from './pages/export-contacts/export-contacts';
 import {UserSettingsPage} from './pages/user-settings/user-settings'
-import { HttpService } from './shared/http.service';
+import {HttpService} from './shared/http.service';
 
-declare var nfc: any;
 
 @Component({
   templateUrl: 'build/app.html',
   providers: [
       {
-          provide: Http,
-          useFactory: (backend: XHRBackend, options: RequestOptions, loadingCtrl: LoadingController) => {
-              return new HttpService(backend, options, loadingCtrl);
+          provide: HttpService,
+          useFactory: (backend: XHRBackend, options: RequestOptions, loadingCtrl: LoadingController, app: App) => {
+              return new HttpService(backend, options, loadingCtrl, app);
           },
-          deps: [XHRBackend, RequestOptions, LoadingController]
+          deps: [XHRBackend, RequestOptions, LoadingController, App]
       }
   ]
 })
@@ -40,8 +39,6 @@ export class MyApp {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
-
-            //nfc.addMimeTypeListener("text/json", {}, {}, {});
         });
 
         this.profile = {component: MyProfileEditPage};
