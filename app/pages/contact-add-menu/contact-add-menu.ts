@@ -4,6 +4,8 @@ import { ContactCreatePage } from '../contact-create/contact-create';
 import { UserFindPage } from '../user-find/user-find';
 import { NfcAddPage } from '../nfc-add/nfc-add';
 import { BarcodeScanner } from 'ionic-native';
+import { ShareableProfileService } from '../../providers/shareable-profile/shareable-profile';
+import { SharedProfileViewPage } from '../shared-profile-view/shared-profile-view';
 
 /*
   Generated class for the ContactAddMenuPage page.
@@ -13,9 +15,10 @@ import { BarcodeScanner } from 'ionic-native';
 */
 @Component({
   templateUrl: 'build/pages/contact-add-menu/contact-add-menu.html',
+  providers: [ShareableProfileService]
 })
 export class ContactAddMenuPage {
-    constructor(private nav: NavController, private alertCtrl: AlertController) {}
+    constructor(private nav: NavController, private alertCtrl: AlertController, private shareableProfileService: ShareableProfileService) {}
 
     onFindContactClick() {
         this.nav.push(UserFindPage);
@@ -36,6 +39,12 @@ export class ContactAddMenuPage {
         }).then((barcodeData) => {
             if (barcodeData.cancelled === false) {
                 console.log(barcodeData.text);
+                this.shareableProfileService.decodeProfileURL(barcodeData.text).subscribe(data => {
+                    console.log(data);
+                    this.nav.push(SharedProfileViewPage, data.profile);
+                }, errors => {
+                    console.log(errors);
+                })
             }
         }, (error) => {
             let alert = this.alertCtrl.create({

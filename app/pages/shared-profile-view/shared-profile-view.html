@@ -1,0 +1,13 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>View Shared Profile</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <profile-detail [profile]="profile" disabled="true" [hide_missing]="true"></profile-detail>
+</ion-content>
+<button fab fab-bottom fab-right style="z-index: 9999;" (click)="onAddClick()">
+    <ion-icon name="add"></ion-icon>
+</button>

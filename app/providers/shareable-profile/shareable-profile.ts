@@ -10,6 +10,7 @@ import {ShareableProfile} from '../../shared/shareable-profile.model';
 export class ShareableProfileService {
     private shareableProfilesUrl = 'http://localhost:8000/api/shareable-profiles/';
     private shareableProfileDetailUrl = this.shareableProfilesUrl + '{ID}' + '/';
+    private shareableProfileDecodeUrl = this.shareableProfilesUrl + 'decode_profile_url/';
 
     constructor(private http: HttpService) {}
 
@@ -34,6 +35,13 @@ export class ShareableProfileService {
 
     deleteProfile(id: number) {
         return this.http.delete(this.shareableProfileDetailUrl.replace('{ID}', id.toString()))
+            .catch(this.handleError);
+    }
+
+    decodeProfileURL(url: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('url', url);
+        return this.http.get(this.shareableProfileDecodeUrl, {search: params}).map(this.extractData)
             .catch(this.handleError);
     }
 
