@@ -11,7 +11,8 @@ import {ContactListPage} from './pages/contact-list/contact-list';
 import {GroupListPage} from './pages/group-list/group-list';
 import {ImportContactsMenuPage} from './pages/import-contacts-menu/import-contacts-menu';
 import {ExportContactsPage} from './pages/export-contacts/export-contacts';
-import {UserSettingsPage} from './pages/user-settings/user-settings'
+import {UserSettingsPage} from './pages/user-settings/user-settings';
+import {LoginPage} from './pages/login/login';
 import {HttpService} from './shared/http.service';
 
 
@@ -20,10 +21,10 @@ import {HttpService} from './shared/http.service';
   providers: [
       {
           provide: HttpService,
-          useFactory: (backend: XHRBackend, options: RequestOptions, loadingCtrl: LoadingController, app: App) => {
-              return new HttpService(backend, options, loadingCtrl, app);
+          useFactory: (backend: XHRBackend, options: RequestOptions, loadingCtrl: LoadingController) => {
+              return new HttpService(backend, options, loadingCtrl);
           },
-          deps: [XHRBackend, RequestOptions, LoadingController, App]
+          deps: [XHRBackend, RequestOptions, LoadingController]
       }
   ]
 })
@@ -34,11 +35,17 @@ export class MyApp {
     pages: any;
     profile: any;
 
-    constructor(platform: Platform) {
+    constructor(platform: Platform, private http: HttpService) {
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             StatusBar.styleDefault();
+
+            this.http.isUnauthenticated.subscribe(_ => {
+                if (!this.nav.isTransitioning()) {
+                    this.nav.setRoot(LoginPage);
+                }
+            });
         });
 
         this.profile = {component: MyProfileEditPage};

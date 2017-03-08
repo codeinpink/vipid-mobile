@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import {Observable}     from 'rxjs/Observable';
+import { Response } from '@angular/http';
+import {HttpService} from '../../shared/http.service';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {ContactPermissions} from '../../shared/contact-permissions.model';
 
@@ -10,7 +11,7 @@ export class ContactPermissionsService {
     private contactPermissionsUrl = 'http://localhost:8000/api/contact-permissions/';
     private contactPermissionsDetailUrl = this.contactPermissionsUrl + '{ID}' + '/';
 
-    constructor(private http: Http) {}
+    constructor(private http: HttpService) {}
 
     // PROFILE'S id, not the id of the contact permission
     getContactPermissions(id: number) {

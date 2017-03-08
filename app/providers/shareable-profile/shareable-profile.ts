@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Http, Response, URLSearchParams} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {Response, URLSearchParams} from '@angular/http';
+import {HttpService} from '../../shared/http.service';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {ShareableProfile} from '../../shared/shareable-profile.model';
 
@@ -10,7 +11,7 @@ export class ShareableProfileService {
     private shareableProfilesUrl = 'http://localhost:8000/api/shareable-profiles/';
     private shareableProfileDetailUrl = this.shareableProfilesUrl + '{ID}' + '/';
 
-    constructor(private http: Http) {}
+    constructor(private http: HttpService) {}
 
     getProfiles(): Observable<ShareableProfile[]> {
         return this.http.get(this.shareableProfilesUrl).map(this.extractData)

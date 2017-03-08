@@ -9,16 +9,22 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
 import {environment} from '../../environments/environment';
 
+
 @Injectable()
 export class HttpService extends Http {
     private pendingRequests: number = 0;
     private isLoading: boolean = false;
     private loader: any;
     private authToken: string;
+    private isAuthenticatedObserver: any;
+    public isUnauthenticated: any;
 
-    constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController, public appCtrl: App) {
+    constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController) {
         super(backend, options);
         this.authToken = localStorage.getItem('auth_token');
+        this.isUnauthenticated = Observable.create(observer => {
+            this.isAuthenticatedObserver = observer;
+        });
     }
 
     // is this even used?
@@ -148,18 +154,16 @@ export class HttpService extends Http {
     }
 
     private logout() {
-        if (!this.appCtrl.getRootNav().isTransitioning()) {
-            console.log('Logging out');
-            localStorage.removeItem('auth_token');
-            this.authToken = null;
-            this.appCtrl.getRootNav().setRoot(LoginPage);
-        }
+        console.log('Logging out');
+        localStorage.removeItem('auth_token');
+        this.authToken = null;
     }
 
     private parseError(code: any) {
         switch (code) {
             case 401:
-               this.logout()
+                this.logout();
+                this.isAuthenticatedObserver.next(true);
                 break;
             default:
                 break;

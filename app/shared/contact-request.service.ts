@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {Observable}     from 'rxjs/Observable';
+import {Response} from '@angular/http';
+import {HttpService} from './http.service';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ContactRequestService {
     private contactRequestsUrl = 'http://localhost:8000/api/contacts/';
     private contactRequestDetailUrl = this.contactRequestsUrl + '{ID}' + '/';
 
-    constructor(private http: Http) {}
+    constructor(private http: HttpService) {}
 
     getContactRequests() {
         return this.http.get(this.contactRequestsUrl)

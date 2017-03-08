@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Response} from '@angular/http';
+import {HttpService} from './http.service';
 import {Observable}     from 'rxjs/Observable';
 import {Group} from './group.model';
 import {GROUPS} from './mock-groups';
@@ -9,7 +10,7 @@ export class GroupService {
     private groupsUrl = 'http://localhost:8000/api/contact-groups/';
     private grouptDetailUrl = this.groupsUrl + '{ID}' + '/';
 
-    constructor(private http: Http) {}
+    constructor(private http: HttpService) {}
 
     getGroups(): Observable<Group[]> {
         return this.http.get(this.groupsUrl).map(this.extractData).catch(this.handleError);
