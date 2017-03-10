@@ -6,6 +6,8 @@ import { NfcAddPage } from '../nfc-add/nfc-add';
 import { BarcodeScanner } from 'ionic-native';
 import { ShareableProfileService } from '../../providers/shareable-profile/shareable-profile';
 import { SharedProfileViewPage } from '../shared-profile-view/shared-profile-view';
+import { ContactFormData } from '../../shared/contact-form-data.model';
+import { ContactAddSetPermissionsPage } from '../contact-add-set-permissions/contact-add-set-permissions';
 
 /*
   Generated class for the ContactAddMenuPage page.
@@ -38,13 +40,15 @@ export class ContactAddMenuPage {
             prompt: "Place a QR code inside the scan area"
         }).then((barcodeData) => {
             if (barcodeData.cancelled === false) {
-                console.log(barcodeData.text);
                 this.shareableProfileService.decodeProfileURL(barcodeData.text).subscribe(data => {
-                    console.log(data);
-                    this.nav.push(SharedProfileViewPage, data.profile);
+                    console.log('opening profile');
+                    let contactFormData = new ContactFormData();
+                    contactFormData.profile = data.profile;
+                    contactFormData.referral = data.unique_link;
+                    this.nav.push(SharedProfileViewPage, contactFormData);
                 }, errors => {
                     console.log(errors);
-                })
+                });
             }
         }, (error) => {
             let alert = this.alertCtrl.create({
@@ -52,8 +56,17 @@ export class ContactAddMenuPage {
                 subTitle: 'The QR Scanner could not be opened.',
                 buttons: ['OK']
             });
-
-            alert.present();
+            /*
+            this.shareableProfileService.decodeProfileURL('4cc91dcc-1303-4d22-b317-86069a60b4f7').subscribe(data => {
+                console.log('opening profile');
+                let contactFormData = new ContactFormData();
+                contactFormData.profile = data.profile;
+                contactFormData.referral = data.unique_link;
+                this.nav.push(SharedProfileViewPage, contactFormData);
+            }, errors => {
+                console.log(errors);
+            });*/
+            //alert.present();
         });
     }
 }

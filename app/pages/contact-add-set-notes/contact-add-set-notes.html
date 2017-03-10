@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Set Notes</ion-title>
+        <ion-buttons end>
+            <button (click)="continue()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="data">
+        <contact-notes-form [contact]="data" (onChanged)="onChanged($event)"></contact-notes-form>
+    </div>
+</ion-content>

@@ -6,7 +6,9 @@
 
 
 <ion-content padding>
-    <profile-detail [profile]="profile" disabled="true" [hide_missing]="true"></profile-detail>
+    <div *ngIf="data">
+        <profile-detail [profile]="data.profile" disabled="true" hide_missing="true"></profile-detail>
+    </div>
 </ion-content>
 <button fab fab-bottom fab-right style="z-index: 9999;" (click)="onAddClick()">
     <ion-icon name="add"></ion-icon>

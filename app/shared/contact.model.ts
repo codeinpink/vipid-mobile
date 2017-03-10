@@ -7,5 +7,6 @@ export class Contact {
 
     constructor() {
         this.profile = new Profile();
+        this.tags = [];
     }
 }

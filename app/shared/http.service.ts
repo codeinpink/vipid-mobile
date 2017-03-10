@@ -21,7 +21,7 @@ export class HttpService extends Http {
 
     constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController) {
         super(backend, options);
-        this.authToken = localStorage.getItem('auth_token');
+        this.authToken = localStorage.getItem('auth_token') || '24a607f915e2e84b9cbdac021e56363efad5d7c0';
         this.isUnauthenticated = Observable.create(observer => {
             this.isAuthenticatedObserver = observer;
         });
@@ -147,9 +147,12 @@ export class HttpService extends Http {
         this.pendingRequests--;
 
         if (this.pendingRequests == 0 && this.isLoading) {
-            this.loader.dismiss();
-            this.loader = null;
-            this.isLoading = false;
+            this.loader.dismiss().then(() => {
+                this.loader = null;
+                this.isLoading = false;
+                console.log('done loading');
+            });
+
         }
     }
 

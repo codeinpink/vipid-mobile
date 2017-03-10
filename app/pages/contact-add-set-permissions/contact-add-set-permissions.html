@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Select Information to Share</ion-title>
+        <ion-buttons end>
+            <button (click)="continue()">
+                NEXT
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="data">
+        <contact-permissions-form [permissions]="data.permissions" (onChanged)="onChanged($event)"></contact-permissions-form>
+    </div>
+</ion-content>

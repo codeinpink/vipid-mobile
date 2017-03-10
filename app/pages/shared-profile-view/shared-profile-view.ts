@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ProfileDetail } from '../../components/profile-detail/profile-detail';
-import { ShareProfilePage } from '../share-profile/share-profile';
+import { ContactAddSetPermissionsPage } from '../contact-add-set-permissions/contact-add-set-permissions';
+import { ContactFormData } from '../../shared/contact-form-data.model';
 
 
 @Component({
@@ -9,19 +10,20 @@ import { ShareProfilePage } from '../share-profile/share-profile';
     directives: [ProfileDetail],
 })
 export class SharedProfileViewPage {
-    profile: any;
+    data: ContactFormData;
 
     constructor(private navCtrl: NavController, private navParams: NavParams) {
 
     }
 
     onAddClick() {
-        this.navCtrl.push(ShareProfilePage);
+        console.log('onAddClick');
+        this.navCtrl.push(ContactAddSetPermissionsPage, this.data);
     }
 
-    onPageWillEnter() {
-        this.profile = this.navParams.data;
-        console.log(this.profile);
+    ngOnInit() {
+        console.log('ngOnInit');
+        this.data = this.navParams.data;
     }
 
 }
