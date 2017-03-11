@@ -5,9 +5,11 @@ export class ContactFormData extends Contact {
     contact: Contact;
     permissions: ContactPermissions;
     referral: string;
+    profileViewTitle: string;
 
     constructor() {
         super();
         this.permissions = new ContactPermissions();
+        this.profileViewTitle = 'View Shared Profile';
     }
 }

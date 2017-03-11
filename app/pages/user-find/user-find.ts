@@ -4,6 +4,8 @@ import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserProfileService } from '../../providers/user-profile/user-profile';
 import { UserFindResultPage } from '../user-find-result/user-find-result';
+import { SharedProfileViewPage } from '../shared-profile-view/shared-profile-view';
+import { ContactFormData } from '../../shared/contact-form-data.model';
 
 
 @Component({
@@ -17,7 +19,11 @@ export class UserFindPage implements OnInit {
 
     onSubmit(data) {
         this.userProfileService.queryByEmail(data.email).subscribe(users => {
-            this.nav.push(UserFindResultPage, users[0]);
+            console.log('opening profile');
+            let contactFormData = new ContactFormData();
+            contactFormData.profile = users[0];
+            contactFormData.profileViewTitle = 'User Found';
+            this.nav.push(SharedProfileViewPage, contactFormData);
         });
     }
 

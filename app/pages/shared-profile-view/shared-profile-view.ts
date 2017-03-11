@@ -10,6 +10,7 @@ import { ContactFormData } from '../../shared/contact-form-data.model';
     directives: [ProfileDetail],
 })
 export class SharedProfileViewPage {
+    title: string;
     data: ContactFormData;
 
     constructor(private navCtrl: NavController, private navParams: NavParams) {
@@ -23,6 +24,7 @@ export class SharedProfileViewPage {
 
     ngOnInit() {
         console.log('ngOnInit');
+        this.title = this.navParams.data.profileViewTitle;
         this.data = this.navParams.data;
     }
 
