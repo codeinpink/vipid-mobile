@@ -4,19 +4,16 @@ import { ShareableProfileListPage } from '../shareable-profile-list/shareable-pr
 import { LinkedIn } from '../../providers/oauth/linkedin';
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 import { OAuthAccessTokenService } from '../../providers/oauth/oauth-access-token';
-import { UserProfileService } from '../../providers/user-profile/user-profile';
-import 'rxjs/add/operator/finally';
 
 
 @Component({
     template: `
         <ion-list>
-            <button ion-item (click)="refresh()">Refresh</button>
             <button ion-item (click)="connectLinkedIn()">Connect LinkedIn</button>
             <button ion-item (click)="openShareableProfilesList()">Shareable Profiles</button>
         </ion-list>
     `,
-    providers: [OAuthAccessTokenService, UserProfileService]
+    providers: [OAuthAccessTokenService]
 })
 export class PopoverPage {
     private oauth: OauthCordova = new OauthCordova();
@@ -27,16 +24,7 @@ export class PopoverPage {
         state: "aaaaaaaaaaaaa"
     });
 
-    constructor(public viewCtrl: ViewController, private appCtrl: App, private accessTokenService: OAuthAccessTokenService, private userProfileService: UserProfileService) {}
-
-    refresh() {
-        // TODO: figure out why this doesn't close the popover and why the popover's closing
-        // causes the page behind it to no longer function
-        this.userProfileService.refreshProfileData(3).finally(() => this.close()).subscribe(data => {
-            console.log(data);
-        });
-    }
-
+    constructor(public viewCtrl: ViewController, private appCtrl: App, private accessTokenService: OAuthAccessTokenService) {}
     connectLinkedIn() {
         this.oauth.logInVia(this.linkedinProvider).then((success) => {
             console.log(success);

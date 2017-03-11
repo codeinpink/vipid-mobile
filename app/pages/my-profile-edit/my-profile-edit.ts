@@ -24,6 +24,14 @@ export class MyProfileEditPage {
         this.userProfileService.getProfile(1).subscribe(profile => this.profile = profile);
     }
 
+    doRefresh(refresher) {
+        this.userProfileService.refreshProfileData(3).subscribe(data => {
+            console.log(data);
+            this.profile = data;
+            refresher.complete();
+        });
+    }
+
     ngOnInit() {
         this.getProfile();
     }
