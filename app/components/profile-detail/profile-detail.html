@@ -1,7 +1,6 @@
 <div *ngIf="profile">
     <ion-img src="/img/profile/profile2.jpg"></ion-img>
-    <ion-item-group>
-        <ion-item-divider color="light">Core Information</ion-item-divider>
+    <ion-list>
         <ion-item>
             <ion-label stacked>Full Name</ion-label>
             <ion-input type="text" value="{{ profile.name }}" [disabled]="disabled"></ion-input>
@@ -26,10 +25,6 @@
             <ion-label stacked>Phone Number</ion-label>
             <ion-input type="text" value="{{ profile.phone_number }}" [disabled]="disabled"></ion-input>
         </ion-item>
-    </ion-item-group>
-
-    <ion-item-group>
-        <ion-item-divider color="light">Online Presence</ion-item-divider>
         <ion-item [hidden]="hideMissing(profile.website)">
             <ion-label stacked>Website</ion-label>
             <ion-input type="text" value="{{ profile.website }}" disabled></ion-input>
@@ -58,5 +53,5 @@
             <ion-label stacked>Instagram</ion-label>
             <ion-input type="text" value="{{ profile.instagram }}" disabled></ion-input>
         </ion-item>
-    </ion-item-group>
+    </ion-list>
 </div>

@@ -1,0 +1,12 @@
+<div *ngIf="contact">
+    <ion-item-group>
+        <ion-item>
+            <ion-label stacked>About</ion-label>
+            <ion-textarea value="{{ contact.about }}" disabled></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Tags</ion-label>
+            <ion-input type="text" value="{{ contact.tags }}" disabled></ion-input>
+        </ion-item>
+    </ion-item-group>
+</div>

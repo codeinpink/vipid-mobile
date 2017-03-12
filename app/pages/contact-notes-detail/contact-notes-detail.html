@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button (click)="goBack()" class="back-button bar-button bar-button-default show-back-button">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>View Contact</ion-title>
+        <ion-buttons end>
+            <button (click)="onEditClick()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <notes-detail [contact]="contact"></notes-detail>
+</ion-content>
