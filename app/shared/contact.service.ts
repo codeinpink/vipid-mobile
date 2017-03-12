@@ -11,6 +11,8 @@ import 'rxjs/Rx'; // for other Observable methods
 export class ContactService {
     private contactsUrl = 'http://localhost:8000/api/contacts/';
     private contactDetailUrl = this.contactsUrl + '{ID}' + '/';
+    private getOutlookContactsUrl = this.contactsUrl + 'get_outlook_contacts/';
+    private importOutlookContactsUrl = this.contactsUrl + 'import_outlook_contacts/';
 
     constructor(private http: HttpService) {}
 
@@ -24,10 +26,19 @@ export class ContactService {
             .catch(this.handleError);
     }
 
+    getOutlookContacts() {
+        return this.http.get(this.getOutlookContactsUrl).map(res => res.json().value).catch(this.handleError);
+    }
+
     addContact(data) {
         // This needs to be replaced with the current user's ID, prolly through a service
         data.owner = 1;
         return this.http.post(this.contactsUrl, data).map(this.extractData);
+    }
+
+    importOutlookContacts(data) {
+        console.log(data);
+        return this.http.post(this.importOutlookContactsUrl, data).map(this.extractData);
     }
 
     editContact(data) {
