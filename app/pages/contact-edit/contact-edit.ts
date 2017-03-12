@@ -3,14 +3,16 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
 import { ProfileForm } from '../../components/profile-form/profile-form';
+import { ContactNotesForm } from '../../components/contact-notes-form/contact-notes-form';
 
 
 @Component({
     templateUrl: 'build/pages/contact-edit/contact-edit.html',
-    directives: [ProfileForm],
+    directives: [ProfileForm, ContactNotesForm],
     providers: [ContactService]
 })
 export class ContactEditPage implements OnInit {
+    editingProfile: boolean;
     contact: Contact;
     valid: boolean;
 
@@ -24,7 +26,13 @@ export class ContactEditPage implements OnInit {
     }
 
     onChanged(ev) {
-        this.contact.profile = ev.data;
+        if (this.editingProfile) {
+            this.contact.profile = ev.data;
+        } else {
+            this.contact.about = ev.data.about;
+            this.contact.tags = ev.data.tags;
+        }
+
         this.valid = ev.valid;
     }
 
@@ -38,5 +46,6 @@ export class ContactEditPage implements OnInit {
 
     ngOnInit() {
         this.getContact();
+        this.editingProfile = this.navParams.get('editingProfile');
     }
 }

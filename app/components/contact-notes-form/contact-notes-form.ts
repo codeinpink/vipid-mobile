@@ -25,6 +25,6 @@ export class ContactNotesForm {
 
         this.form.valueChanges.subscribe(data => {
             this.onChanged.emit({data: data, valid: this.form.valid});
-        })
+        });
     }
 }

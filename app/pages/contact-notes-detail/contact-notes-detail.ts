@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { NotesDetail } from '../../components/notes-detail/notes-detail';
+import { ContactEditPage } from '../contact-edit/contact-edit';
 
 
 @Component({
@@ -17,6 +18,13 @@ export class ContactNotesDetailPage {
 
     goBack() {
         this.navCtrl.pop();
+    }
+
+    onEditClick() {
+        this.navCtrl.push(ContactEditPage, {
+            id: this.contact.id,
+            editingProfile: false
+        });
     }
 
     ngOnInit() {

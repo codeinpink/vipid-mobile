@@ -11,6 +11,7 @@
 
 <ion-content padding class="contact-edit">
     <div *ngIf="contact">
-        <profile-form [profile]="contact.profile" (onChanged)="onChanged($event)"></profile-form>
+        <profile-form *ngIf="editingProfile" [profile]="contact.profile" (onChanged)="onChanged($event)"></profile-form>
+        <contact-notes-form *ngIf="!editingProfile" [contact]="contact" (onChanged)="onChanged($event)"></contact-notes-form>
     </div>
 </ion-content>

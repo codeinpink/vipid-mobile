@@ -1,12 +1,12 @@
-<div *ngIf="contact">
+<form [formGroup]="form">
     <ion-item-group>
         <ion-item>
             <ion-label stacked>About</ion-label>
-            <ion-textarea value="{{ contact.about }}"></ion-textarea>
+            <ion-textarea value="{{ contact.about }}"  [formControl]="form.controls['about']"></ion-textarea>
         </ion-item>
         <ion-item>
             <ion-label stacked>Tags</ion-label>
-            <ion-input type="text" value="{{ contact.tags }}"></ion-input>
+            <ion-input type="text" value="{{ contact.tags }}"  [formControl]="form.controls['tags']"></ion-input>
         </ion-item>
     </ion-item-group>
-</div>
+</form>

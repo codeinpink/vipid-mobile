@@ -22,7 +22,8 @@ export class ContactProfileDetailPage {
 
     onEditClick() {
         this.navCtrl.push(ContactEditPage, {
-            id: this.contact.id
+            id: this.contact.id,
+            editingProfile: true
         });
     }
 
