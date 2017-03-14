@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactEditPage } from '../contact-edit/contact-edit';
 
@@ -10,12 +10,12 @@ import { ContactEditPage } from '../contact-edit/contact-edit';
 export class ContactProfileDetailPage {
     contact: Contact;
 
-    constructor(private navCtrl: NavController, private navParams: NavParams) {
+    constructor(private navCtrl: NavController, private navParams: NavParams, private appCtrl: App) {
 
     }
 
     goBack() {
-        this.navCtrl.pop();
+        this.appCtrl.getRootNav().pop();
     }
 
     onEditClick() {
