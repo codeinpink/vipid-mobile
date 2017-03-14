@@ -21,6 +21,7 @@ export class HttpService extends Http {
     constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController) {
         super(backend, options);
         this.authToken = localStorage.getItem('auth_token') || '24a607f915e2e84b9cbdac021e56363efad5d7c0';
+
         this.isUnauthenticated = Observable.create(observer => {
             this.isAuthenticatedObserver = observer;
         });
@@ -44,6 +45,11 @@ export class HttpService extends Http {
     put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.updateUrl(url);
         return this.intercept(super.put(url, body, this.getRequestOptionArgs(options)));
+    }
+
+    patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
+        url = this.updateUrl(url);
+        return this.intercept(super.patch(url, body, this.getRequestOptionArgs(options)));
     }
 
     delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
