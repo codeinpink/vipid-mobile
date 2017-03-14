@@ -24,7 +24,7 @@ export class ContactDetailPage {
     this.contactService.getContact(id).subscribe(contact => this.contact = contact);
   }
 
-    onPageWillEnter() {
+    ngOnInit() {
         this.getContact();
     }
 }
