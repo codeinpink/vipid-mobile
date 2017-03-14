@@ -9,7 +9,9 @@
     <div *ngIf="data">
         <profile-detail [profile]="data.profile" disabled="true" hide_missing="true"></profile-detail>
     </div>
+    <ion-fab right bottom>
+        <button ion-fab (click)="onAddClick()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>
-<button fab fab-bottom fab-right style="z-index: 9999;" (click)="onAddClick()">
-    <ion-icon name="add"></ion-icon>
-</button>
