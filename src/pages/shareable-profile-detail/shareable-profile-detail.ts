@@ -30,7 +30,7 @@ export class ShareableProfileDetailPage {
         this.navCtrl.push(ShareableProfileEditPage, {profile: this.profile });
     }
 
-    onPageWillEnter() {
+    ngOnInit() {
         this.profile = this.navParams.get('profile');
     }
 
