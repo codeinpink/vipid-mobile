@@ -1,12 +1,12 @@
 <ion-header>
     <ion-navbar>
-        <button menuToggle>
+        <button ion-button icon-only menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title [hidden]="showSearch">Groups</ion-title>
         <ion-searchbar (input)="filterGroups($event)" [hidden]="!showSearch" [showCancelButton]="true" (ionClear)="resetGroups()" (ionCancel)="clearSearch()" placeholder="Filter Groups"></ion-searchbar>
         <ion-buttons end>
-            <button (click)="toggleSearch()" [hidden]="showSearch">
+            <button ion-button icon-only (click)="toggleSearch()" [hidden]="showSearch">
                 <ion-icon name="search"></ion-icon>
             </button>
         </ion-buttons>

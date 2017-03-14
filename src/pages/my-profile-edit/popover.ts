@@ -19,7 +19,7 @@ export class PopoverPage {
     private oauth: OauthCordova = new OauthCordova();
     private linkedinProvider: LinkedIn = new LinkedIn({
         clientId: "78701vytcosrbk",
-        appScope: ["r_basicprofile"],
+        appScope: ["r_emailaddress", "r_basicprofile"],
         redirectUri: "http://localhost/callback",
         state: "aaaaaaaaaaaaa"
     });
