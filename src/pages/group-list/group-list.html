@@ -22,7 +22,9 @@
             <p>{{ group.description }}</p>
         </ion-item>
     </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab (click)="onAddClick()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>
-<button fab fab-bottom fab-right style="z-index: 9999;" (click)="onAddClick()">
-    <ion-icon name="add"></ion-icon>
-</button>

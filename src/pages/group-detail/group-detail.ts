@@ -21,7 +21,7 @@ export class GroupDetailPage {
         });
     }
 
-    onPageWillEnter() {
+    ngOnInit() {
         this.group = this.navParams.get('group');
     }
 

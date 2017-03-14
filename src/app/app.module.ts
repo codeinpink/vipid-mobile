@@ -13,6 +13,9 @@ import { ContactEditPage } from '../pages/contact-edit/contact-edit';
 import { ContactListPage } from '../pages/contact-list/contact-list';
 import { ContactNotesDetailPage } from '../pages/contact-notes-detail/contact-notes-detail';
 import { ContactProfileDetailPage } from '../pages/contact-profile-detail/contact-profile-detail';
+import { GroupCreatePage } from '../pages/group-create/group-create';
+import { GroupDetailPage } from '../pages/group-detail/group-detail';
+import { GroupListPage } from '../pages/group-list/group-list';
 import { ImportContactsMenuPage } from '../pages/import-contacts-menu/import-contacts-menu';
 import { ImportOutlookContactsPage } from '../pages/import-outlook-contacts/import-outlook-contacts';
 import { ImportPhoneContactsPage } from '../pages/import-phone-contacts/import-phone-contacts';
@@ -51,6 +54,9 @@ import { XHRBackend, RequestOptions } from '@angular/http';
     ContactListPage,
     ContactNotesDetailPage,
     ContactProfileDetailPage,
+    GroupCreatePage,
+    GroupDetailPage,
+    GroupListPage,
     ImportContactsMenuPage,
     ImportOutlookContactsPage,
     ImportPhoneContactsPage,
@@ -90,6 +96,9 @@ import { XHRBackend, RequestOptions } from '@angular/http';
     ContactListPage,
     ContactNotesDetailPage,
     ContactProfileDetailPage,
+    GroupCreatePage,
+    GroupDetailPage,
+    GroupListPage,
     ImportContactsMenuPage,
     ImportOutlookContactsPage,
     ImportPhoneContactsPage,
