@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>ShareableProfileDetail</ion-title>
+        <ion-buttons end>
+            <button (click)="onEditClick()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+            <button (click)="onMoreClick()">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="shareable-profile-detail">
+    <div *ngIf="profile"><!--[type]="8"-->
+        <qr-code [value]="getProfileLink(profile)"  [size]="300"></qr-code>
+        <shareable-profile-form [permissions]="profile" disabled="true" (onChanged)="onChanged($event)"></shareable-profile-form>
+    </div>
+</ion-content>

@@ -1,8 +1,0 @@
-{
-  "resolution": "main",
-  "tree": {
-    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/00694cb526241f3e4e484e584b4de8a1824a9469/phonegap-nfc/phonegap-nfc.d.ts",
-    "raw": "registry:dt/phonegap-nfc#0.0.0+20160512043927",
-    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/00694cb526241f3e4e484e584b4de8a1824a9469/phonegap-nfc/phonegap-nfc.d.ts"
-  }
-}
