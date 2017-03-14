@@ -12,10 +12,22 @@
             <ion-label stacked>Username</ion-label>
             <ion-input type="text" [formControl]="form.controls['username']"></ion-input>
         </ion-item>
+        <span class="form-error" *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched && !form.controls['username'].dirty">{{ validationMessages.username.required }}</span>
+        <div *ngIf="formErrors.username">
+            <div *ngFor="let error of formErrors.username">
+                <span class="form-error">{{ error }}</span>
+            </div>
+        </div>
         <ion-item>
             <ion-label stacked>Password</ion-label>
             <ion-input type="password" [formControl]="form.controls['password']"></ion-input>
         </ion-item>
+        <span class="form-error" *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched && !form.controls['password'].dirty">{{ validationMessages.password.required }}</span>
+        <div *ngIf="formErrors.password">
+            <div *ngFor="let error of formErrors.password">
+                <span class="form-error">{{ error }}</span>
+            </div>
+        </div>
         <button ion-button round [disabled]="!form.valid">Log In</button>
     </form>
 </ion-content>

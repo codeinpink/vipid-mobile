@@ -20,7 +20,7 @@ export class HttpService extends Http {
 
     constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController) {
         super(backend, options);
-        this.authToken = localStorage.getItem('auth_token') || '24a607f915e2e84b9cbdac021e56363efad5d7c0';
+        this.authToken = localStorage.getItem('auth_token');// || '24a607f915e2e84b9cbdac021e56363efad5d7c0';
 
         this.isUnauthenticated = Observable.create(observer => {
             this.isAuthenticatedObserver = observer;
@@ -121,6 +121,7 @@ export class HttpService extends Http {
 
     private onCatch(error: any): Observable<any> {
         console.log('onCatch');
+
         let errMsg: string;
         if (error instanceof Response) {
             const body = error.json() || '';
@@ -130,7 +131,9 @@ export class HttpService extends Http {
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
-        return Observable.throw(errMsg);
+        // TODO: display message if it's a server error
+        return Observable.throw(error);
+
     }
 
     private onSubscribeSuccess(res: Response): void {
