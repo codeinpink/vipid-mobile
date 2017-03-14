@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { QRCodeModule } from 'angular2-qrcode';
 
+// Pages
 import { ContactAddMenuPage } from '../pages/contact-add-menu/contact-add-menu';
 import { ContactAddSetNotesPage } from '../pages/contact-add-set-notes/contact-add-set-notes';
 import { ContactAddSetPermissionsPage } from '../pages/contact-add-set-permissions/contact-add-set-permissions';
@@ -32,14 +33,23 @@ import { UserFindPage } from '../pages/user-find/user-find';
 import { UserFindResultPage } from '../pages/user-find-result/user-find-result';
 import { UserSettingsPage } from '../pages/user-settings/user-settings';
 
+// Directives/components
 import { ProfileForm } from '../components/profile-form/profile-form';
 import { ProfileDetail } from '../components/profile-detail/profile-detail';
 import { ContactNotesForm } from '../components/contact-notes-form/contact-notes-form';
 import { NotesDetail } from '../components/notes-detail/notes-detail';
 import { ContactPermissionsForm } from '../components/contact-permissions-form/contact-permissions-form';
 import { ShareableProfileForm } from '../components/shareable-profile-form/shareable-profile-form';
-import { HttpService } from '../shared/http.service';
 import { XHRBackend, RequestOptions } from '@angular/http';
+
+// Services
+import { HttpService } from '../shared/http.service';
+import { ContactService } from '../shared/contact.service';
+import { GroupService } from '../shared/group.service';
+import { AuthService } from '../providers/auth/auth';
+import { ContactPermissionsService } from '../providers/contact-permissions/contact-permissions';
+import { ShareableProfileService } from '../providers/shareable-profile/shareable-profile';
+import { UserProfileService } from '../providers/user-profile/user-profile';
 
 
 @NgModule({
@@ -117,14 +127,13 @@ import { XHRBackend, RequestOptions } from '@angular/http';
   ],
   providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
-      {
-          provide: HttpService,
-          useFactory: (backend: XHRBackend, options: RequestOptions, loadingCtrl: LoadingController) => {
-              return new HttpService(backend, options, loadingCtrl);
-          },
-          deps: [XHRBackend, RequestOptions, LoadingController]
-      }
-
+      HttpService,
+      ContactService,
+      GroupService,
+      AuthService,
+      ContactPermissionsService,
+      ShareableProfileService,
+      UserProfileService,
   ]
 })
 export class AppModule {}
