@@ -4,6 +4,7 @@ import { UserProfileService } from '../../providers/user-profile/user-profile';
 import { ContactPermissions } from '../../shared/contact-permissions.model';
 import { ShareableProfile } from '../../shared/shareable-profile.model';
 import { ShareableProfileService } from '../../providers/shareable-profile/shareable-profile';
+import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 
 
 @Component({
@@ -14,8 +15,8 @@ export class ShareableProfileCreatePage {
     profile: ShareableProfile;
     valid: boolean;
 
-    constructor(private navCtrl: NavController, private userProfileService: UserProfileService, private shareableProfileService: ShareableProfileService) {
-
+    constructor(private navCtrl: NavController, private userProfileService: UserProfileService, private shareableProfileService: ShareableProfileService,
+    private nm: NotificationManager) {
     }
 
     onChanged(ev) {
@@ -25,7 +26,9 @@ export class ShareableProfileCreatePage {
 
     onSave() {
         if (this.valid) {
-            this.shareableProfileService.createProfile(this.profile).subscribe(_ => this.navCtrl.pop());
+            this.shareableProfileService.createProfile(this.profile).subscribe(_ => {
+                this.navCtrl.pop().then(_ => this.nm.showSuccessMessage('Profile created'));
+            });
         }
     }
 

@@ -6,6 +6,7 @@ import { Group } from '../../shared/group.model';
 import { GroupService } from '../../shared/group.service';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
 import { ContactAddMenuPage } from '../contact-add-menu/contact-add-menu';
+import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 
 /*
   Generated class for the ContactListPage page.
@@ -23,7 +24,8 @@ export class ContactListPage {
     groups: Group[];
     showSearch: Boolean;
 
-    constructor(private nav: NavController, private contactService: ContactService, private groupService: GroupService) {}
+    constructor(private nav: NavController, private contactService: ContactService, private groupService: GroupService,
+    private nm: NotificationManager) {}
 
     getContacts() {
         this.contactService.getContacts().subscribe(contacts => {
@@ -37,6 +39,7 @@ export class ContactListPage {
             this.contacts = contacts;
             this.filteredContacts = contacts;
             refresher.complete();
+            this.nm.showSuccessMessage('Refreshed');
         });
     }
 

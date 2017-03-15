@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
+import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class ContactCreatePage {
     contact: Contact;
     valid: boolean;
 
-    constructor(private nav: NavController, private contactService: ContactService) {
+    constructor(private nav: NavController, private contactService: ContactService, private nm: NotificationManager) {
 
     }
 
@@ -24,7 +25,9 @@ export class ContactCreatePage {
     onSave() {
         if (this.valid) {
             this.contactService.addContact(this.contact).subscribe(_ => {
-                this.nav.popToRoot();
+                this.nav.popToRoot().then(_ => {
+                    this.nm.showSuccessMessage('Contact created');
+                });
             });
         }
     }

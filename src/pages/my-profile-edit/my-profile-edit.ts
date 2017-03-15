@@ -3,6 +3,7 @@ import { NavController, PopoverController } from 'ionic-angular';
 import { UserProfileService } from '../../providers/user-profile/user-profile';
 import { Profile } from '../../shared/profile.model';
 import { PopoverPage } from './popover';
+import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class MyProfileEditPage {
     profile: Profile;
     valid: boolean;
 
-    constructor(private navCtrl: NavController, private userProfileService: UserProfileService, private popoverCtrl: PopoverController) {
+    constructor(private navCtrl: NavController, private userProfileService: UserProfileService, private popoverCtrl: PopoverController,
+    private nm: NotificationManager) {
 
     }
 
@@ -22,7 +24,7 @@ export class MyProfileEditPage {
     }
 
     doRefresh(refresher) {
-        this.userProfileService.refreshProfileData(3).subscribe(data => {
+        this.userProfileService.refreshProfileData(8).subscribe(data => {
             console.log(data);
             this.profile = data;
             refresher.complete();
@@ -35,7 +37,9 @@ export class MyProfileEditPage {
 
     onSave() {
         if (this.valid) {
-            this.userProfileService.updateProfile(1, this.profile).subscribe();
+            this.userProfileService.updateProfile(1, this.profile).subscribe(_ => {
+                this.nm.showSuccessMessage('Profile updated');
+            });
         }
     }
 
