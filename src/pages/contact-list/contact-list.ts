@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
+import { ContactRequestService } from '../../shared/contact-request.service';
 import { Group } from '../../shared/group.model';
 import { GroupService } from '../../shared/group.service';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
@@ -19,18 +20,24 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
     providers: [ContactService, GroupService]
 })
 export class ContactListPage {
+    listType: string;
     contacts: Contact[];
     filteredContacts: Contact[];
     groups: Group[];
+    contactRequests: any;
     showSearch: Boolean;
 
-    constructor(private nav: NavController, private contactService: ContactService, private groupService: GroupService,
-    private nm: NotificationManager) {}
+    constructor(private nav: NavController, private contactService: ContactService, private crService: ContactRequestService,
+    private groupService: GroupService, private nm: NotificationManager) {
+        this.listType = 'contacts';
+        this.showSearch = true;
+    }
 
     getContacts() {
         this.contactService.getContacts().subscribe(contacts => {
             this.contacts = contacts;
             this.filteredContacts = contacts;
+            this.getContactRequests();
         });
     }
 
@@ -45,6 +52,23 @@ export class ContactListPage {
 
     getGroups() {
         this.groupService.getGroups().subscribe(groups => this.groups = groups);
+    }
+
+    // Should probably change this in the future to update whenever contacts gets updated
+    getContactRequests() {
+        this.contactRequests = [];
+        this.crService.getContactRequests().subscribe(requests => {
+            requests.map(request => {
+                let contact = this.contacts.find(c => {
+                    let profile: any = c.profile;
+                    return profile.user === request.sender;
+                });
+
+                if (contact) {
+                    this.contactRequests.push({contact: contact, user: request.sender});
+                }
+            });
+        });
     }
 
     onPersonAddClick() {
@@ -98,7 +122,6 @@ export class ContactListPage {
     }
 
     ngOnInit() {
-        this.showSearch = false;
         this.getContacts();
         this.getGroups();
     }

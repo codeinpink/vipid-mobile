@@ -51,6 +51,7 @@ import { ContactPermissionsService } from '../providers/contact-permissions/cont
 import { ShareableProfileService } from '../providers/shareable-profile/shareable-profile';
 import { UserProfileService } from '../providers/user-profile/user-profile';
 import { NotificationManager } from '../providers/notification-manager/notification-manager';
+import { ContactRequestService } from '../shared/contact-request.service';
 
 
 @NgModule({
@@ -135,7 +136,8 @@ import { NotificationManager } from '../providers/notification-manager/notificat
       ContactPermissionsService,
       ShareableProfileService,
       UserProfileService,
-      NotificationManager
+      NotificationManager,
+      ContactRequestService
   ]
 })
 export class AppModule {}
