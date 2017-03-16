@@ -1,59 +1,126 @@
 <div *ngIf="profile">
     <form [formGroup]="profileForm">
-        <ion-img src="assets/img/profile/profile2.jpg"></ion-img>
+        <img *ngIf="profile.picture" src="{{ profile.picture }}">
+        <img *ngIf="!profile.picture" src="assets/img/profile/profile3/jpg">
         <ion-list>
             <ion-item>
                 <ion-label stacked>Full Name</ion-label>
                 <ion-input type="text" value="{{ profile.name }}" [formControl]="profileForm.controls['name']"></ion-input>
             </ion-item>
+            <span class="form-error" *ngIf="profileForm.controls['name'].hasError('required') && profileForm.controls['name'].touched && !profileForm.controls['name'].dirty">{{ validationMessages.name.required }}</span>
+            <div *ngIf="formErrors.name">
+                <div *ngFor="let error of formErrors.name">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Title</ion-label>
                 <ion-input type="text" value="{{ profile.title }}" [formControl]="profileForm.controls['title']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.title">
+                <div *ngFor="let error of formErrors.title">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Company</ion-label>
                 <ion-input type="text" value="{{ profile.company }}" [formControl]="profileForm.controls['company']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.company">
+                <div *ngFor="let error of formErrors.company">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Location</ion-label>
                 <ion-input type="text" value="{{ profile.location }}" [formControl]="profileForm.controls['location']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.location">
+                <div *ngFor="let error of formErrors.location">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Email</ion-label>
                 <ion-input type="text" value="{{ profile.email }}" [formControl]="profileForm.controls['email']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.location">
+                <div *ngFor="let error of formErrors.location">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Phone Number</ion-label>
                 <ion-input type="text" value="{{ profile.phone_number }}" [formControl]="profileForm.controls['phone_number']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.phone_number">
+                <div *ngFor="let error of formErrors.phone_number">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Website</ion-label>
                 <ion-input type="text" value="{{ profile.website }}" [formControl]="profileForm.controls['website']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.website">
+                <div *ngFor="let error of formErrors.website">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Linkedin</ion-label>
                 <ion-input type="text" value="{{ profile.linkedin }}" [formControl]="profileForm.controls['linkedin']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.linkedin">
+                <div *ngFor="let error of formErrors.linkedin">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Twitter</ion-label>
                 <ion-input type="text" value="{{ profile.twitter }}" [formControl]="profileForm.controls['twitter']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.twitter">
+                <div *ngFor="let error of formErrors.twitter">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Github</ion-label>
                 <ion-input type="text" value="{{ profile.github }}" [formControl]="profileForm.controls['github']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.github">
+                <div *ngFor="let error of formErrors.github">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Facebook</ion-label>
                 <ion-input type="text" value="{{ profile.facebook }}" [formControl]="profileForm.controls['facebook']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.facebook">
+                <div *ngFor="let error of formErrors.facebook">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Youtube</ion-label>
                 <ion-input type="text" value="{{ profile.youtube }}" [formControl]="profileForm.controls['youtube']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.youtube">
+                <div *ngFor="let error of formErrors.youtube">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Instagram</ion-label>
                 <ion-input type="text" value="{{ profile.instagram }}" [formControl]="profileForm.controls['instagram']"></ion-input>
             </ion-item>
+            <div *ngIf="formErrors.instagram">
+                <div *ngFor="let error of formErrors.instagram">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
         </ion-list>
     </form>
 </div>
