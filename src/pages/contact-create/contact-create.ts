@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
+import { ContactAddSetNotesPage } from '../contact-add-set-notes/contact-add-set-notes';
 import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 
 
@@ -20,6 +21,12 @@ export class ContactCreatePage {
     onChanged(ev) {
         this.contact.profile = ev.data;
         this.valid = ev.valid;
+    }
+
+    continue() {
+        if (this.valid) {
+            this.nav.push(ContactAddSetNotesPage, this.contact);
+        }
     }
 
     onSave() {
