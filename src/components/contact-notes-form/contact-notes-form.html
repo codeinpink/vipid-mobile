@@ -4,6 +4,11 @@
             <ion-label stacked>About</ion-label>
             <ion-textarea formControlName="about"></ion-textarea>
         </ion-item>
+        <div *ngIf="formErrors.about">
+            <div *ngFor="let error of formErrors.about">
+                <span class="form-error">{{ error }}</span>
+            </div>
+        </div>
         <ion-item>
             <!-- TODO: figure out how to display this correctly with the tags -->
             <ion-label stacked>Tags</ion-label>

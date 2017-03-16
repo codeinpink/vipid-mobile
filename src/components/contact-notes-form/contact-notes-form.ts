@@ -12,9 +12,19 @@ export class ContactNotesForm {
     @Output() onChanged: EventEmitter<any> = new EventEmitter<any>();
 
     form: FormGroup;
+    formErrors: any;
+    validationMessages: any;
 
     constructor(private formBuilder: FormBuilder) {
+        this.formErrors = {
+            'about': []
+        };
 
+        this.validationMessages = {
+            'about': {
+                'maxlength': 'The about field cannot exceed 1000 characters'
+            },
+        };
     }
 
     onTagAdded(tag) {
@@ -40,11 +50,27 @@ export class ContactNotesForm {
 
         this.form = this.formBuilder.group({
             profile: [this.contact.profile],
-            about: [this.contact.about],
+            about: [this.contact.about, Validators.maxLength(1000)],
             tags: [formTags]
         });
 
         this.form.valueChanges.subscribe(data => {
+            if (!this.form) return;
+
+            const form = this.form;
+
+            for (const field in this.formErrors) {
+                this.formErrors[field] = [];
+                const control = form.get(field);
+
+                if (control && control.dirty && !control.valid) {
+                    const messages = this.validationMessages[field];
+                    for (const key in control.errors) {
+                        this.formErrors[field].push(messages[key]);
+                    }
+                }
+            }
+
             this.emit(data);
         });
     }
