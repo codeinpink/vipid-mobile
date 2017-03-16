@@ -4,6 +4,7 @@ import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
 import { ContactNotesDetailPage } from '../contact-notes-detail/contact-notes-detail';
 import { ContactProfileDetailPage } from '../contact-profile-detail/contact-profile-detail';
+import { ContactPermissionsDetailPage } from '../contact-permissions-detail/contact-permissions-detail';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class ContactDetailPage {
   contact: Contact;
   profileDetailTab: any = ContactProfileDetailPage;
   notesDetailTab: any = ContactNotesDetailPage;
+  permissionsDetailTab: any = ContactPermissionsDetailPage;
 
   constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService) {
 
