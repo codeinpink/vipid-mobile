@@ -17,14 +17,34 @@ export class ContactNotesForm {
 
     }
 
+    onTagAdded(tag) {
+
+    }
+
+    onTagRemoved(tag) {
+        let tags = this.form.controls['tags'].value;
+        delete tags[tag.index];
+        this.form.controls['tags'].setValue(tags);
+    }
+
+    emit(data) {
+        let tags = data.tags.filter(tag => tag).map(tag => tag.name);
+        data.tags = tags;
+        this.onChanged.emit({data: data, valid: this.form.valid});
+    }
+
     ngOnInit() {
+        let formTags = this.contact.tags.map(tag => {
+            return {'name': tag};
+        });
+
         this.form = this.formBuilder.group({
             about: [this.contact.about],
-            tags: [this.contact.tags],
+            tags: [formTags]
         });
 
         this.form.valueChanges.subscribe(data => {
-            this.onChanged.emit({data: data, valid: this.form.valid});
+            this.emit(data);
         });
     }
 }

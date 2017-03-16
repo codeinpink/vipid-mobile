@@ -3,6 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler, LoadingController } from 'ion
 import { MyApp } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { QRCodeModule } from 'angular2-qrcode';
+import { TagsInputModule } from 'ionic2-tags-input';
 
 // Pages
 import { ContactAddMenuPage } from '../pages/contact-add-menu/contact-add-menu';
@@ -96,7 +97,8 @@ import { ContactRequestService } from '../shared/contact-request.service';
   imports: [
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    QRCodeModule
+    QRCodeModule,
+    TagsInputModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

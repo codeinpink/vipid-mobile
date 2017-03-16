@@ -2,11 +2,14 @@
     <ion-item-group>
         <ion-item>
             <ion-label stacked>About</ion-label>
-            <ion-textarea value="{{ contact.about }}"  [formControl]="form.controls['about']"></ion-textarea>
+            <ion-textarea formControlName="about"></ion-textarea>
         </ion-item>
         <ion-item>
+            <!-- TODO: figure out how to display this correctly with the tags -->
             <ion-label stacked>Tags</ion-label>
-            <ion-input type="text" value="{{ contact.tags }}"  [formControl]="form.controls['tags']"></ion-input>
+        </ion-item>
+        <ion-item>
+            <tags-input formControlName="tags" maxWordLength="15" (onTagAdded)="onTagAdded($event)" (onTagRemoved)="onTagRemoved($event)"></tags-input>
         </ion-item>
     </ion-item-group>
 </form>
