@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
 import { ContactAddSetNotesPage } from '../contact-add-set-notes/contact-add-set-notes';
@@ -14,7 +14,8 @@ export class ContactCreatePage {
     contact: Contact;
     valid: boolean;
 
-    constructor(private nav: NavController, private contactService: ContactService, private nm: NotificationManager) {
+    constructor(private nav: NavController, private alertCtrl: AlertController, private contactService: ContactService,
+    private nm: NotificationManager) {
 
     }
 
@@ -26,6 +27,14 @@ export class ContactCreatePage {
     continue() {
         if (this.valid) {
             this.nav.push(ContactAddSetNotesPage, this.contact);
+        } else {
+            let alert = this.alertCtrl.create({
+                title: 'Error',
+                subTitle: 'Please fix the form errors before continuing',
+                buttons: ['OK']
+            });
+
+            alert.present();
         }
     }
 
