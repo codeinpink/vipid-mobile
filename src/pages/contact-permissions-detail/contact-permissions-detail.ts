@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { ContactPermissionsService } from '../../providers/contact-permissions/contact-permissions';
 import { Contact } from '../../shared/contact.model';
 import { ContactEditPage } from '../contact-edit/contact-edit';
@@ -13,10 +13,11 @@ export class ContactPermissionsDetailPage {
     contact: Contact;
     permissions: any;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private cpService: ContactPermissionsService) {}
+    constructor(public navCtrl: NavController, public navParams: NavParams, private appCtrl: App,
+    private cpService: ContactPermissionsService) {}
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad ContactPermissionsDetailPage');
+    goBack() {
+        this.appCtrl.getRootNav().pop();
     }
 
     ngOnInit() {

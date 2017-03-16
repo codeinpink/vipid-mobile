@@ -8,6 +8,14 @@
     <ion-card>
         <ion-card-header>Method</ion-card-header>
         <ion-list>
+            <button ion-item (click)="onQRScanClick()">
+                <ion-icon name="qr-scanner" item-left></ion-icon>
+                Scan QR Code
+            </button>
+            <button ion-item (click)="onNFCAddClick()">
+                <ion-icon name="phone-portrait" item-left></ion-icon>
+                Add Via NFC
+            </button>
             <button ion-item (click)="onFindContactClick()">
                 <ion-icon name="search" item-left></ion-icon>
                 Find Contact on VIP ID
@@ -15,14 +23,6 @@
             <button ion-item (click)="onCreateContactClick()">
                 <ion-icon name="person-add" item-left></ion-icon>
                 Create Contact
-            </button>
-            <button ion-item (click)="onNFCAddClick()">
-                <ion-icon name="phone-portrait" item-left></ion-icon>
-                Add Via NFC
-            </button>
-            <button ion-item (click)="onQRScanClick()">
-                <ion-icon name="qr-scanner" item-left></ion-icon>
-                Scan QR Code
             </button>
         </ion-list>
     </ion-card>
