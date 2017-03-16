@@ -39,6 +39,7 @@ export class ContactNotesForm {
         });
 
         this.form = this.formBuilder.group({
+            profile: [this.contact.profile],
             about: [this.contact.about],
             tags: [formTags]
         });
