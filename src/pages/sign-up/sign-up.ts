@@ -2,50 +2,23 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../providers/auth/auth';
-import { ContactListPage } from '../contact-list/contact-list';
-import { SignUpPage } from '../sign-up/sign-up';
 
 
 @Component({
-    templateUrl: 'login.html',
-    providers: [FormBuilder, AuthService],
+    selector: 'page-sign-up',
+    templateUrl: 'sign-up.html'
 })
-export class LoginPage {
+export class SignUpPage {
     form: FormGroup;
     errors: any;
     formErrors: any;
     validationMessages: any;
 
     constructor(private navCtrl: NavController, private formBuilder: FormBuilder, private authService: AuthService) {
-
-    }
-
-    goHome() {
-        this.navCtrl.setRoot(ContactListPage);
-    }
-
-    onSignUpClick() {
-        //let modal = this.modalCtrl.create(SignUpPage);
-        //modal.present();
-        this.navCtrl.push(SignUpPage);
-    }
-
-    onSubmit(value) {
-        this.authService.login(value).subscribe(_ => this.goHome(), errors => {
-            this.errors = errors;
-        }
-        );
-    }
-
-    ngOnInit() {
-        this.form = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-
         this.formErrors = {
             'email': [],
-            'password': []
+            'password': [],
+            'name': []
         };
 
         this.validationMessages = {
@@ -54,8 +27,27 @@ export class LoginPage {
             },
             'password': {
                 'required': 'Password is required'
+            },
+            'name': {
+                'required': 'Name is required'
             }
         };
+    }
+
+    onCloseClick() {
+        this.navCtrl.pop();
+    }
+
+    onLogInClick() {
+        this.navCtrl.pop();
+    }
+
+    ngOnInit() {
+        this.form = this.formBuilder.group({
+            email: ['', Validators.required],
+            password: ['', Validators.required],
+            name: ['', Validators.required],
+        });
 
         this.form.valueChanges.subscribe(data => {
             if (!this.form) return;
@@ -74,6 +66,10 @@ export class LoginPage {
                 }
             }
         });
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad SignUpPage');
     }
 
 }

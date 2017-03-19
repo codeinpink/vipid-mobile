@@ -31,6 +31,7 @@ import { ShareableProfileDetailPage } from '../pages/shareable-profile-detail/sh
 import { ShareableProfileEditPage } from '../pages/shareable-profile-edit/shareable-profile-edit';
 import { ShareableProfileListPage } from '../pages/shareable-profile-list/shareable-profile-list';
 import { SharedProfileViewPage } from '../pages/shared-profile-view/shared-profile-view';
+import { SignUpPage } from '../pages/sign-up/sign-up';
 import { UserFindPage } from '../pages/user-find/user-find';
 import { UserFindResultPage } from '../pages/user-find-result/user-find-result';
 import { UserSettingsPage } from '../pages/user-settings/user-settings';
@@ -85,6 +86,7 @@ import { OAuthAccessTokenService } from '../providers/oauth/oauth-access-token';
     ShareableProfileEditPage,
     ShareableProfileListPage,
     SharedProfileViewPage,
+    SignUpPage,
     UserFindPage,
     UserFindResultPage,
     UserSettingsPage,
@@ -129,6 +131,7 @@ import { OAuthAccessTokenService } from '../providers/oauth/oauth-access-token';
     ShareableProfileEditPage,
     ShareableProfileListPage,
     SharedProfileViewPage,
+    SignUpPage,
     UserFindPage,
     UserFindResultPage,
     UserSettingsPage

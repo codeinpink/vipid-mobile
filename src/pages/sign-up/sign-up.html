@@ -1,7 +1,19 @@
-<ion-content padding class="login">
+<!--<ion-header>
+    <ion-navbar>
+        <ion-title>Sign Up</ion-title>
+    </ion-navbar>
+</ion-header>
+-->
+<ion-content padding class="sign-up">
+    <ion-icon name="close" color="faintgrey" (click)="onCloseClick()"></ion-icon>
     <ion-grid>
         <ion-row>
-            <img src="assets/img/logo.png">
+            <img src="assets/img/logo.png"><br>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+            <p text-center class="header">Sign Up</p>
+        </ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-8 push-2>
@@ -11,7 +23,7 @@
                         {{ errors }}
                     </p>
                     <ion-item no-padding>
-                        <ion-label stacked>Email Address</ion-label>
+                        <ion-label stacked>Professional Email Address</ion-label>
                         <ion-input type="email" [formControl]="form.controls['email']"></ion-input>
                     </ion-item>
                     <span class="form-error" *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched && !form.controls['email'].dirty">{{ validationMessages.email.required }}</span>
@@ -30,14 +42,25 @@
                             <span class="form-error">{{ error }}</span>
                         </div>
                     </div>
-                    <p text-right class="help-text">Forgot password</p>
-                    <button ion-button block>Log In</button>
+                    <ion-item>
+                        <ion-label stacked>Full Name</ion-label>
+                        <ion-input type="text" [formControl]="form.controls['name']"></ion-input>
+                    </ion-item>
+                    <span class="form-error" *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched && !form.controls['name'].dirty">{{ validationMessages.name.required }}</span>
+                    <div *ngIf="formErrors.name">
+                        <div *ngFor="let error of formErrors.name">
+                            <span class="form-error">{{ error }}</span>
+                        </div>
+                    </div>
+                    <button ion-button block>Sign Up</button>
                 </form>
+                <p class="help-text" text-uppercase text-center>Or</p>
                 <button ion-button icon-left block color="linkedin">
                     <ion-icon name="logo-linkedin" padding-right></ion-icon>
-                    Log In With LinkedIn
+                    Sign Up With LinkedIn
                 </button>
-                <p text-center text-uppercase padding-top (click)="onSignUpClick()">Don't have an account? <strong>Sign Up</strong></p>
+
+                <p text-center text-uppercase padding-top (click)="onLogInClick()">Have an account? <strong>Log In</strong></p>
             </ion-col>
         </ion-row>
     </ion-grid>

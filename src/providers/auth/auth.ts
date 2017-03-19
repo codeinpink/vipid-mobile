@@ -8,11 +8,26 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthService {
     private loginUrl = 'http://localhost:8000/api/login/';
+    //private signupUrl = 'http://localhost:8000/api/signup/';
+    private signupUrl = 'http://localhost:8000/rest-auth/registration/';
 
     constructor(private http: HttpService) {}
 
-    login(credentials: any) {
+    public login(credentials: any) {
         return this.http.post(this.loginUrl, credentials).map(res => {
+            let data = this.extractData(res);
+
+            if (data.token) {
+                localStorage.setItem('auth_token', data.token);
+                this.http.refreshToken();
+            }
+
+            return data;
+        }).catch(this.handleError);
+    }
+
+    public signup(data: any) {
+        return this.http.post(this.signupUrl, data).map(res => {
             let data = this.extractData(res);
 
             if (data.token) {
