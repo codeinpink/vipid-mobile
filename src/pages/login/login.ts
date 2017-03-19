@@ -32,18 +32,18 @@ export class LoginPage {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            username: ['', Validators.required],
+            email: ['', Validators.required],
             password: ['', Validators.required]
         });
         console.log(this.form);
         this.formErrors = {
-            'username': [],
+            'email': [],
             'password': []
         };
 
         this.validationMessages = {
-            'username': {
-                'required': 'Username is required'
+            'email': {
+                'required': 'Email address is required'
             },
             'password': {
                 'required': 'Password is required'

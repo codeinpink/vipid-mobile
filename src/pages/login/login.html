@@ -1,33 +1,44 @@
-<ion-header>
-    <ion-navbar>
-        <ion-title>Login</ion-title>
-    </ion-navbar>
-</ion-header>
-
-
-<ion-content padding>
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-        <p *ngIf="errors" style="color: #ea6153;">{{ errors }}</p>
-        <ion-item>
-            <ion-label stacked>Username</ion-label>
-            <ion-input type="text" [formControl]="form.controls['username']"></ion-input>
-        </ion-item>
-        <span class="form-error" *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched && !form.controls['username'].dirty">{{ validationMessages.username.required }}</span>
-        <div *ngIf="formErrors.username">
-            <div *ngFor="let error of formErrors.username">
-                <span class="form-error">{{ error }}</span>
-            </div>
-        </div>
-        <ion-item>
-            <ion-label stacked>Password</ion-label>
-            <ion-input type="password" [formControl]="form.controls['password']"></ion-input>
-        </ion-item>
-        <span class="form-error" *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched && !form.controls['password'].dirty">{{ validationMessages.password.required }}</span>
-        <div *ngIf="formErrors.password">
-            <div *ngFor="let error of formErrors.password">
-                <span class="form-error">{{ error }}</span>
-            </div>
-        </div>
-        <button ion-button round [disabled]="!form.valid">Log In</button>
-    </form>
+<ion-content padding class="login">
+    <ion-grid>
+        <ion-row>
+            <img src="assets/img/logo.png">
+        </ion-row>
+        <ion-row>
+            <ion-col col-8 push-2>
+                <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                    <p *ngIf="errors" ion-text color="danger" text-center>
+                        <ion-icon name="alert" color="danger" margin-right></ion-icon>
+                        {{ errors }}
+                    </p>
+                    <ion-item no-padding>
+                        <ion-label stacked>Email Address</ion-label>
+                        <ion-input type="email" [formControl]="form.controls['email']"></ion-input>
+                    </ion-item>
+                    <span class="form-error" *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched && !form.controls['email'].dirty">{{ validationMessages.email.required }}</span>
+                    <div *ngIf="formErrors.email">
+                        <div *ngFor="let error of formErrors.email">
+                            <span class="form-error">{{ error }}</span>
+                        </div>
+                    </div>
+                    <ion-item no-padding>
+                        <ion-label stacked>Password</ion-label>
+                        <ion-input type="password" [formControl]="form.controls['password']"></ion-input>
+                    </ion-item>
+                    <span class="form-error" *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched && !form.controls['password'].dirty">{{ validationMessages.password.required }}</span>
+                    <div *ngIf="formErrors.password">
+                        <div *ngFor="let error of formErrors.password">
+                            <span class="form-error">{{ error }}</span>
+                        </div>
+                    </div>
+                    <p text-right class="help-text">Forgot password</p>
+                    <button ion-button block>Log In</button>
+                </form>
+                <button ion-button icon-left block color="linkedin">
+                    <ion-icon name="logo-linkedin" padding-right></ion-icon>
+                    Log In With LinkedIn
+                </button>
+                <p text-center text-uppercase>Don't have an account? <strong>Sign Up</strong></p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
