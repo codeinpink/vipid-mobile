@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 import {HttpService} from './http.service';
+import {Headers, RequestOptionsArgs, RequestOptions} from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
 import {CONTACTS} from './mock-contacts';
 import {Contact} from './contact.model';
@@ -11,7 +12,7 @@ import 'rxjs/Rx'; // for other Observable methods
 export class ContactService {
     private contactsUrl = 'http://localhost:8000/api/contacts/';
     private contactDetailUrl = this.contactsUrl + '{ID}' + '/';
-    private getOutlookContactsUrl = this.contactsUrl + 'get_outlook_contacts/';
+    private getOutlookContactsUrl = 'https://graph.microsoft.com/v1.0/me/contacts';
     private importOutlookContactsUrl = this.contactsUrl + 'import_outlook_contacts/';
 
     private contacts: Contact[] = [];
@@ -32,8 +33,12 @@ export class ContactService {
             .catch(this.handleError);
     }
 
-    getOutlookContacts() {
-        return this.http.get(this.getOutlookContactsUrl).map(res => res.json().value).catch(this.handleError);
+    getOutlookContacts(token: string) {
+        let options = new RequestOptions();
+        options.headers = new Headers();
+        options.headers.set('Authorization', `Bearer ${token}`);
+
+        return this.http.get(this.getOutlookContactsUrl, options).map(res => res.json().value).catch(this.handleError);
     }
 
     addContact(data) {

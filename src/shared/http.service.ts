@@ -20,7 +20,7 @@ export class HttpService extends Http {
 
     constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController) {
         super(backend, options);
-        this.authToken = localStorage.getItem('auth_token');// || '24a607f915e2e84b9cbdac021e56363efad5d7c0';
+        this.authToken = localStorage.getItem('auth_token') || '166d41e98e6dbcbe5167da1c46b75ffecda0b435';
 
         this.isUnauthenticated = Observable.create(observer => {
             this.isAuthenticatedObserver = observer;
@@ -96,9 +96,13 @@ export class HttpService extends Http {
 
         options.headers.append('Content-Type', 'application/json');
 
-        // Only include it if it exists, otherwise certain endpoints that don't require
-        // tokens will get confused and reject the request
-        if (this.authToken) {
+        /*  Only include it if it exists, otherwise certain endpoints that don't require
+            tokens will get confused and reject the request
+
+            Also only add it if a service hasn't already added it; if a service has,
+            that probably means it's an external call and not a call to our API
+        */
+        if (this.authToken && !options.headers.has('Authorization')) {
             options.headers.set('Authorization', `Token ${this.authToken}`);
         }
 

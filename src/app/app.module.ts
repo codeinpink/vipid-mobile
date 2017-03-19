@@ -54,6 +54,7 @@ import { ShareableProfileService } from '../providers/shareable-profile/shareabl
 import { UserProfileService } from '../providers/user-profile/user-profile';
 import { NotificationManager } from '../providers/notification-manager/notification-manager';
 import { ContactRequestService } from '../shared/contact-request.service';
+import { OAuthAccessTokenService } from '../providers/oauth/oauth-access-token';
 
 
 @NgModule({
@@ -142,7 +143,8 @@ import { ContactRequestService } from '../shared/contact-request.service';
       ShareableProfileService,
       UserProfileService,
       NotificationManager,
-      ContactRequestService
+      ContactRequestService,
+      OAuthAccessTokenService
   ]
 })
 export class AppModule {}
