@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ContactListPage } from '../contact-list/contact-list';
 import { AuthService } from '../../providers/auth/auth';
 
 
@@ -23,15 +24,19 @@ export class SignUpPage {
 
         this.validationMessages = {
             'email': {
-                'required': 'Email address is required'
+                'required': 'Email address is required.'
             },
             'password': {
-                'required': 'Password is required'
+                'required': 'Password is required.'
             },
             'name': {
-                'required': 'Name is required'
+                'required': 'Name is required.'
             }
         };
+    }
+
+    goHome() {
+        this.navCtrl.setRoot(ContactListPage);
     }
 
     onCloseClick() {
@@ -40,6 +45,19 @@ export class SignUpPage {
 
     onLogInClick() {
         this.navCtrl.pop();
+    }
+
+    onSubmit(value) {
+        this.authService.signup(value).subscribe(_ => this.goHome(), errors => {
+            for (const key in errors) {
+                this.formErrors[key] = [];
+
+                for (let error in errors[key]) {
+                    this.formErrors[key].push(errors[key][error]);
+                }
+            }
+        }
+        );
     }
 
     ngOnInit() {

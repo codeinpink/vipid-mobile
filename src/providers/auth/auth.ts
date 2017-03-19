@@ -30,8 +30,8 @@ export class AuthService {
         return this.http.post(this.signupUrl, data).map(res => {
             let data = this.extractData(res);
 
-            if (data.token) {
-                localStorage.setItem('auth_token', data.token);
+            if (data.key) {
+                localStorage.setItem('auth_token', data.key);
                 this.http.refreshToken();
             }
 
@@ -58,7 +58,7 @@ export class AuthService {
         }
 
         console.error(errMsg);
-        return Observable.throw(err);
+        return Observable.throw(error.json());
     }
 
 }

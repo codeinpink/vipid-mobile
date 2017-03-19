@@ -26,7 +26,6 @@
                         <ion-label stacked>Professional Email Address</ion-label>
                         <ion-input type="email" [formControl]="form.controls['email']"></ion-input>
                     </ion-item>
-                    <span class="form-error" *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched && !form.controls['email'].dirty">{{ validationMessages.email.required }}</span>
                     <div *ngIf="formErrors.email">
                         <div *ngFor="let error of formErrors.email">
                             <span class="form-error">{{ error }}</span>
@@ -36,7 +35,6 @@
                         <ion-label stacked>Password</ion-label>
                         <ion-input type="password" [formControl]="form.controls['password']"></ion-input>
                     </ion-item>
-                    <span class="form-error" *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched && !form.controls['password'].dirty">{{ validationMessages.password.required }}</span>
                     <div *ngIf="formErrors.password">
                         <div *ngFor="let error of formErrors.password">
                             <span class="form-error">{{ error }}</span>
@@ -46,7 +44,6 @@
                         <ion-label stacked>Full Name</ion-label>
                         <ion-input type="text" [formControl]="form.controls['name']"></ion-input>
                     </ion-item>
-                    <span class="form-error" *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched && !form.controls['name'].dirty">{{ validationMessages.name.required }}</span>
                     <div *ngIf="formErrors.name">
                         <div *ngFor="let error of formErrors.name">
                             <span class="form-error">{{ error }}</span>
