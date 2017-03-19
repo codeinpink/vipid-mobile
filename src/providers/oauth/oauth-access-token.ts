@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
+import { LinkedIn } from '../../providers/oauth/linkedin';
 import { Outlook } from '../../providers/oauth/outlook';
 
 
@@ -16,7 +17,48 @@ export class OAuthAccessTokenService {
 
     }
 
-    public getLinkedInToken(code: string, state: string) {
+    public isLoggedInWithLinkedIn() {
+        if (!localStorage.getItem('is_linkedin_connected')) {
+            console.log('no linkedin connection present');
+            return false;
+        }
+
+        let linkedin_expiration: number = +localStorage.getItem('linkedin_expiration');
+
+        if (!linkedin_expiration || linkedin_expiration < Date.now()) {
+            console.log('no linkedin expiration present');
+            this.clearLinkedInConnection();
+            return false;
+        }
+
+        return true;
+    }
+
+    public loginWithLinkedIn() {
+        let linkedinProvider: LinkedIn = new LinkedIn({
+            clientId: "78701vytcosrbk",
+            appScope: ["r_emailaddress", "r_basicprofile"],
+            redirectUri: "http://localhost/callback",
+            state: "aaaaaaaaaaaaa"
+        });
+
+        return this.oauth.logInVia(linkedinProvider).then((data: any) => {
+            console.log(data);
+            return new Promise(resolve => {
+                this.getLinkedInTokenFromServer(data.code, data.state).subscribe(token => {
+                    console.log('token ' + token);
+                    resolve(token);
+                }, error => {
+                    resolve(error);
+                });
+            });
+        }, (error) => {
+            this.clearLinkedInConnection();
+            console.log(error);
+        });
+    }
+
+    public getLinkedInTokenFromServer(code: string, state: string) {
         let data: any = {
             code: code,
             state: state
@@ -89,6 +131,13 @@ export class OAuthAccessTokenService {
 
             return token;
         });
+    }
+
+    // so someone can tell us that our token has expired; in the future we should
+    // subscribe to HttpService's errors or something so we know when our token has expired ourselves
+    public clearLinkedInConnection() {
+        localStorage.removeItem('is_linkedin_connected');
+        localStorage.removeItem('linkedin_expiration');
     }
 
     // so someone can tell us that our token has expired; in the future we should

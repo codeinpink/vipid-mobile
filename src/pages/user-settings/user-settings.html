@@ -8,8 +8,15 @@
 </ion-header>
 
 <ion-content padding class="user-settings">
-    <ion-list>
-        <button block light (click)="onPhoneSignInClick()">Google Sign In</button>
-        <button block light (click)="onPhoneSignOutClick()">Google Sign Out</button>
-    </ion-list>
+    <ion-card>
+        <ion-card-header>Social Connections</ion-card-header>
+        <ion-list>
+            <button ion-item (click)="onLinkedInClick()">
+                <ion-icon name="logo-linkedin" color="linkedin" padding-right></ion-icon>
+                LinkedIn
+                <ion-icon *ngIf="!isLoggedInWithLinkedIn" color="faintgrey" name="link" padding-left></ion-icon>
+                <ion-icon *ngIf="isLoggedInWithLinkedIn" color="primary" name="link" padding-left></ion-icon>
+            </button>
+        </ion-list>
+    </ion-card>
 </ion-content>

@@ -9,7 +9,6 @@ import { OAuthAccessTokenService } from '../../providers/oauth/oauth-access-toke
 @Component({
     template: `
         <ion-list>
-            <button ion-item (click)="connectLinkedIn()">Connect LinkedIn</button>
             <button ion-item (click)="openShareableProfilesList()">Shareable Profiles</button>
         </ion-list>
     `,
@@ -25,21 +24,6 @@ export class PopoverPage {
     });
 
     constructor(public viewCtrl: ViewController, private appCtrl: App, private accessTokenService: OAuthAccessTokenService) {}
-    connectLinkedIn() {
-        this.oauth.logInVia(this.linkedinProvider).then((success) => {
-            console.log(success);
-            if (success['state'] != this.linkedinProvider.state) {
-                // maybe log out?
-                //return;
-            }
-
-            this.accessTokenService.getLinkedInToken(success['code'], success['state']).subscribe(key => {
-                console.log(key);
-            });
-        }, (error) => {
-            console.log(error);
-        });
-    }
 
     openShareableProfilesList() {
         this.appCtrl.getRootNav().push(ShareableProfileListPage).then(_ => this.close());
