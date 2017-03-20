@@ -56,6 +56,7 @@ import { UserProfileService } from '../providers/user-profile/user-profile';
 import { NotificationManager } from '../providers/notification-manager/notification-manager';
 import { ContactRequestService } from '../shared/contact-request.service';
 import { OAuthAccessTokenService } from '../providers/oauth/oauth-access-token';
+import { UserSettings } from '../providers/user-settings';
 
 
 @NgModule({
@@ -147,7 +148,8 @@ import { OAuthAccessTokenService } from '../providers/oauth/oauth-access-token';
       UserProfileService,
       NotificationManager,
       ContactRequestService,
-      OAuthAccessTokenService
+      OAuthAccessTokenService,
+      UserSettings
   ]
 })
 export class AppModule {}

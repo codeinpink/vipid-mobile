@@ -8,15 +8,27 @@
 </ion-header>
 
 <ion-content padding class="user-settings">
-    <ion-card>
-        <ion-card-header>Social Connections</ion-card-header>
-        <ion-list>
-            <button ion-item (click)="onLinkedInClick()">
-                <ion-icon name="logo-linkedin" color="linkedin" padding-right></ion-icon>
-                LinkedIn
-                <ion-icon *ngIf="!isLoggedInWithLinkedIn" color="faintgrey" name="link" padding-left></ion-icon>
-                <ion-icon *ngIf="isLoggedInWithLinkedIn" color="primary" name="link" padding-left></ion-icon>
-            </button>
-        </ion-list>
-    </ion-card>
+    <ion-item-group>
+        <ion-item-divider>Account</ion-item-divider>
+        <ion-item>
+            <ion-icon name="contact" color="grey" item-left></ion-icon>
+            Account Information
+        </ion-item>
+        <ion-item>
+            <ion-icon name="lock" color="grey" item-left></ion-icon>
+            Change Password
+        </ion-item>
+        <ion-item-divider>Social Connections</ion-item-divider>
+        <ion-item (click)="onLinkedInClick()">
+            <ion-icon name="logo-linkedin" color="linkedin" item-left></ion-icon>
+            LinkedIn
+            <ion-icon *ngIf="!isLoggedInWithLinkedIn" color="faintgrey" name="link" item-right></ion-icon>
+            <ion-icon *ngIf="isLoggedInWithLinkedIn" color="primary" name="link" item-right></ion-icon>
+        </ion-item>
+        <ion-item-divider>Support</ion-item-divider>
+        <ion-item>
+            <ion-icon name="bug" color="grey" item-left></ion-icon>
+            Report a Problem
+        </ion-item>
+    </ion-item-group>
 </ion-content>

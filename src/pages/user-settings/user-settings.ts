@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { NavController, AlertController } from 'ionic-angular';
 import { OAuthAccessTokenService } from '../../providers/oauth/oauth-access-token';
 import { NotificationManager } from '../../providers/notification-manager/notification-manager';
+import { UserSettings } from '../../providers/user-settings';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class UserSettingsPage implements OnInit {
     isLoggedInWithLinkedIn: boolean;
 
     constructor(private nav: NavController, private alertCtrl: AlertController, private accessTokenService: OAuthAccessTokenService,
-    private nm: NotificationManager){}
+    private nm: NotificationManager, private settings: UserSettings){}
 
     onLinkedInClick() {
         if (!this.isLoggedInWithLinkedIn) {
@@ -47,6 +48,6 @@ export class UserSettingsPage implements OnInit {
     }
 
     ngOnInit(){
-        this.isLoggedInWithLinkedIn = this.accessTokenService.isLoggedInWithLinkedIn();
+        this.isLoggedInWithLinkedIn = this.settings.isLinkedInConnected();
     }
 }
