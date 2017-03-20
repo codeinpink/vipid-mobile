@@ -35,6 +35,8 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 import { UserFindPage } from '../pages/user-find/user-find';
 import { UserFindResultPage } from '../pages/user-find-result/user-find-result';
 import { UserSettingsPage } from '../pages/user-settings/user-settings';
+import { AccountInformationPage } from '../pages/user-settings/account-information/account-information';
+import { ChangePasswordPage } from '../pages/user-settings/change-password/change-password';
 
 // Directives/components
 import { ProfileForm } from '../components/profile-form/profile-form';
@@ -91,6 +93,8 @@ import { UserSettings } from '../providers/user-settings';
     UserFindPage,
     UserFindResultPage,
     UserSettingsPage,
+    AccountInformationPage,
+    ChangePasswordPage,
     ProfileForm,
     ProfileDetail,
     NotesDetail,
@@ -135,7 +139,9 @@ import { UserSettings } from '../providers/user-settings';
     SignUpPage,
     UserFindPage,
     UserFindResultPage,
-    UserSettingsPage
+    UserSettingsPage,
+    AccountInformationPage,
+    ChangePasswordPage
   ],
   providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

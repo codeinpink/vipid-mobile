@@ -1,6 +1,7 @@
 export class UserSettings {
     id: number;
     email: string;
-    name: string;
+    first_name: string;
+    last_name: string;
     linkedin_connected: boolean;
 }

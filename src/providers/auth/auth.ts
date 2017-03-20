@@ -8,8 +8,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthService {
     private loginUrl = 'http://localhost:8000/api/login/';
-    //private signupUrl = 'http://localhost:8000/api/signup/';
     private signupUrl = 'http://localhost:8000/rest-auth/registration/';
+    private passwordChangeUrl = 'http://localhost:8000/rest-auth/password/change/';
 
     constructor(private http: HttpService) {}
 
@@ -37,6 +37,10 @@ export class AuthService {
 
             return data;
         }).catch(this.handleError);
+    }
+
+    public changePassword(data: any) {
+        return this.http.post(this.passwordChangeUrl, data).map(this.extractData).catch(this.handleError);
     }
 
     private extractData(res: Response) {

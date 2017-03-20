@@ -10,11 +10,11 @@
 <ion-content padding class="user-settings">
     <ion-item-group>
         <ion-item-divider>Account</ion-item-divider>
-        <ion-item>
+        <ion-item (click)="onAccountInformationClick()">
             <ion-icon name="contact" color="grey" item-left></ion-icon>
             Account Information
         </ion-item>
-        <ion-item>
+        <ion-item (click)="onChangePasswordClick()">
             <ion-icon name="lock" color="grey" item-left></ion-icon>
             Change Password
         </ion-item>

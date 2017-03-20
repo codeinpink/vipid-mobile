@@ -3,6 +3,8 @@ import { NavController, AlertController } from 'ionic-angular';
 import { OAuthAccessTokenService } from '../../providers/oauth/oauth-access-token';
 import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 import { UserSettings } from '../../providers/user-settings';
+import { AccountInformationPage } from './account-information/account-information';
+import { ChangePasswordPage } from './change-password/change-password';
 
 
 @Component({
@@ -13,6 +15,14 @@ export class UserSettingsPage implements OnInit {
 
     constructor(private nav: NavController, private alertCtrl: AlertController, private accessTokenService: OAuthAccessTokenService,
     private nm: NotificationManager, private settings: UserSettings){}
+
+    onAccountInformationClick() {
+        this.nav.push(AccountInformationPage);
+    }
+
+    onChangePasswordClick() {
+        this.nav.push(ChangePasswordPage);
+    }
 
     onLinkedInClick() {
         if (!this.isLoggedInWithLinkedIn) {
