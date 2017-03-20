@@ -59,6 +59,10 @@ export class HttpService extends Http {
 
     refreshToken() {
         this.authToken = localStorage.getItem('auth_token');
+
+        if (!this.authToken) {
+            this.isAuthenticatedObserver.next(true);
+        }
     }
 
     private intercept(observable: Observable<Response>): Observable<Response> {

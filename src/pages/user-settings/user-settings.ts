@@ -3,6 +3,7 @@ import { NavController, AlertController } from 'ionic-angular';
 import { OAuthAccessTokenService } from '../../providers/oauth/oauth-access-token';
 import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 import { UserSettings } from '../../providers/user-settings';
+import { AuthService } from '../../providers/auth/auth';
 import { AccountInformationPage } from './account-information/account-information';
 import { ChangePasswordPage } from './change-password/change-password';
 
@@ -14,7 +15,7 @@ export class UserSettingsPage implements OnInit {
     isLoggedInWithLinkedIn: boolean;
 
     constructor(private nav: NavController, private alertCtrl: AlertController, private accessTokenService: OAuthAccessTokenService,
-    private nm: NotificationManager, private settings: UserSettings){}
+    private nm: NotificationManager, private settings: UserSettings, private authService: AuthService){}
 
     onAccountInformationClick() {
         this.nav.push(AccountInformationPage);
@@ -55,6 +56,10 @@ export class UserSettingsPage implements OnInit {
 
             alert.present();
         }
+    }
+
+    onLogoutClick() {
+        this.authService.logout().subscribe();
     }
 
     ngOnInit(){
