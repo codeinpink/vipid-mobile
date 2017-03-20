@@ -25,8 +25,11 @@ export class UserSettings {
     }
 
     public updateSettings(data: any) {
-        return this.http.patch(this.settingsUrl, data).map(this.extractData)
-            .catch(this.handleError);
+        return this.http.patch(this.settingsUrl, data).map(res => {
+            let data = res.json();
+            this.settings = data;
+            return data;
+        }).catch(this.handleError);
     }
 
     public isLinkedInConnected() {
@@ -35,6 +38,18 @@ export class UserSettings {
         }
 
         return this.settings.linkedin_connected;
+    }
+
+    getFirstName() {
+        return this.settings.first_name || '';
+    }
+
+    getLastName() {
+        return this.settings.last_name || '';
+    }
+
+    getEmailAddress() {
+        return this.settings.email || '';
     }
 
     private extractData(res: Response) {

@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Account Information</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <p *ngIf="errors" ion-text color="danger" text-center>
+            <ion-icon name="alert" color="danger" margin-right></ion-icon>
+            {{ errors }}
+        </p>
+        <ion-item>
+            <ion-label stacked>Email Address</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <div *ngIf="formErrors.email">
+            <div *ngFor="let error of formErrors.email">
+                <span class="form-error">{{ error }}</span>
+            </div>
+        </div>
+        <ion-item>
+            <ion-label stacked>First Name</ion-label>
+            <ion-input type="text" formControlName="first_name"></ion-input>
+        </ion-item>
+        <div *ngIf="formErrors.first_name">
+            <div *ngFor="let error of formErrors.first_name">
+                <span class="form-error">{{ error }}</span>
+            </div>
+        </div>
+        <ion-item>
+            <ion-label stacked>Last Name</ion-label>
+            <ion-input type="text" formControlName="last_name"></ion-input>
+        </ion-item>
+        <div *ngIf="formErrors.last_name">
+            <div *ngFor="let error of formErrors.last_name">
+                <span class="form-error">{{ error }}</span>
+            </div>
+        </div>
+        <button ion-button block margin-top>Update Information</button>
+    </form>
+</ion-content>
