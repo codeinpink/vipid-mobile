@@ -1,18 +1,28 @@
 <ion-header>
     <ion-navbar>
+        <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
         <ion-title>Shareable Profiles</ion-title>
     </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+    <div *ngIf="!profiles || profiles.length === 0" class="empty-list-message">
+        <h2 ion-text color="primary">No Shareable Profiles Yet</h2>
+        <p class="help-text">Shareable profiles make it easy to share your information with people and
+            are perfect for career fairs, conferences, and even your resume! Click the plus button to get started!</p>
+    </div>
     <ion-list>
         <ion-item *ngFor="let profile of profiles" (click)="onProfileSelect(profile)">
             <h2>{{ profile.title }}</h2>
             <h3>{{ profile.unique_link }}</h3>
         </ion-item>
     </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab (click)="onAddClick()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>
-<button fab fab-bottom fab-right style="z-index: 9999;" (click)="onAddClick()">
-    <ion-icon name="add"></ion-icon>
-</button>

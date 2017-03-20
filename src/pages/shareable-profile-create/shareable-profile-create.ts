@@ -27,7 +27,7 @@ export class ShareableProfileCreatePage {
     onSave() {
         if (this.valid) {
             this.shareableProfileService.createProfile(this.profile).subscribe(_ => {
-                this.navCtrl.pop().then(_ => this.nm.showSuccessMessage('Profile created'));
+                this.navCtrl.popToRoot().then(_ => this.nm.showSuccessMessage('Profile created'));
             });
         }
     }

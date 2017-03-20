@@ -28,8 +28,12 @@ export class ImportOutlookContactsPage {
         this.contacts.filter(contact => contact.selected === true).map(oc => {
             let c = new Contact();
             let loc = this.getLocationString(oc.homeAddress);
+            let parts = oc.displayName.split(' ');
+            let first = parts.length > 2 ? (parts[0] + ' ' + parts[1]) : parts[0];
+            let last = parts.length > 2 ? parts[2] : parts[1]
 
-            c.profile.name = oc.displayName;
+            c.profile.first_name = first;
+            c.profile.last_name = last;
             c.profile.email = oc.emailAddresses[0].address ? oc.emailAddresses[0].address : '';
             c.profile.phone_number = oc.mobilePhone ? oc.mobilePhone : '';
             c.profile.title = oc.jobTitle ? oc.jobTitle : '';

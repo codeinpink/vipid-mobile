@@ -1,9 +1,14 @@
 <div *ngIf="profile">
+    <img *ngIf="profile.picture" src="{{ profile.picture }}">
     <img src="assets/img/profile/profile2.jpg">
     <ion-list>
         <ion-item>
-            <ion-label stacked>Full Name</ion-label>
-            <ion-input type="text" value="{{ profile.name }}" [disabled]="disabled"></ion-input>
+            <ion-label stacked>First Name</ion-label>
+            <ion-input type="text" value="{{ profile.first_name }}" [disabled]="disabled"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Last Name</ion-label>
+            <ion-input type="text" value="{{ profile.last_name }}" [disabled]="disabled"></ion-input>
         </ion-item>
         <ion-item [hidden]="hideMissing(profile.title)">
             <ion-label stacked>Title</ion-label>

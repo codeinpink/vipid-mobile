@@ -13,8 +13,11 @@
     </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
+    <div *ngIf="!filteredGroups || filteredGroups.length === 0" class="empty-list-message">
+        <h2 ion-text color="primary">No Groups Yet</h2>
+        <p class="help-text">Groups are a convenient way to sort your contacts. Click the plus button to start sorting yours!</p>
+    </div>
     <ion-list>
         <ion-item *ngFor="let group of filteredGroups" (click)="onGroupSelect(group)">
             <h2>{{ group.name }}</h2>

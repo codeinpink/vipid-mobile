@@ -34,6 +34,11 @@
     height: 160px !important;
 }
 
+.empty-list-message {
+    margin-top: 150px;
+    text-align: center;
+}
+
 @import '../pages/login/login.scss';
 @import '../pages/sign-up/sign-up.scss';
 @import '../pages/user-settings/user-settings.scss';

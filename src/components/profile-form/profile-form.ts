@@ -8,7 +8,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
     providers: [FormBuilder]
 })
 export class ProfileForm {
-    @Input() profile: any;
+    @Input() profile: any
+    @Input() isUserProfile: boolean;
     @Input() disabled: boolean;
     @Output() onChanged: EventEmitter<any> = new EventEmitter<any>();
 
@@ -19,7 +20,8 @@ export class ProfileForm {
 
     constructor(private formBuilder: FormBuilder) {
         this.formErrors = {
-            'name': [],
+            'first_name': [],
+            'last_name': [],
             'title': [],
             'company': [],
             'location': [],
@@ -35,9 +37,13 @@ export class ProfileForm {
         };
 
         this.validationMessages = {
-            'name': {
-                'required': 'Your name is required',
-                'maxlength': 'Your name cannot exceed 80 characters'
+            'first_name': {
+                'required': 'Your first name is required',
+                'maxlength': 'Your name cannot exceed 30 characters'
+            },
+            'last_name': {
+                'required': 'Your last name is required',
+                'maxlength': 'Your name cannot exceed 30 characters'
             },
             'title': {
                 'maxlength': 'Your name cannot exceed 120 characters'
@@ -80,11 +86,12 @@ export class ProfileForm {
 
     ngOnInit() {
         this.profileForm = this.formBuilder.group({
-            name: [this.profile.name, Validators.compose([Validators.required, Validators.maxLength(80)])],
+            first_name: [{value: this.profile.first_name, disabled: this.isUserProfile}, Validators.compose([Validators.required, Validators.maxLength(30)])],
+            last_name: [{value: this.profile.last_name, disabled: this.isUserProfile}, Validators.compose([Validators.required, Validators.maxLength(30)])],
             title: [this.profile.title, Validators.maxLength(120)],
             company: [this.profile.company, Validators.maxLength(50)],
             location: [this.profile.location, Validators.maxLength(75)],
-            email: [this.profile.email, Validators.maxLength(80)],
+            email: [{value: this.profile.email, disabled: this.isUserProfile}, Validators.maxLength(80)],
             phone_number: [this.profile.phone_number, Validators.maxLength(25)],
             website: [this.profile.website, Validators.maxLength(256)],
             linkedin: [this.profile.linkedin, Validators.maxLength(64)],

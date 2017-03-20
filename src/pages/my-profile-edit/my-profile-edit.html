@@ -8,9 +8,6 @@
             <button ion-button icon-only (click)="onSave()">
                 <ion-icon name="checkmark"></ion-icon>
             </button>
-            <button ion-button icon-only (click)="onMoreClick()">
-                <ion-icon name="more"></ion-icon>
-            </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
@@ -21,6 +18,6 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <div *ngIf="profile">
-        <profile-form [profile]="profile" (onChanged)="onChanged($event)"></profile-form>
+        <profile-form [profile]="profile" isUserProfile="true" (onChanged)="onChanged($event)"></profile-form>
     </div>
 </ion-content>

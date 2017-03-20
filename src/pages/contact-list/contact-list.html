@@ -25,13 +25,17 @@
     </ion-refresher>
     <div [ngSwitch]="listType">
         <div *ngSwitchCase="'contacts'">
+            <div *ngIf="!filteredContacts || filteredContacts.length === 0" class="empty-list-message">
+                <h2 ion-text color="primary">No Contacts Yet</h2>
+                <p class="help-text">There are many ways to add a contact! Click the plus button to get started!</p>
+            </div>
             <ion-list>
                 <ion-item *ngFor="let contact of filteredContacts" (click)="onContactSelect(contact)">
                     <ion-avatar item-left>
                         <img *ngIf="contact.profile.avatar" src="{{ contact.profile.avatar }}">
                         <img *ngIf="!contact.profile.avatar" src="assets/img/profile/default-avatar.png">
                     </ion-avatar>
-                    <h2>{{ contact.profile.name }}</h2>
+                    <h2>{{ contact.profile.first_name }} {{ contact.profile.last_name }}</h2>
                     <h3>{{ contact.profile.company }}</h3>
                     <p>{{ contact.profile.title }}</p>
                 </ion-item>

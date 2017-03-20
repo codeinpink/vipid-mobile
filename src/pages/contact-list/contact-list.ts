@@ -103,7 +103,7 @@ export class ContactListPage {
             this.resetContacts();
         } else {
             this.filteredContacts = this.contacts.filter((contact) => {
-                return (contact.profile.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+                return (contact.profile.first_name.toLowerCase().indexOf(val.toLowerCase()) > -1);
             })
         }
     }

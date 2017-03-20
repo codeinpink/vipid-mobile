@@ -1,6 +1,7 @@
 export class Profile {
     id: number;
-    name: string;
+    first_name: string;
+    last_name: string;
     email: string;
     picture: string;
     phone_number: string;
@@ -17,7 +18,8 @@ export class Profile {
     youtube: string;
 
     constructor() {
-            this.name = '';
+            this.first_name = '';
+            this.last_name = '';
             this.email = '';
             this.picture = '';
             this.phone_number = null;

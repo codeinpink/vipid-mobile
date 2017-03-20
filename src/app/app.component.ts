@@ -6,6 +6,7 @@ import { ContactListPage } from '../pages/contact-list/contact-list';
 import { GroupListPage } from '../pages/group-list/group-list';
 import { ImportContactsMenuPage } from '../pages/import-contacts-menu/import-contacts-menu';
 import { ExportContactsPage } from '../pages/export-contacts/export-contacts';
+import { ShareableProfileListPage } from '../pages/shareable-profile-list/shareable-profile-list';
 import { UserSettingsPage } from '../pages/user-settings/user-settings';
 import { LoginPage } from '../pages/login/login';
 import { HttpService } from '../shared/http.service';
@@ -41,7 +42,8 @@ export class MyApp {
         {title: 'Contacts', component: ContactListPage },
         {title: 'Groups', component: GroupListPage},
         {title: 'Import', component: ImportContactsMenuPage},
-        {title: 'Export', component: ExportContactsPage},
+        //{title: 'Export', component: ExportContactsPage},
+        {title: 'Shareable Profiles', component: ShareableProfileListPage},
         {title: 'Settings', component: UserSettingsPage}
     ];
   }
