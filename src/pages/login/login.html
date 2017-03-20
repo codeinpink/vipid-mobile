@@ -6,9 +6,11 @@
         <ion-row>
             <ion-col col-8 push-2>
                 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-                    <p *ngIf="errors" ion-text color="danger" text-center>
+                    <p *ngIf="formErrors.non_field_errors.length > 0 || errors">
                         <ion-icon name="alert" color="danger" margin-right></ion-icon>
-                        {{ errors }}
+                        <span *ngFor="let error of formErrors.non_field_errors" class="form-error" text-center>
+                            {{ error }}
+                        </span>
                     </p>
                     <ion-item no-padding>
                         <ion-label stacked>Email Address</ion-label>

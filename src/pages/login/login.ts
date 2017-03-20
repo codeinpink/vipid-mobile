@@ -25,16 +25,19 @@ export class LoginPage {
     }
 
     onSignUpClick() {
-        //let modal = this.modalCtrl.create(SignUpPage);
-        //modal.present();
         this.navCtrl.push(SignUpPage);
     }
 
     onSubmit(value) {
         this.authService.login(value).subscribe(_ => this.goHome(), errors => {
-            this.errors = errors;
-        }
-        );
+            for (const key in errors) {
+                this.formErrors[key] = [];
+
+                for (let error in errors[key]) {
+                    this.formErrors[key].push(errors[key][error]);
+                }
+            }
+        });
     }
 
     ngOnInit() {
@@ -45,7 +48,8 @@ export class LoginPage {
 
         this.formErrors = {
             'email': [],
-            'password': []
+            'password': [],
+            'non_field_errors': []
         };
 
         this.validationMessages = {

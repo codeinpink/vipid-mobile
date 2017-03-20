@@ -56,8 +56,7 @@ export class SignUpPage {
                     this.formErrors[key].push(errors[key][error]);
                 }
             }
-        }
-        );
+        });
     }
 
     ngOnInit() {
