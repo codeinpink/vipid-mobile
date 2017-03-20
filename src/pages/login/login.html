@@ -1,10 +1,15 @@
 <ion-content padding class="login">
     <ion-grid>
-        <ion-row>
+        <ion-row padding-top>
             <img src="assets/img/logo.png">
         </ion-row>
         <ion-row>
-            <ion-col col-8 push-2>
+            <ion-col>
+                <p text-center class="header">Log In</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-md-8 offset-md-2>
                 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
                     <p *ngIf="formErrors.non_field_errors.length > 0 || errors">
                         <ion-icon name="alert" color="danger" margin-right></ion-icon>
@@ -32,7 +37,7 @@
                             <span class="form-error">{{ error }}</span>
                         </div>
                     </div>
-                    <p text-right class="help-text">Forgot password</p>
+                    <p text-right class="help-text" (click)="onPasswordResetClick()">Forgot password</p>
                     <button ion-button block>Log In</button>
                 </form>
                 <button ion-button icon-left block color="linkedin">

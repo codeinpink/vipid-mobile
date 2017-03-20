@@ -15,6 +15,10 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+form ion-item {
+    padding: 0 0;
+}
+
 .form-error {
     color: color($colors, danger);
     padding-left: 16px;

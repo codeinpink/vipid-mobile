@@ -8,8 +8,12 @@
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm.value)">
         <ion-item>
             <ion-label stacked>Email</ion-label>
-            <ion-input type="text" [formControl]="searchForm.controls['email']"></ion-input>
+            <ion-input type="text" formControlName="email"></ion-input>
         </ion-item>
-        <button block [disabled]="!searchForm.controls.email.value" style="margin-top:100px;">Find User</button>
+        <button ion-button block style="margin-top:100px;">Find User</button>
     </form>
+    <div *ngIf="showNoResults" class="empty-list-message">
+        <h2 ion-text color="primary">User Not Found</h2>
+        <p class="help-text">No one with this email addresses uses the app yet.</p>
+    </div>
 </ion-content>

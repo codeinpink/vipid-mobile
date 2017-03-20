@@ -1,40 +1,34 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../providers/auth/auth';
-import { ContactListPage } from '../contact-list/contact-list';
-import { SignUpPage } from '../sign-up/sign-up';
-import { ResetPasswordPage } from './reset-password/reset-password';
+import { NotificationManager } from '../../../providers/notification-manager/notification-manager';
+import { UserSettings } from '../../../providers/user-settings';
+import { AuthService } from '../../../providers/auth/auth';
 
 
 @Component({
-    templateUrl: 'login.html',
-    providers: [FormBuilder, AuthService],
+    selector: 'reset-password',
+    templateUrl: 'reset-password.html'
 })
-export class LoginPage {
+export class ResetPasswordPage {
     form: FormGroup;
     errors: any;
     formErrors: any;
     validationMessages: any;
 
-    constructor(private navCtrl: NavController, private formBuilder: FormBuilder, private authService: AuthService) {
+    constructor(private navCtrl: NavController, private formBuilder: FormBuilder, private nm: NotificationManager,
+    private authService: AuthService) {
 
     }
 
-    goHome() {
-        this.navCtrl.setRoot(ContactListPage);
-    }
-
-    onPasswordResetClick() {
-        this.navCtrl.push(ResetPasswordPage);
-    }
-
-    onSignUpClick() {
-        this.navCtrl.push(SignUpPage);
+    onCloseClick() {
+        this.navCtrl.pop();
     }
 
     onSubmit(value) {
-        this.authService.login(value).subscribe(_ => this.goHome(), errors => {
+        this.authService.resetPassword(value).subscribe(_ => {
+            this.navCtrl.pop().then(_ => this.nm.showSuccessMessage('Password reset email sent'));
+        }, errors => {
             for (const key in errors) {
                 this.formErrors[key] = [];
 
@@ -46,25 +40,19 @@ export class LoginPage {
     }
 
     ngOnInit() {
-        this.form = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-
         this.formErrors = {
-            'email': [],
-            'password': [],
-            'non_field_errors': []
+            'email': []
         };
 
         this.validationMessages = {
             'email': {
-                'required': 'Email address is required'
-            },
-            'password': {
-                'required': 'Password is required'
+                'required': 'This field may not be blank.'
             }
         };
+
+        this.form = this.formBuilder.group({
+            email: ['', Validators.required]
+        });
 
         this.form.valueChanges.subscribe(data => {
             if (!this.form) return;
@@ -84,5 +72,4 @@ export class LoginPage {
             }
         });
     }
-
 }

@@ -10,6 +10,7 @@ export class AuthService {
     private loginUrl = 'http://localhost:8000/rest-auth/login/';
     private signupUrl = 'http://localhost:8000/rest-auth/registration/';
     private logoutUrl = 'http://localhost:8000/rest-auth/logout/';
+    private passwordResetUrl = 'http://localhost:8000/rest-auth/password/reset/';
     private passwordChangeUrl = 'http://localhost:8000/rest-auth/password/change/';
 
     constructor(private http: HttpService) {}
@@ -45,6 +46,10 @@ export class AuthService {
             localStorage.removeItem('auth_token');
             this.http.refreshToken();
         }).catch(this.handleError);
+    }
+
+    public resetPassword(data: any) {
+        return this.http.post(this.passwordResetUrl, data).map(this.extractData).catch(this.handleError);
     }
 
     public changePassword(data: any) {

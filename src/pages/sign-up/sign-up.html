@@ -12,11 +12,11 @@
         </ion-row>
         <ion-row>
             <ion-col>
-            <p text-center class="header">Sign Up</p>
-        </ion-col>
+                <p text-center class="header">Sign Up</p>
+            </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col col-8 push-2>
+            <ion-col col-md-8 offset-md-2>
                 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
                     <p *ngIf="errors" ion-text color="danger" text-center>
                         <ion-icon name="alert" color="danger" margin-right></ion-icon>

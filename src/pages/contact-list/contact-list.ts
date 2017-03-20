@@ -108,6 +108,10 @@ export class ContactListPage {
         }
     }
 
+    getAvatarData(first: string, last: string) {
+        return first + ' ' + last;
+    }
+
     toggleSearch() {
         this.showSearch = !this.showSearch;
     }

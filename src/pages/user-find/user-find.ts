@@ -12,23 +12,33 @@ import { ContactFormData } from '../../shared/contact-form-data.model';
     providers: [FormBuilder, UserProfileService]
 })
 export class UserFindPage implements OnInit {
+    showNoResults: boolean = false;
     searchForm: FormGroup;
 
     constructor(private nav: NavController, private formBuilder: FormBuilder, private userProfileService: UserProfileService) {}
 
     onSubmit(data) {
-        this.userProfileService.queryByEmail(data.email).subscribe(users => {
-            console.log('opening profile');
-            let contactFormData = new ContactFormData();
-            contactFormData.profile = users[0];
-            contactFormData.profileViewTitle = 'User Found';
-            this.nav.push(SharedProfileViewPage, contactFormData);
-        });
+        if (this.searchForm.valid) {
+            this.showNoResults = false;
+            this.userProfileService.queryByEmail(data.email).subscribe(users => {
+                if (users.length === 1) {
+                    console.log('opening profile');
+                    let contactFormData = new ContactFormData();
+                    contactFormData.profile = users[0];
+                    contactFormData.profileViewTitle = 'User Found';
+                    this.nav.push(SharedProfileViewPage, contactFormData);
+                } else {
+                    this.showNoResults = true;
+                }
+            });
+        } else {
+
+        }
     }
 
     ngOnInit() {
         this.searchForm = this.formBuilder.group({
-            email: []
+            email: ['', Validators.required]
         });
     }
 }

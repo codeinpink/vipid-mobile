@@ -23,6 +23,7 @@ import { ImportContactsMenuPage } from '../pages/import-contacts-menu/import-con
 import { ImportOutlookContactsPage } from '../pages/import-outlook-contacts/import-outlook-contacts';
 import { ImportPhoneContactsPage } from '../pages/import-phone-contacts/import-phone-contacts';
 import { LoginPage } from '../pages/login/login';
+import { ResetPasswordPage } from '../pages/login/reset-password/reset-password';
 import { MyProfileEditPage } from '../pages/my-profile-edit/my-profile-edit';
 import { PopoverPage as MyProfileEditPopoverPage } from '../pages/my-profile-edit/popover';
 import { NfcAddPage } from '../pages/nfc-add/nfc-add';
@@ -45,6 +46,7 @@ import { ContactNotesForm } from '../components/contact-notes-form/contact-notes
 import { NotesDetail } from '../components/notes-detail/notes-detail';
 import { ContactPermissionsForm } from '../components/contact-permissions-form/contact-permissions-form';
 import { ShareableProfileForm } from '../components/shareable-profile-form/shareable-profile-form';
+import { Ng2LetterAvatar } from '../components/letter-avatar/ng2letteravatar';
 import { XHRBackend, RequestOptions } from '@angular/http';
 
 // Services
@@ -81,6 +83,7 @@ import { UserSettings } from '../providers/user-settings';
     ImportOutlookContactsPage,
     ImportPhoneContactsPage,
     LoginPage,
+    ResetPasswordPage,
     MyProfileEditPage,
     MyProfileEditPopoverPage,
     NfcAddPage,
@@ -100,13 +103,14 @@ import { UserSettings } from '../providers/user-settings';
     NotesDetail,
     ContactNotesForm,
     ContactPermissionsForm,
-    ShareableProfileForm
+    ShareableProfileForm,
+    Ng2LetterAvatar
   ],
   imports: [
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     QRCodeModule,
-    TagsInputModule
+    TagsInputModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -128,6 +132,7 @@ import { UserSettings } from '../providers/user-settings';
     ImportOutlookContactsPage,
     ImportPhoneContactsPage,
     LoginPage,
+    ResetPasswordPage,
     MyProfileEditPage,
     MyProfileEditPopoverPage,
     NfcAddPage,
