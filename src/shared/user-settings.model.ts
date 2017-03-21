@@ -1,4 +1,6 @@
-export class UserSettings {
+import { Profile } from './profile.model';
+
+export class UserSettings extends Profile {
     id: number;
     email: string;
     first_name: string;

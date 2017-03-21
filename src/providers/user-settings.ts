@@ -3,23 +3,39 @@ import { HttpService } from '../shared/http.service';
 import { Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/publishReplay';
+import { ReplaySubject } from 'rxjs/Rx';
+import { Profile } from '../shared/profile.model';
 import { UserSettings as Settings } from '../shared/user-settings.model';
 
 @Injectable()
 export class UserSettings {
-    private settings: Settings = null;
+    private settings: ReplaySubject<Settings> = new ReplaySubject<Settings>(1);
 
     private settingsUrl = 'http://localhost:8000/rest-auth/user/';
 
+    public settingsA: ReplaySubject<Settings>;
+
     constructor(public http: HttpService) {
         console.log('Hello UserSettings Provider');
-        this.getSettings().subscribe(settings => {
-            this.settings = settings;
-            console.log(this.settings);
-        });
     }
 
-    private getSettings() {
+    public getSettings(forceRefresh?: boolean) {
+        console.log('# of subscribers: ' + this.settings.observers.length);
+
+        if (this.settings.observers.length === 0 || forceRefresh) {
+                this._getSettings().subscribe(settings => {
+                    this.settings.next(settings);
+                }, error => {
+                    this.settings.error(error);
+                    this.settings = new ReplaySubject(1);
+                })
+        }
+
+        return this.settings;
+    }
+
+    private _getSettings() {
         return this.http.get(this.settingsUrl).map(this.extractData)
             .catch(this.handleError);
     }
@@ -27,29 +43,9 @@ export class UserSettings {
     public updateSettings(data: any) {
         return this.http.patch(this.settingsUrl, data).map(res => {
             let data = res.json();
-            this.settings = data;
+            this.settings.next(data);
             return data;
         }).catch(this.handleError);
-    }
-
-    public isLinkedInConnected() {
-        if (!this.settings) {
-            return false;
-        }
-
-        return this.settings.linkedin_connected;
-    }
-
-    getFirstName() {
-        return this.settings.first_name || '';
-    }
-
-    getLastName() {
-        return this.settings.last_name || '';
-    }
-
-    getEmailAddress() {
-        return this.settings.email || '';
     }
 
     private extractData(res: Response) {

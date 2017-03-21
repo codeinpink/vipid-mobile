@@ -15,7 +15,9 @@ export class UserSettingsPage implements OnInit {
     isLoggedInWithLinkedIn: boolean;
 
     constructor(private nav: NavController, private alertCtrl: AlertController, private accessTokenService: OAuthAccessTokenService,
-    private nm: NotificationManager, private settings: UserSettings, private authService: AuthService){}
+    private nm: NotificationManager, private settings: UserSettings, private authService: AuthService) {
+
+    }
 
     onAccountInformationClick() {
         this.nav.push(AccountInformationPage);
@@ -63,6 +65,6 @@ export class UserSettingsPage implements OnInit {
     }
 
     ngOnInit(){
-        this.isLoggedInWithLinkedIn = this.settings.isLinkedInConnected();
+        this.settings.getSettings().subscribe(settings => this.isLoggedInWithLinkedIn = settings.linkedin_connected);
     }
 }

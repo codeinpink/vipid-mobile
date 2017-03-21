@@ -15,6 +15,10 @@ export class AccountInformationPage {
     formErrors: any;
     validationMessages: any;
 
+    email: string;
+    first_name: string;
+    last_name: string;
+
     constructor(private navCtrl: NavController, private formBuilder: FormBuilder, private settings: UserSettings,
     private nm: NotificationManager) {
 
@@ -57,9 +61,9 @@ export class AccountInformationPage {
         };
 
         this.form = this.formBuilder.group({
-            email: [{value: this.settings.getEmailAddress(), disabled: true}, Validators.maxLength(80)],
-            first_name: [this.settings.getFirstName(), Validators.maxLength(30)],
-            last_name: [this.settings.getLastName(), Validators.maxLength(30)],
+            email: [{value: this.email, disabled: true}, Validators.maxLength(80)],
+            first_name: [this.first_name, Validators.maxLength(30)],
+            last_name: [this.last_name, Validators.maxLength(30)],
         });
 
         this.form.valueChanges.subscribe(data => {
@@ -82,6 +86,12 @@ export class AccountInformationPage {
     }
 
     ngOnInit() {
+        this.settings.getSettings().subscribe(settings => {
+            this.email = settings.email;
+            this.first_name = settings.first_name;
+            this.last_name = settings.last_name;
+        });
+
         this.initForm();
     }
 }
