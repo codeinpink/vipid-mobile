@@ -17,24 +17,8 @@ export class OAuthAccessTokenService {
 
     }
 
-    public isLoggedInWithLinkedIn() {
-        if (!localStorage.getItem('is_linkedin_connected')) {
-            console.log('no linkedin connection present');
-            return false;
-        }
-
-        let linkedin_expiration: number = +localStorage.getItem('linkedin_expiration');
-
-        if (!linkedin_expiration || linkedin_expiration < Date.now()) {
-            console.log('no linkedin expiration present');
-            this.clearLinkedInConnection();
-            return false;
-        }
-
-        return true;
-    }
-
-    public loginWithLinkedIn() {
+    // isAuthenticationSource = should the token returned be set as the token for our API?
+    public loginWithLinkedIn(isAuthenticationSource: boolean) {
         let linkedinProvider: LinkedIn = new LinkedIn({
             clientId: "78701vytcosrbk",
             appScope: ["r_emailaddress", "r_basicprofile"],
@@ -47,6 +31,12 @@ export class OAuthAccessTokenService {
             return new Promise(resolve => {
                 this.getLinkedInTokenFromServer(data.code, data.state).subscribe(token => {
                     console.log('token ' + token);
+
+                    if (token && isAuthenticationSource) {
+                        localStorage.setItem('auth_token', token);
+                        this.http.refreshToken();
+                    }
+
                     resolve(token);
                 }, error => {
                     resolve(error);
@@ -66,7 +56,6 @@ export class OAuthAccessTokenService {
 
         return this.http.post('http://localhost:8000/rest-auth/linkedin/', data).map(res => {
             let data = res.json();
-            this.storage.set('linkedin_token', data.key);
             return data.key;
         });
     }
