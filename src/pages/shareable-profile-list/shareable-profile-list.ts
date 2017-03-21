@@ -17,6 +17,13 @@ export class ShareableProfileListPage {
 
     }
 
+    doRefresh(refresher) {
+        this.shareableProfileService.getProfiles().subscribe(profiles => {
+            this.profiles = profiles
+            refresher.complete();
+        });
+    }
+
     onAddClick() {
         this.navCtrl.push(ShareableProfileCreatePage);
     }

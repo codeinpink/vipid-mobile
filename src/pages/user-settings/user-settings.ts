@@ -38,7 +38,7 @@ export class UserSettingsPage implements OnInit {
                     {
                         text: 'Connect LinkedIn',
                         handler: () => {
-                            this.accessTokenService.loginWithLinkedIn().then(_ => {
+                            this.accessTokenService.loginWithLinkedIn(false).then(_ => {
                                 this.nm.showSuccessMessage('LinkedIn connected')
                             });
                         }

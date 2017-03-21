@@ -29,6 +29,7 @@ import { PopoverPage as MyProfileEditPopoverPage } from '../pages/my-profile-edi
 import { NfcAddPage } from '../pages/nfc-add/nfc-add';
 import { ShareableProfileCreatePage } from '../pages/shareable-profile-create/shareable-profile-create';
 import { ShareableProfileDetailPage } from '../pages/shareable-profile-detail/shareable-profile-detail';
+import { PopoverPage as ShareableProfileDetailPopoverPage } from '../pages/shareable-profile-detail/popover';
 import { ShareableProfileEditPage } from '../pages/shareable-profile-edit/shareable-profile-edit';
 import { ShareableProfileListPage } from '../pages/shareable-profile-list/shareable-profile-list';
 import { SharedProfileViewPage } from '../pages/shared-profile-view/shared-profile-view';
@@ -89,6 +90,7 @@ import { UserSettings } from '../providers/user-settings';
     NfcAddPage,
     ShareableProfileCreatePage,
     ShareableProfileDetailPage,
+    ShareableProfileDetailPopoverPage,
     ShareableProfileEditPage,
     ShareableProfileListPage,
     SharedProfileViewPage,
@@ -138,6 +140,7 @@ import { UserSettings } from '../providers/user-settings';
     NfcAddPage,
     ShareableProfileCreatePage,
     ShareableProfileDetailPage,
+    ShareableProfileDetailPopoverPage,
     ShareableProfileEditPage,
     ShareableProfileListPage,
     SharedProfileViewPage,

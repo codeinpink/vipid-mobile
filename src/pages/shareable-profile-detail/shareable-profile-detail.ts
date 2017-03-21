@@ -21,9 +21,9 @@ export class ShareableProfileDetailPage {
         return 'http://vipidapp.com/profiles/' + profile.unique_link + '/';
     }
 
-    onMoreClick() {
+    onMoreClick(event) {
         let popover = this.popoverCtrl.create(PopoverPage, {profile: this.profile});
-        popover.present();
+        popover.present({ev: event});
     }
 
     onEditClick() {

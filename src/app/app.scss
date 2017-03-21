@@ -15,9 +15,20 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-form ion-item {
-    padding: 0 0;
+form .item-md, form .item-ios {
+    padding-left: 0;
 }
+
+.toolbar-background{
+    //color: color($colors, primary);
+    //background-color: #FFF;
+}
+
+.ion-title {
+    //color: color($colors, primary);
+}
+
+$navbar-md-color: color($colors, primary);
 
 .form-error {
     color: color($colors, danger);

@@ -1,8 +1,8 @@
 <form [formGroup]="form">
     <ion-item-group>
         <ion-item>
-            <ion-label stacked>Title</ion-label>
-            <ion-input type="text" value="{{ permissions.title }}" formControlName="title" [disabled]="disabled"></ion-input>
+            <ion-label stacked>Profile Title</ion-label>
+            <ion-input type="text" formControlName="title" [disabled]="disabled"></ion-input>
         </ion-item>
         <ion-item *ngIf="permissions.unique_link">
             <ion-label stacked>Profile URL</ion-label>

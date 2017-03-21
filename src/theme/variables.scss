@@ -34,18 +34,23 @@ $colors: (
   linkedin:   #007AB6
 );
 
+$toolbar-background: color($colors, primary);
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
+$toolbar-ios-title-text-color: #FFF;
+$toolbar-ios-active-color: #FFF;
+$segment-button-ios-border-bottom-color: #FFF;
 
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
+$toolbar-md-title-text-color: #FFF;
+$toolbar-md-active-color: #FFF;
+$segment-button-md-border-bottom-color: #FFF;
 
 
 

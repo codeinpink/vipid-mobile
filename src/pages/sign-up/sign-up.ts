@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactListPage } from '../contact-list/contact-list';
 import { AuthService } from '../../providers/auth/auth';
+import { OAuthAccessTokenService } from '../../providers/oauth/oauth-access-token';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class SignUpPage {
     formErrors: any;
     validationMessages: any;
 
-    constructor(private navCtrl: NavController, private formBuilder: FormBuilder, private authService: AuthService) {
+    constructor(private navCtrl: NavController, private formBuilder: FormBuilder, private authService: AuthService,
+    private accessTokenService: OAuthAccessTokenService) {
         this.formErrors = {
             'email': [],
             'password': [],
@@ -45,6 +47,12 @@ export class SignUpPage {
 
     onLogInClick() {
         this.navCtrl.pop();
+    }
+
+    onSignupWithLinkedInClick() {
+        this.accessTokenService.loginWithLinkedIn(true).then(_ => {
+            this.navCtrl.setRoot(ContactListPage);
+        });
     }
 
     onSubmit(value) {

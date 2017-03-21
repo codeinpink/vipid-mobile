@@ -28,6 +28,6 @@ export class PopoverPage {
     }
 
     close() {
-        this.viewCtrl.dismiss();
+        return this.viewCtrl.dismiss();
     }
 }

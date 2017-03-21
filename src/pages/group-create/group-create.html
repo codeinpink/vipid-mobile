@@ -1,15 +1,15 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>GroupCreate</ion-title>
+        <ion-title>Create Group</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding class="group-create">
     <form [formGroup]="groupForm" (ngSubmit)="onSubmit(groupForm.value)">
         <ion-item>
-            <ion-label floating>Name</ion-label>
+            <ion-label stacked>Group Name</ion-label>
             <ion-input type="text" [formControl]="groupForm.controls['name']"></ion-input>
         </ion-item>
-        <button block [disabled]="!groupForm.valid">Create Group</button>
+        <button ion-button block margin-top>Create Group</button>
     </form>
 </ion-content>

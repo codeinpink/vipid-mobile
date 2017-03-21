@@ -31,7 +31,7 @@ export class ShareableProfileEditPage {
         this.valid = ev.valid;
     }
 
-    onPageWillEnter() {
+    ngOnInit() {
         this.profile = this.navParams.get('profile');
     }
 
