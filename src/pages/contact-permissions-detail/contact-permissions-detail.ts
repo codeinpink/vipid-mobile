@@ -3,6 +3,7 @@ import { NavController, NavParams, App } from 'ionic-angular';
 import { ContactPermissionsService } from '../../providers/contact-permissions/contact-permissions';
 import { Contact } from '../../shared/contact.model';
 import { ContactEditPage } from '../contact-edit/contact-edit';
+import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 
 
 @Component({
@@ -12,12 +13,29 @@ import { ContactEditPage } from '../contact-edit/contact-edit';
 export class ContactPermissionsDetailPage {
     contact: Contact;
     permissions: any;
+    valid: boolean = true;
+    dirty: boolean = false;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private appCtrl: App,
-    private cpService: ContactPermissionsService) {}
+    private cpService: ContactPermissionsService, private nm: NotificationManager) {}
 
     goBack() {
         this.appCtrl.getRootNav().pop();
+    }
+
+    onSaveClick() {
+        if (this.valid && this.dirty) {
+            this.cpService.updateContactPermissions(this.contact.profile.id, this.permissions).subscribe(permissions => {
+                this.permissions = permissions;
+                this.nm.showSuccessMessage('Permissions updated');
+            });
+        }
+    }
+
+    onChanged(ev) {
+        this.permissions = ev.data;
+        this.valid = ev.valid;
+        this.dirty = ev.dirty;
     }
 
     ngOnInit() {

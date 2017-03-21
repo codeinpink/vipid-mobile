@@ -31,7 +31,7 @@ export class ContactPermissionsForm {
         });
 
         this.form.valueChanges.subscribe(data => {
-            this.onChanged.emit({data: data, valid: this.form.valid});
+            this.onChanged.emit({data: data, valid: this.form.valid, dirty: this.form.dirty});
         })
     }
 }

@@ -7,11 +7,8 @@
         </ion-buttons>
         <ion-title>View Contact</ion-title>
         <ion-buttons end>
-            <button ion-button icon-only (click)="onEditClick()" *ngIf="!contact.profile_read_only">
-                <ion-icon name="create"></ion-icon>
-            </button>
-            <button ion-button icon-only (click)="onMoreClick()">
-                <ion-icon name="more"></ion-icon>
+            <button ion-button icon-only (click)="onSaveClick()" *ngIf="contact.profile_read_only">
+                <ion-icon name="checkmark"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>

@@ -1,6 +1,5 @@
 <form [formGroup]="form">
     <ion-item-group>
-        <ion-item-divider color="light">Core Information</ion-item-divider>
         <ion-item>
             <ion-label stacked>Can View Full Name</ion-label>
             <ion-input type="text" value="{{ permissions.profile.name }}" disabled></ion-input>
@@ -31,10 +30,6 @@
             <ion-input type="text" value="{{ permissions.profile.phone_number }}" disabled></ion-input>
             <ion-toggle checked="{{ permissions.can_view_phone_number }}" formControlName="can_view_phone_number"></ion-toggle>
         </ion-item>
-    </ion-item-group>
-
-    <ion-item-group>
-        <ion-item-divider color="light">Online Presence</ion-item-divider>
         <ion-item>
             <ion-label stacked>Can View Website</ion-label>
             <ion-input type="text" value="{{ permissions.profile.website }}" disabled></ion-input>
