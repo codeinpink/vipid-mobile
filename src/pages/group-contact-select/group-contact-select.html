@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Select Group Contacts</ion-title>
+        <ion-buttons end>
+            <button ion-button clear (click)="save()">
+                SAVE
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list [virtualScroll]="contacts" approxItemHeight="100px">
+        <ion-item *virtualItem="let contact">
+            <ion-checkbox [(ngModel)]="contact.selected" item-left></ion-checkbox>
+            <ion-thumbnail item-left>
+                <ion-img *ngIf="contact.profile.avatar" [src]="contact.profile.avatar"></ion-img>
+                <ng2-letter-avatar *ngIf="!contact.profile.avatar" [avatar-data]="getAvatarData(contact.profile.first_name, contact.profile.last_name)"
+                avatar-char-count="2" avatar-custom-bg-color="#4fbfa6" avatar-height="80px" avatar-height="80px" dynamic="true"></ng2-letter-avatar>
+            </ion-thumbnail>
+            <ion-label>
+                <h2>{{ contact.profile.first_name }} {{ contact.profile.last_name }}</h2>
+                <h3>{{ contact.profile.company }}</h3>
+                <p>{{ contact.profile.title }}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

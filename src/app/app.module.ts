@@ -16,6 +16,7 @@ import { ContactListPage } from '../pages/contact-list/contact-list';
 import { ContactNotesDetailPage } from '../pages/contact-notes-detail/contact-notes-detail';
 import { ContactPermissionsDetailPage } from '../pages/contact-permissions-detail/contact-permissions-detail';
 import { ContactProfileDetailPage } from '../pages/contact-profile-detail/contact-profile-detail';
+import { GroupContactSelectPage } from '../pages/group-contact-select/group-contact-select';
 import { GroupCreatePage } from '../pages/group-create/group-create';
 import { GroupDetailPage } from '../pages/group-detail/group-detail';
 import { GroupListPage } from '../pages/group-list/group-list';
@@ -77,6 +78,7 @@ import { UserSettings } from '../providers/user-settings';
     ContactNotesDetailPage,
     ContactPermissionsDetailPage,
     ContactProfileDetailPage,
+    GroupContactSelectPage,
     GroupCreatePage,
     GroupDetailPage,
     GroupListPage,
@@ -127,6 +129,7 @@ import { UserSettings } from '../providers/user-settings';
     ContactNotesDetailPage,
     ContactPermissionsDetailPage,
     ContactProfileDetailPage,
+    GroupContactSelectPage,
     GroupCreatePage,
     GroupDetailPage,
     GroupListPage,

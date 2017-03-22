@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Group } from '../../shared/group.model';
 import { Contact } from '../../shared/contact.model';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
+import { GroupContactSelectPage } from '../group-contact-select/group-contact-select';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class GroupDetailPage {
     }
 
     onAddClick() {
-        //this.navCtrl.push();
+        this.navCtrl.push(GroupContactSelectPage, {group: this.group});
     }
 
     onContactSelect(contact: Contact) {
