@@ -9,6 +9,10 @@
 
 <ion-content padding>
     <div *ngIf="group">
+        <div *ngIf="group.contacts.length === 0" class="empty-list-message">
+            <h2 ion-text color="primary">No Group Contacts Yet</h2>
+            <p class="help-text">Group contacts by common traits, interests, or information. Click the plus button to add to this group!</p>
+        </div>
         <ion-list>
             <ion-item *ngFor="let contact of group.contacts" (click)="onContactSelect(contact)">
                 <ion-avatar item-left>
@@ -19,5 +23,10 @@
                 <p>{{ contact.profile.location }}</p>
             </ion-item>
         </ion-list>
+        <ion-fab right bottom>
+            <button ion-fab (click)="onAddClick()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-fab>
     </div>
 </ion-content>

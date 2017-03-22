@@ -13,7 +13,7 @@ export class GroupCreatePage {
 
     constructor(private nav: NavController, private formBuilder: FormBuilder, private groupService: GroupService) {
         this.groupForm = this.formBuilder.group({
-            name: ['', Validators.required],
+            name: ['', Validators.required]
         });
     }
 

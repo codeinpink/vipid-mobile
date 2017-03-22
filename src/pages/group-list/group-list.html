@@ -14,6 +14,9 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <div *ngIf="filteredGroups && filteredGroups.length === 0" class="empty-list-message">
         <h2 ion-text color="primary">No Groups Yet</h2>
         <p class="help-text">Groups are a convenient way to sort your contacts. Click the plus button to start sorting yours!</p>

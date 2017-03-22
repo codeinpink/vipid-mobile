@@ -4,6 +4,7 @@ import { Group } from '../../shared/group.model';
 import { GroupService } from '../../shared/group.service';
 import { GroupCreatePage } from '../group-create/group-create';
 import { GroupDetailPage } from '../group-detail/group-detail';
+import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 
 
 @Component({
@@ -15,8 +16,17 @@ export class GroupListPage {
     filteredGroups: Group[];
     showSearch: Boolean;
 
-    constructor(private navCtrl: NavController, private groupService: GroupService) {
+    constructor(private navCtrl: NavController, private groupService: GroupService, private nm: NotificationManager) {
 
+    }
+
+    doRefresh(refresher) {
+        this.groupService.getGroups().subscribe(groups => {
+            this.groups = groups;
+            this.filteredGroups = groups;
+            refresher.complete();
+            this.nm.showSuccessMessage('Refreshed');
+        });
     }
 
     onAddClick() {

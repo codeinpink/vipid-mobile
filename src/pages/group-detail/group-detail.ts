@@ -15,6 +15,10 @@ export class GroupDetailPage {
 
     }
 
+    onAddClick() {
+        //this.navCtrl.push();
+    }
+
     onContactSelect(contact: Contact) {
         this.navCtrl.push(ContactDetailPage, {
             id: contact.id

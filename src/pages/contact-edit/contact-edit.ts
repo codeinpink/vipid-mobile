@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
 
@@ -13,7 +13,7 @@ export class ContactEditPage implements OnInit {
     contact: Contact;
     valid: boolean;
 
-    constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService) {}
+    constructor(private nav: NavController, private navParams: NavParams, private appCtrl: App, private contactService: ContactService) {}
 
     getContact() {
         let id = +this.navParams.get('id');
@@ -36,7 +36,7 @@ export class ContactEditPage implements OnInit {
     onSave() {
         if (this.valid) {
             this.contactService.editContact(this.contact).subscribe(_ => {
-                this.nav.pop();
+                this.appCtrl.getRootNav().pop();
             });
         }
     }

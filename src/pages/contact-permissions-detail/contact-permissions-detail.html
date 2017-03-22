@@ -10,6 +10,9 @@
             <button ion-button icon-only (click)="onSaveClick()" *ngIf="contact.profile_read_only">
                 <ion-icon name="checkmark"></ion-icon>
             </button>
+            <button ion-button icon-only (click)="onDeleteClick()">
+                <ion-icon name="trash"></ion-icon>
+            </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
