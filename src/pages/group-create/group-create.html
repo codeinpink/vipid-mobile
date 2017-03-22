@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Create Group</ion-title>
+        <ion-title>{{ title }}</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -10,6 +10,6 @@
             <ion-label stacked>Group Name</ion-label>
             <ion-input type="text" [formControl]="groupForm.controls['name']"></ion-input>
         </ion-item>
-        <button ion-button block margin-top>Create Group</button>
+        <button ion-button block margin-top>{{ submitText }}</button>
     </form>
 </ion-content>

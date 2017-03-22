@@ -2,6 +2,14 @@
 
     <ion-navbar>
         <ion-title>View Group</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="onDeleteClick()">
+                <ion-icon name="trash"></ion-icon>
+            </button>
+            <button ion-button icon-only (click)="onEditClick()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 
 </ion-header>
