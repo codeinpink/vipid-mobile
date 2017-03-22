@@ -6,10 +6,21 @@
 
 <ion-content padding class="group-create">
     <form [formGroup]="groupForm" (ngSubmit)="onSubmit(groupForm.value)">
+        <p *ngIf="formErrors.non_field_errors.length > 0 || errors">
+            <ion-icon name="alert" color="danger" margin-right></ion-icon>
+            <span *ngFor="let error of formErrors.non_field_errors" class="form-error" text-center>
+                {{ error }}
+            </span>
+        </p>
         <ion-item>
             <ion-label stacked>Group Name</ion-label>
             <ion-input type="text" [formControl]="groupForm.controls['name']"></ion-input>
         </ion-item>
+        <div *ngIf="formErrors.name">
+            <div *ngFor="let error of formErrors.name">
+                <span class="form-error">{{ error }}</span>
+            </div>
+        </div>
         <button ion-button block margin-top>{{ submitText }}</button>
     </form>
 </ion-content>

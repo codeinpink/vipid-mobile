@@ -58,6 +58,6 @@ export class GroupService {
         }
 
         console.error(errMsg);
-        return Observable.throw(errMsg);
+        return Observable.throw(error.json());
     }
 }
