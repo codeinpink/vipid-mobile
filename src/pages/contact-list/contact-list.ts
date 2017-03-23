@@ -20,6 +20,9 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
     providers: [ContactService, GroupService]
 })
 export class ContactListPage {
+    contactSubscription: any;
+    refresher: any;
+
     listType: string;
     contacts: Contact[];
     filteredContacts: Contact[];
@@ -34,20 +37,26 @@ export class ContactListPage {
     }
 
     getContacts() {
-        this.contactService.getContacts().subscribe(contacts => {
-            this.contacts = contacts;
-            this.filteredContacts = contacts;
-            this.getContactRequests();
-        });
+        if (this.refresher && this.contactSubscription) {
+            this.contactService.getContacts(true);
+
+        } else {
+            this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
+                this.contacts = contacts;
+                this.filteredContacts = contacts;
+                this.getContactRequests();
+
+                if (this.refresher) {
+                    this.refresher.complete();
+                    this.nm.showSuccessMessage('Refreshed');
+                }
+            });
+        }
     }
 
     doRefresh(refresher) {
-        this.contactService.getContacts().subscribe(contacts => {
-            this.contacts = contacts;
-            this.filteredContacts = contacts;
-            refresher.complete();
-            this.nm.showSuccessMessage('Refreshed');
-        });
+        this.refresher = refresher;
+        this.getContacts();
     }
 
     getGroups() {

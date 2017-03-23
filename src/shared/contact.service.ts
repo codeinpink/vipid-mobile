@@ -3,6 +3,7 @@ import {Response} from '@angular/http';
 import {HttpService} from './http.service';
 import {Headers, RequestOptionsArgs, RequestOptions} from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/Rx';
 import {CONTACTS} from './mock-contacts';
 import {Contact} from './contact.model';
 import 'rxjs/Rx'; // for other Observable methods
@@ -10,22 +11,33 @@ import 'rxjs/Rx'; // for other Observable methods
 
 @Injectable()
 export class ContactService {
+    private contacts: ReplaySubject<Contact[]> = new ReplaySubject<Contact[]>(1);
+
     private contactsUrl = 'http://localhost:8000/api/contacts/';
     private contactDetailUrl = this.contactsUrl + '{ID}' + '/';
     private getOutlookContactsUrl = 'https://graph.microsoft.com/v1.0/me/contacts';
     private importOutlookContactsUrl = this.contactsUrl + 'import_outlook_contacts/';
 
-    private contacts: Contact[] = [];
-
     constructor(private http: HttpService) {}
 
-    getContacts(forceRefresh?: boolean): Observable<Contact[]> {
-        if (forceRefresh || this.contacts.length === 0) {
-            return this.http.get(this.contactsUrl).map(this.extractData)
-                .catch(this.handleError);
-        } else {
-            //return Observable.from(this.contacts);
+    public getContacts(forceRefresh?: boolean): Observable<Contact[]> {
+        let numSubscribers = this.contacts.observers.length;
+        console.log('Contact service - # of subscribers: ' + numSubscribers);
+
+        if (this.contacts.observers.length === 0 || forceRefresh) {
+                this._getContacts().subscribe(groups => {
+                    this.contacts.next(groups);
+                }, error => {
+                    this.contacts.error(error);
+                    this.contacts = new ReplaySubject(1);
+                })
         }
+
+        return this.contacts;
+    }
+
+    private _getContacts() {
+        return this.http.get(this.contactsUrl).map(this.extractData).catch(this.handleError);
     }
 
     getContact(id: number) {
