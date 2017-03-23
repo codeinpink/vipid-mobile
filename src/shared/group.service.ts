@@ -21,14 +21,10 @@ export class GroupService {
     }
 
     createGroup(data: any) {
-        // This needs to be replaced with the current user's ID, prolly through a service
-        data.owner = 1;
         return this.http.post(this.groupsUrl, data).map(this.extractData).catch(this.handleError);
     }
 
     updateGroup(data: any) {
-        // This needs to be replaced with the current user's ID, prolly through a service
-        data.owner = 1;
         return this.http.patch(this.grouptDetailUrl.replace('{ID}', data.id), data)
             .map(this.extractData)
             .catch(this.handleError);

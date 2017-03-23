@@ -42,8 +42,6 @@ export class ContactService {
     }
 
     addContact(data) {
-        // This needs to be replaced with the current user's ID, prolly through a service
-        data.owner = 1;
         return this.http.post(this.contactsUrl, data).map(this.extractData);
     }
 
@@ -53,8 +51,6 @@ export class ContactService {
     }
 
     editContact(data) {
-        // This needs to be replaced with the current user's ID, prolly through a service
-        data.owner = 1;
         let index = this.getContactIndex(data.id);
         CONTACTS[index] = data;
         return this.http.patch(this.contactDetailUrl.replace('{ID}', data.id), data).map(this.extractData);
