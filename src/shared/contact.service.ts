@@ -11,6 +11,7 @@ import 'rxjs/Rx'; // for other Observable methods
 
 @Injectable()
 export class ContactService {
+    private _contacts: Contact[] = [];
     private contacts: ReplaySubject<Contact[]> = new ReplaySubject<Contact[]>(1);
 
     private contactsUrl = 'http://localhost:8000/api/contacts/';
@@ -25,8 +26,10 @@ export class ContactService {
         console.log('Contact service - # of subscribers: ' + numSubscribers);
 
         if (this.contacts.observers.length === 0 || forceRefresh) {
-                this._getContacts().subscribe(groups => {
-                    this.contacts.next(groups);
+                this._getContacts().subscribe(contacts => {
+                    this._contacts = contacts;
+                    console.log(this._contacts.length)
+                    this.contacts.next(this._contacts);
                 }, error => {
                     this.contacts.error(error);
                     this.contacts = new ReplaySubject(1);
@@ -53,8 +56,15 @@ export class ContactService {
         return this.http.get(this.getOutlookContactsUrl, options).map(res => res.json().value).catch(this.handleError);
     }
 
-    addContact(data) {
-        return this.http.post(this.contactsUrl, data).map(this.extractData);
+    public addContact(data) {
+        return this.http.post(this.contactsUrl, data).map(res => {
+            let contact: Contact = res.json();
+
+            this._contacts.push(contact);
+            this.contacts.next(this._contacts);
+
+            return contact;
+        });
     }
 
     importOutlookContacts(data) {
@@ -62,33 +72,36 @@ export class ContactService {
         return this.http.post(this.importOutlookContactsUrl, data).map(this.extractData);
     }
 
-    editContact(data) {
-        let index = this.getContactIndex(data.id);
-        CONTACTS[index] = data;
-        return this.http.patch(this.contactDetailUrl.replace('{ID}', data.id), data).map(this.extractData);
-    }
+    public editContact(data) {
+        return this.http.patch(this.contactDetailUrl.replace('{ID}', data.id), data).map(res => {
+            let contact: Contact = res.json();
 
-    deleteContact(data) {
-        return this.http.delete(this.contactDetailUrl.replace('{ID}', data.id)).map(this.extractData);
-    }
-
-    private getContactIndex(id: number) {
-        let index = -1;
-
-        for (let i = 0; i < CONTACTS.length; i++) {
-            if (CONTACTS[i].id === id) {
-                index = i;
-                break;
+            for (let i = 0; i < this._contacts.length; i++) {
+                if (this._contacts[i].id === contact.id) {
+                    this._contacts[i] = contact;
+                    break
+                }
             }
-        }
 
-        return index;
+            console.log(contact);
+            this.contacts.next(this._contacts);
+
+            return contact;
+        });
+    }
+
+    public deleteContact(data) {
+        return this.http.delete(this.contactDetailUrl.replace('{ID}', data.id)).map(_ => {
+            let contacts = this._contacts.filter(contact => contact.id !== data.id);
+            this._contacts = contacts;
+            this.contacts.next(this._contacts);
+        });
     }
 
     private extractData(res: Response) {
         let body = res.json();
         return body || {};
-  }
+    }
   private handleError (error: Response | any) {
       // In a real world app, we might use a remote logging infrastructure
       let errMsg: string;

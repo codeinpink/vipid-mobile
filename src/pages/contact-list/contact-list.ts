@@ -16,8 +16,7 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'contact-list.html',
-    providers: [ContactService, GroupService]
+  templateUrl: 'contact-list.html'
 })
 export class ContactListPage {
     contactSubscription: any;
@@ -42,6 +41,8 @@ export class ContactListPage {
 
         } else {
             this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
+                console.log('contacts updated');
+                console.log(contacts);
                 this.contacts = contacts;
                 this.filteredContacts = contacts;
                 this.getContactRequests();
@@ -135,6 +136,7 @@ export class ContactListPage {
     }
 
     ngOnInit() {
+        console.log('ngOnInit');
         this.getContacts();
         this.getGroups();
     }

@@ -8,25 +8,33 @@ import { ContactPermissionsDetailPage } from '../contact-permissions-detail/cont
 
 
 @Component({
-  templateUrl: 'contact-detail.html',
-  providers: [ContactService]
+  templateUrl: 'contact-detail.html'
 })
 export class ContactDetailPage {
-  contact: Contact;
-  profileDetailTab: any = ContactProfileDetailPage;
-  notesDetailTab: any = ContactNotesDetailPage;
-  permissionsDetailTab: any = ContactPermissionsDetailPage;
+    private contactSubscription: any;
 
-  constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService) {
+    contact: Contact;
+    profileDetailTab: any = ContactProfileDetailPage;
+    notesDetailTab: any = ContactNotesDetailPage;
+    permissionsDetailTab: any = ContactPermissionsDetailPage;
 
-  }
+    constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService) {
 
-  getContact() {
-    var id = +this.navParams.get('id');
-    this.contactService.getContact(id).subscribe(contact => this.contact = contact);
-  }
+    }
+
+    getContact() {
+        var id = +this.navParams.get('id');
+        this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
+            console.log('updating detail view contact');
+            this.contact = contacts.filter(contact => contact.id === id)[0];
+        });
+    }
 
     ngOnInit() {
         this.getContact();
+    }
+
+    ngOnDestroy() {
+        this.contactSubscription.unsubscribe();
     }
 }

@@ -7,8 +7,7 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
 
 
 @Component({
-    templateUrl: 'contact-create.html',
-    providers: [ContactService]
+    templateUrl: 'contact-create.html'
 })
 export class ContactCreatePage {
     contact: Contact;

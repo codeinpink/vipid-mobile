@@ -5,10 +5,11 @@ import { ContactService } from '../../shared/contact.service';
 
 
 @Component({
-    templateUrl: 'contact-edit.html',
-    providers: [ContactService]
+    templateUrl: 'contact-edit.html'
 })
 export class ContactEditPage implements OnInit {
+    private contactSubscription: any;
+
     editingProfile: boolean;
     contact: Contact;
     valid: boolean;
@@ -17,8 +18,9 @@ export class ContactEditPage implements OnInit {
 
     getContact() {
         let id = +this.navParams.get('id');
-        this.contactService.getContact(id).subscribe(contact => {
-            this.contact = contact;
+        this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
+            console.log('updating edit view contact');
+            this.contact = contacts.filter(contact => contact.id === id)[0];
         });
     }
 
@@ -36,7 +38,7 @@ export class ContactEditPage implements OnInit {
     onSave() {
         if (this.valid) {
             this.contactService.editContact(this.contact).subscribe(_ => {
-                this.appCtrl.getRootNav().pop();
+                this.nav.pop();
             });
         }
     }
@@ -44,5 +46,9 @@ export class ContactEditPage implements OnInit {
     ngOnInit() {
         this.getContact();
         this.editingProfile = this.navParams.get('editingProfile');
+    }
+
+    ngOnDestroy() {
+        this.contactSubscription.unsubscribe();
     }
 }
