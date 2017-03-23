@@ -7,7 +7,7 @@
 
 <ion-content padding>
     <div *ngIf="data">
-        <profile-detail [profile]="data.profile" disabled="true" hide_missing="true"></profile-detail>
+        <profile-detail [profile]="data.profile" disabled="true" showSummary="true" hide_missing="true"></profile-detail>
     </div>
     <ion-fab right bottom>
         <button ion-fab (click)="onAddClick()">

@@ -6,8 +6,10 @@ export class Profile {
     picture: string;
     phone_number: string;
     title: string;
+    industry: string;
     company: string;
     location: string;
+    summary: string;
 
     website: string;
     linkedin: string;
@@ -24,8 +26,10 @@ export class Profile {
             this.picture = '';
             this.phone_number = null;
             this.title = '';
+            this.industry = '';
             this.company = '';
             this.location = '';
+            this.summary = '';
             this.website = '';
             this.linkedin = '';
             this.github = '';

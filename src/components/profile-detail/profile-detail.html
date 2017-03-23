@@ -13,6 +13,14 @@
             <ion-label stacked>Title</ion-label>
             <ion-input type="text" value="{{ profile.title }}" [disabled]="disabled"></ion-input>
         </ion-item>
+        <ion-item *ngIf="showSummary" [hidden]="hideMissing(profile.summary)">
+            <ion-label stacked>Summary</ion-label>
+            <ion-textarea value="{{ profile.summary }}" [disabled]="disabled"></ion-textarea>
+        </ion-item>
+        <ion-item [hidden]="hideMissing(profile.industry)">
+            <ion-label stacked>Industry</ion-label>
+            <ion-input type="text" value="{{ profile.industry }}" [disabled]="disabled"></ion-input>
+        </ion-item>
         <ion-item [hidden]="hideMissing(profile.company)">
             <ion-label stacked>Company</ion-label>
             <ion-input type="text" value="{{ profile.company }}" [disabled]="disabled"></ion-input>

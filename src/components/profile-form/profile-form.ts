@@ -23,8 +23,10 @@ export class ProfileForm {
             'first_name': [],
             'last_name': [],
             'title': [],
+            'industry': [],
             'company': [],
             'location': [],
+            'summary': [],
             'email': [],
             'phone_number': [],
             'website': [],
@@ -48,11 +50,16 @@ export class ProfileForm {
             'title': {
                 'maxlength': 'Your name cannot exceed 120 characters'
             },
+            'industry': {
+                'maxlength': 'Your industry cannot exceed 20 characters'
+            },
             'company': {
                 'maxlength': 'Your company cannot exceed 50 characters'
             },
             'location': {
                 'maxlength': 'Your location cannot exceed 75 characters'
+            },
+            'summary': {
             },
             'email': {
                 'maxlength': 'Your email cannot exceed 80 characters'
@@ -89,8 +96,10 @@ export class ProfileForm {
             first_name: [{value: this.profile.first_name, disabled: this.isUserProfile}, Validators.compose([Validators.required, Validators.maxLength(30)])],
             last_name: [{value: this.profile.last_name, disabled: this.isUserProfile}, Validators.compose([Validators.required, Validators.maxLength(30)])],
             title: [this.profile.title, Validators.maxLength(120)],
+            industry: [this.profile.industry, Validators.maxLength(20)],
             company: [this.profile.company, Validators.maxLength(50)],
             location: [this.profile.location, Validators.maxLength(75)],
+            summary: [this.profile.summary, Validators.maxLength(2000)],
             email: [{value: this.profile.email, disabled: this.isUserProfile}, Validators.maxLength(80)],
             phone_number: [this.profile.phone_number, Validators.maxLength(25)],
             website: [this.profile.website, Validators.maxLength(256)],

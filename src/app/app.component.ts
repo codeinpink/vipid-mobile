@@ -10,6 +10,8 @@ import { ShareableProfileListPage } from '../pages/shareable-profile-list/sharea
 import { UserSettingsPage } from '../pages/user-settings/user-settings';
 import { LoginPage } from '../pages/login/login';
 import { HttpService } from '../shared/http.service';
+import { UserSettings } from '../providers/user-settings';
+import { Profile } from '../shared/profile.model';
 
 
 @Component({
@@ -20,9 +22,11 @@ export class MyApp {
 
   rootPage = ContactListPage;
   pages: any;
-  profile: any;
+  profilePage: any;
 
-  constructor(platform: Platform, http: HttpService) {
+  picture: string;
+
+  constructor(platform: Platform, http: HttpService, settings: UserSettings) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -36,7 +40,11 @@ export class MyApp {
         }
     });
 
-    this.profile = {component: MyProfileEditPage};
+    settings.getSettings().subscribe(profile => {
+        this.picture = profile.picture;
+    });
+
+    this.profilePage = {component: MyProfileEditPage};
 
     this.pages = [
         {title: 'Contacts', component: ContactListPage },

@@ -24,7 +24,17 @@
     <ion-list>
         <ion-item *ngFor="let group of filteredGroups" (click)="onGroupSelect(group)">
             <ng2-letter-avatar [avatar-data]="group.name"
-            avatar-char-count="2" avatar-custom-bg-color="#4fbfa6" avatar-height="80px" avatar-height="80px" dynamic="true" item-left></ng2-letter-avatar>
+                avatar-char-count="1"
+                avatar-custom-bg-color="white"
+                avatar-border="true"
+                avatar-custom-border="border:3px solid #4fbfa6"
+                avatar-text-color="#4fbfa6"
+                avatar-font-family="Roboto, 'Helvetica Neue', sans-serif"
+                avatar-height="80px"
+                avatar-width="80px"
+                dynamic="true"
+                item-left>
+            </ng2-letter-avatar>
             <h2>{{ group.name }}</h2>
             <h3>{{ group.contacts.length }} contacts in this group</h3>
             <p>{{ group.description }}</p>

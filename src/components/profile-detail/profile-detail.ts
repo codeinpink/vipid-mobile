@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
 export class ProfileDetail {
     @Input() profile: any;
     @Input() disabled: boolean;
+    @Input() showSummary: boolean = false;
     @Input() hide_missing: boolean;
 
     constructor() {

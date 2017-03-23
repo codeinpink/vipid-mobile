@@ -28,6 +28,24 @@
                     <span class="form-error">{{ error }}</span>
                 </div>
             </div>
+            <ion-item *ngIf="isUserProfile">
+                <ion-label stacked>Summary</ion-label>
+                <ion-textarea formControlName="summary"></ion-textarea>
+            </ion-item>
+            <div *ngIf="formErrors.summary">
+                <div *ngFor="let error of formErrors.summary">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
+            <ion-item>
+                <ion-label stacked>Industry</ion-label>
+                <ion-input type="text" formControlName="industry"></ion-input>
+            </ion-item>
+            <div *ngIf="formErrors.industry">
+                <div *ngFor="let error of formErrors.industry">
+                    <span class="form-error">{{ error }}</span>
+                </div>
+            </div>
             <ion-item>
                 <ion-label stacked>Company</ion-label>
                 <ion-input type="text" formControlName="company"></ion-input>

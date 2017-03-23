@@ -43,9 +43,28 @@ $navbar-md-color: color($colors, primary);
     display: block;
 }
 
+.menu-avatar-header {
+    background: color($colors, primary);
+    color: white;
+}
+
 .profile-picture {
-    width: 160px !important;
-    height: 160px !important;
+    width: 155px !important;
+    height: 155px !important;
+    background: color($colors, faintgrey);
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+    ion-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 55%;
+        transform: translate(-50%, -50%);
+        font-size: 5.2em;
+        color: color($colors, grey);
+    }
 }
 
 .empty-list-message {

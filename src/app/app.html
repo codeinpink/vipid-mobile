@@ -1,10 +1,13 @@
 <ion-menu [content]="content">
     <ion-content>
         <ion-list>
-            <ion-item>
+            <ion-item class="menu-avatar-header">
                 <ion-avatar>
-                    <img src="assets/img/profile/profile2.jpg" class="image-center profile-picture">
-                    <h2 text-center menuClose (click)="openPage(profile)">Edit My Profile</h2>
+                    <div *ngIf="!picture" class="image-center profile-picture">
+                        <ion-icon name="person"></ion-icon>
+                    </div>
+                    <img *ngIf="picture" src="assets/img/profile/profile2.jpg" class="image-center profile-picture">
+                    <h2 text-center padding-top menuClose (click)="openPage(profilePage)">Edit My Profile</h2>
                 </ion-avatar>
             </ion-item>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
