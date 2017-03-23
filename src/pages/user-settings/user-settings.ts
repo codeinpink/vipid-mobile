@@ -12,6 +12,7 @@ import { ChangePasswordPage } from './change-password/change-password';
     templateUrl: 'user-settings.html'
 })
 export class UserSettingsPage implements OnInit {
+    settingsSubscription: any;
     isLoggedInWithLinkedIn: boolean;
 
     constructor(private nav: NavController, private alertCtrl: AlertController, private accessTokenService: OAuthAccessTokenService,
@@ -65,6 +66,10 @@ export class UserSettingsPage implements OnInit {
     }
 
     ngOnInit(){
-        this.settings.getSettings().subscribe(settings => this.isLoggedInWithLinkedIn = settings.linkedin_connected);
+        this.settingsSubscription = this.settings.getSettings().subscribe(settings => this.isLoggedInWithLinkedIn = settings.linkedin_connected);
+    }
+
+    ngOnDestroy() {
+        this.settingsSubscription.unsubscribe();
     }
 }

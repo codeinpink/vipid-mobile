@@ -10,6 +10,8 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
     templateUrl: 'my-profile-edit.html'
 })
 export class MyProfileEditPage {
+    settingsSubscription: any;
+
     profile: Profile;
     valid: boolean;
 
@@ -19,7 +21,7 @@ export class MyProfileEditPage {
     }
 
     getProfile() {
-        this.settings.getSettings().subscribe(profile => this.profile = profile);
+        this.settingsSubscription = this.settings.getSettings().subscribe(profile => this.profile = profile);
     }
 
     doRefresh(refresher) {
@@ -34,6 +36,10 @@ export class MyProfileEditPage {
 
     ngOnInit() {
         this.getProfile();
+    }
+
+    ngOnDestroy() {
+        this.settingsSubscription.unsubscribe();
     }
 
     onSave() {

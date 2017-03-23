@@ -10,6 +10,8 @@ import { UserSettings } from '../../../providers/user-settings';
     templateUrl: 'account-information.html'
 })
 export class AccountInformationPage {
+    settingsSubscription: any;
+
     form: FormGroup;
     errors: any;
     formErrors: any;
@@ -86,12 +88,16 @@ export class AccountInformationPage {
     }
 
     ngOnInit() {
-        this.settings.getSettings().subscribe(settings => {
+        this.settingsSubscription = this.settings.getSettings().subscribe(settings => {
             this.email = settings.email;
             this.first_name = settings.first_name;
             this.last_name = settings.last_name;
         });
 
         this.initForm();
+    }
+
+    ngOnDestroy() {
+        this.settingsSubscription.unsubscribe();
     }
 }
