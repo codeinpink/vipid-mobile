@@ -8,25 +8,18 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
 
 
 @Component({
-    templateUrl: 'group-list.html',
-    providers: [GroupService]
+    templateUrl: 'group-list.html'
 })
 export class GroupListPage {
+    groupSubscription: any;
+    refresher: any;
+
     groups: Group[];
     filteredGroups: Group[];
     showSearch: Boolean;
 
     constructor(private navCtrl: NavController, private groupService: GroupService, private nm: NotificationManager) {
 
-    }
-
-    doRefresh(refresher) {
-        this.groupService.getGroups().subscribe(groups => {
-            this.groups = groups;
-            this.filteredGroups = groups;
-            refresher.complete();
-            this.nm.showSuccessMessage('Refreshed');
-        });
     }
 
     onAddClick() {
@@ -65,15 +58,34 @@ export class GroupListPage {
     }
 
     getGroups() {
-        this.groupService.getGroups().subscribe(groups => {
-            this.groups = groups;
-            this.filteredGroups = groups;
-        });
+        if (this.refresher && this.groupSubscription) {
+            this.groupService.getGroups(true);
+
+        } else {
+            this.groupSubscription = this.groupService.getGroups().subscribe(groups => {
+                this.groups = groups;
+                this.filteredGroups = groups;
+
+                if (this.refresher) {
+                    this.refresher.complete();
+                    this.nm.showSuccessMessage('Refreshed');
+                }
+            });
+        }
+    }
+
+    doRefresh(refresher) {
+        this.refresher = refresher;
+        this.getGroups();
     }
 
     ngOnInit() {
         this.getGroups();
         this.showSearch = false;
+    }
+
+    ngOnDestroy() {
+        this.groupSubscription.unsubscribe();
     }
 
 }

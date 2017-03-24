@@ -8,7 +8,6 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
 
 @Component({
     templateUrl: 'group-create.html',
-    providers: [FormBuilder, GroupService]
 })
 export class GroupCreatePage {
     mode: string = 'CREATE';
