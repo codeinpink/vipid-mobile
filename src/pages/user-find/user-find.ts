@@ -8,8 +8,7 @@ import { ContactFormData } from '../../shared/contact-form-data.model';
 
 
 @Component({
-    templateUrl: 'user-find.html',
-    providers: [FormBuilder, UserProfileService]
+    templateUrl: 'user-find.html'
 })
 export class UserFindPage implements OnInit {
     showNoResults: boolean = false;

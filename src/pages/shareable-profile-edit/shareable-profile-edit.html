@@ -12,6 +12,6 @@
 
 <ion-content padding>
     <div *ngIf="profile">
-        <shareable-profile-form [permissions]="profile" disabled="false" (onChanged)="onChanged($event)"></shareable-profile-form>
+        <shareable-profile-form [permissions]="profile" [disabled]="false" (onChanged)="onChanged($event)"></shareable-profile-form>
     </div>
 </ion-content>

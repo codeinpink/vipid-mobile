@@ -16,7 +16,6 @@ import { ContactFormData } from '../../shared/contact-form-data.model';
 */
 @Component({
   templateUrl: 'contact-add-menu.html',
-  providers: [ShareableProfileService]
 })
 export class ContactAddMenuPage {
     constructor(private nav: NavController, private alertCtrl: AlertController, private shareableProfileService: ShareableProfileService) {}

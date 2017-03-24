@@ -7,7 +7,6 @@ import { ContactListPage } from '../contact-list/contact-list';
 
 @Component({
     templateUrl: 'contact-add-set-notes.html',
-    providers: [ ContactService]
 })
 export class ContactAddSetNotesPage {
     data: ContactFormData;

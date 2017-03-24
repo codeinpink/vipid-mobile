@@ -2,7 +2,7 @@
     <ion-item-group>
         <ion-item>
             <ion-label stacked>Profile Title</ion-label>
-            <ion-input type="text" formControlName="title" [disabled]="disabled"></ion-input>
+            <ion-input type="text" value="{{ permissions.title }}" formControlName="title"></ion-input>
         </ion-item>
         <ion-item *ngIf="permissions.unique_link">
             <ion-label stacked>Profile URL</ion-label>
@@ -36,42 +36,42 @@
         <ion-item>
             <ion-label stacked>Can View Phone Number</ion-label>
             <ion-input type="text" value="{{ permissions.profile.phone_number }}" disabled></ion-input>
-            <ion-toggle checked="{{ permissions.can_view_phone_number }}" formControlName="can_view_phone_number" [disabled]="disabled"></ion-toggle>
+            <ion-toggle checked="{{ permissions.can_view_phone_number }}" formControlName="can_view_phone_number"></ion-toggle>
         </ion-item>
         <ion-item>
             <ion-label stacked>Can View Website</ion-label>
             <ion-input type="text" value="{{ permissions.profile.website }}" disabled></ion-input>
-            <ion-toggle checked="{{ permissions.can_view_website }}" formControlName="can_view_website" [disabled]="disabled"></ion-toggle>
+            <ion-toggle checked="{{ permissions.can_view_website }}" formControlName="can_view_website"></ion-toggle>
         </ion-item>
         <ion-item>
             <ion-label stacked>Can View Linkedin</ion-label>
             <ion-input type="text" value="{{ permissions.profile.linkedin }}" disabled></ion-input>
-            <ion-toggle checked="{{ permissions.can_view_linkedin }}" formControlName="can_view_linkedin" [disabled]="disabled"></ion-toggle>
+            <ion-toggle checked="{{ permissions.can_view_linkedin }}" formControlName="can_view_linkedin"></ion-toggle>
         </ion-item>
         <ion-item>
             <ion-label stacked>Can View Twitter</ion-label>
             <ion-input type="text" value="{{ permissions.profile.twitter }}" disabled></ion-input>
-            <ion-toggle checked="{{ permissions.can_view_twitter }}" formControlName="can_view_twitter" [disabled]="disabled"></ion-toggle>
+            <ion-toggle checked="{{ permissions.can_view_twitter }}" formControlName="can_view_twitter"></ion-toggle>
         </ion-item>
         <ion-item>
             <ion-label stacked>Can View Github</ion-label>
             <ion-input type="text" value="{{ permissions.profile.github }}" disabled></ion-input>
-            <ion-toggle checked="{{ permissions.can_view_github }}" formControlName="can_view_github" [disabled]="disabled"></ion-toggle>
+            <ion-toggle checked="{{ permissions.can_view_github }}" formControlName="can_view_github"></ion-toggle>
         </ion-item>
         <ion-item>
             <ion-label stacked>Can View Facebook</ion-label>
             <ion-input type="text" value="{{ permissions.profile.facebook }}" disabled></ion-input>
-            <ion-toggle checked="{{ permissions.can_view_facebook }}" formControlName="can_view_facebook" [disabled]="disabled"></ion-toggle>
+            <ion-toggle checked="{{ permissions.can_view_facebook }}" formControlName="can_view_facebook"></ion-toggle>
         </ion-item>
         <ion-item>
             <ion-label stacked>Can View Youtube</ion-label>
             <ion-input type="text" value="{{ permissions.profile.youtube }}" disabled></ion-input>
-            <ion-toggle checked="{{ permissions.can_view_youtube }}" formControlName="can_view_youtube" [disabled]="disabled"></ion-toggle>
+            <ion-toggle checked="{{ permissions.can_view_youtube }}" formControlName="can_view_youtube"></ion-toggle>
         </ion-item>
         <ion-item>
             <ion-label stacked>Can View Instagram</ion-label>
             <ion-input type="text" value="{{ permissions.profile.instagram }}" disabled></ion-input>
-            <ion-toggle type="text" checked="{{ permissions.can_view_instagram }}" formControlName="can_view_instagram" [disabled]="disabled"></ion-toggle>
+            <ion-toggle type="text" checked="{{ permissions.can_view_instagram }}" formControlName="can_view_instagram"></ion-toggle>
         </ion-item>
     </ion-item-group>
 </form>

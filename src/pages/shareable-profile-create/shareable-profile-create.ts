@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { UserProfileService } from '../../providers/user-profile/user-profile';
+import { UserSettings } from '../../providers/user-settings';
 import { ContactPermissions } from '../../shared/contact-permissions.model';
 import { ShareableProfile } from '../../shared/shareable-profile.model';
 import { ShareableProfileService } from '../../providers/shareable-profile/shareable-profile';
@@ -8,14 +8,13 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
 
 
 @Component({
-    templateUrl: 'shareable-profile-create.html',
-    providers: [UserProfileService, ShareableProfileService]
+    templateUrl: 'shareable-profile-create.html'
 })
 export class ShareableProfileCreatePage {
     profile: ShareableProfile;
     valid: boolean;
 
-    constructor(private navCtrl: NavController, private userProfileService: UserProfileService, private shareableProfileService: ShareableProfileService,
+    constructor(private navCtrl: NavController, private settings: UserSettings, private shareableProfileService: ShareableProfileService,
     private nm: NotificationManager) {
     }
 
@@ -33,12 +32,10 @@ export class ShareableProfileCreatePage {
     }
 
     ngOnInit() {
-        this.userProfileService.getProfile(1).subscribe(userProfile => {
+        this.settings.getSettings().subscribe(settings => {
             this.profile = new ShareableProfile();
-            this.profile.profile = userProfile;
-            this.profile.id = -1;
+            this.profile.profile = settings;
         });
-
     }
 
 }

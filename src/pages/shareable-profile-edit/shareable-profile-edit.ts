@@ -6,8 +6,7 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
 
 
 @Component({
-    templateUrl: 'shareable-profile-edit.html',
-    providers: [ShareableProfileService]
+    templateUrl: 'shareable-profile-edit.html'
 })
 export class ShareableProfileEditPage {
     profile: ShareableProfile;
@@ -20,7 +19,7 @@ export class ShareableProfileEditPage {
 
     onSave() {
         if (this.valid) {
-            this.shareableProfileService.updateProfile(this.profile.id, this.profile).subscribe(_ => {
+            this.shareableProfileService.updateProfile(this.profile).subscribe(_ => {
                 this.navCtrl.pop().then(_ => this.nm.showSuccessMessage('Profile updated'));
             });
         }

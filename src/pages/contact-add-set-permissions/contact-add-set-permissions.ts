@@ -6,7 +6,6 @@ import { ContactAddSetNotesPage } from '../contact-add-set-notes/contact-add-set
 
 @Component({
     templateUrl: 'contact-add-set-permissions.html',
-    providers: []
 })
 export class ContactAddSetPermissionsPage {
     data: ContactFormData;

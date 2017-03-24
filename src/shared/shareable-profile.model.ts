@@ -1,6 +1,7 @@
 import {ContactPermissions} from './contact-permissions.model';
 
 export class ShareableProfile extends ContactPermissions {
+    id: number;
     title: string;
     unique_link: string;
     groups: any;

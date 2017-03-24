@@ -7,10 +7,10 @@ import { PopoverPage } from './popover';
 
 
 @Component({
-    templateUrl: 'shareable-profile-detail.html',
-    providers: [ShareableProfileService]
+    templateUrl: 'shareable-profile-detail.html'
 })
 export class ShareableProfileDetailPage {
+    profileSubscription: any;
     profile: ShareableProfile;
 
     constructor(private navCtrl: NavController, private navParams: NavParams, private shareableProfileService: ShareableProfileService, private popoverCtrl: PopoverController) {
@@ -27,11 +27,19 @@ export class ShareableProfileDetailPage {
     }
 
     onEditClick() {
-        this.navCtrl.push(ShareableProfileEditPage, {profile: this.profile });
+        this.navCtrl.push(ShareableProfileEditPage, {profile: this.profile});
     }
+
+    onChanged() {}
 
     ngOnInit() {
-        this.profile = this.navParams.get('profile');
+        let id = +this.navParams.get('id');
+        this.profileSubscription = this.shareableProfileService.getProfiles().subscribe(profiles => {
+            this.profile = profiles.filter(profile => profile.id === id)[0];
+        });
     }
 
+    ngOnDestroy() {
+        this.profileSubscription.unsubscribe();
+    }
 }
