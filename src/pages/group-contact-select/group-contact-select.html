@@ -11,8 +11,11 @@
 
 
 <ion-content padding>
-    <ion-list [virtualScroll]="contacts" approxItemHeight="100px">
-        <ion-item *virtualItem="let contact">
+    <!--
+        Can't use virtual scroll list since it currently doesn't update the view of the checkbox -_-
+    -->
+    <ion-list>
+        <ion-item *ngFor="let contact of contacts">
             <ion-checkbox [(ngModel)]="contact.selected" item-left></ion-checkbox>
             <ion-thumbnail *ngIf="contact.profile.avatar" item-left>
                 <ion-img [src]="contact.profile.avatar"></ion-img>

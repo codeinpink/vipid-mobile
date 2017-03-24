@@ -17,18 +17,7 @@ export class GroupContactSelectPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public contactService: ContactService,
     private groupService: GroupService, private nm: NotificationManager) {
-        this.contactService.getContacts().subscribe(contacts => {
-            let groupContacts = this.group.contacts.map(c => c.id);
-            this.contacts = contacts.map((contact: SelectableContact) => {
-                if (groupContacts.indexOf(contact.id) !== -1) {
-                    contact.selected = true;
-                } else {
-                    contact.selected = false;
-                }
 
-                return contact;
-            });
-        });
     }
 
     save() {
@@ -46,6 +35,19 @@ export class GroupContactSelectPage {
 
     ngOnInit() {
         this.group = this.navParams.get('group');
+
+        this.contactService.getContacts().subscribe(contacts => {
+            let groupContacts = this.group.contacts.map(c => c.id);
+            this.contacts = contacts.map((contact: SelectableContact) => {
+                if (groupContacts.indexOf(contact.id) !== -1) {
+                    contact.selected = true;
+                } else {
+                    contact.selected = false;
+                }
+
+                return contact;
+            });
+        });
     }
 
 }
