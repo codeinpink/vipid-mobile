@@ -20,7 +20,8 @@
         </ion-item>
         <ion-item-divider>Social Connections</ion-item-divider>
         <ion-item (click)="onLinkedInClick()">
-            <ion-icon name="logo-linkedin" color="linkedin" item-left></ion-icon>
+            <ion-icon *ngIf="!isLoggedInWithLinkedIn" name="logo-linkedin" color="grey" item-left></ion-icon>
+            <ion-icon *ngIf="isLoggedInWithLinkedIn" name="logo-linkedin" color="linkedin" item-left></ion-icon>
             LinkedIn
             <ion-icon *ngIf="!isLoggedInWithLinkedIn" color="faintgrey" name="link" item-right></ion-icon>
             <ion-icon *ngIf="isLoggedInWithLinkedIn" color="primary" name="link" item-right></ion-icon>

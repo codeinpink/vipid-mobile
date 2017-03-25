@@ -9,13 +9,18 @@
             <ion-input type="text" value="{{ getProfileLink(permissions) }}" disabled></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Can View Full Name</ion-label>
-            <ion-input type="text" value="{{ permissions.profile.name }}" disabled></ion-input>
+            <ion-label stacked>Can View Title</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.title }}" disabled></ion-input>
             <ion-toggle disabled checked="true"></ion-toggle>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Can View Title</ion-label>
-            <ion-input type="text" value="{{ permissions.profile.title }}" disabled></ion-input>
+            <ion-label stacked>Can View Summary</ion-label>
+            <ion-textarea value="{{ permissions.profile.summary }}" disabled></ion-textarea>
+            <ion-toggle disabled checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Can View Industry</ion-label>
+            <ion-input type="text" value="{{ permissions.profile.industry }}" disabled></ion-input>
             <ion-toggle disabled checked="true"></ion-toggle>
         </ion-item>
         <ion-item>
