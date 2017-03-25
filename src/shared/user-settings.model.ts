@@ -6,4 +6,6 @@ export class UserSettings extends Profile {
     first_name: string;
     last_name: string;
     linkedin_connected: boolean;
+    picture: string;
+    avatar: string;
 }

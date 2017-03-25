@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Events } from 'ionic-angular';
 import { HttpService } from '../shared/http.service';
 import { Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -13,11 +14,21 @@ export class UserSettings {
     private settings: ReplaySubject<Settings> = new ReplaySubject<Settings>(1);
 
     private settingsUrl = 'http://localhost:8000/rest-auth/user/';
+    private settingsRefreshUrl = 'http://localhost:8000/rest-auth/user/refresh/';
 
     public settingsA: ReplaySubject<Settings>;
 
-    constructor(public http: HttpService) {
+    constructor(public http: HttpService, public events: Events) {
         console.log('Hello UserSettings Provider');
+        this.events.subscribe('user:login', () => {
+            console.log('logged in');
+            this.settings.next(new Settings());
+        });
+
+        this.events.subscribe('user:logout', () => {
+            console.log('logged out');
+            this.settings.next(new Settings());
+        });
     }
 
     public getSettings(forceRefresh?: boolean) {
@@ -38,6 +49,15 @@ export class UserSettings {
     private _getSettings() {
         return this.http.get(this.settingsUrl).map(this.extractData)
             .catch(this.handleError);
+    }
+
+    public refresh() {
+        this.http.post(this.settingsRefreshUrl, '').map(this.extractData).catch(this.handleError).subscribe(settings => {
+            this.settings.next(settings);
+        }, error => {
+            this.settings.error(error);
+            this.settings = new ReplaySubject(1);
+        });
     }
 
     public updateSettings(data: any) {

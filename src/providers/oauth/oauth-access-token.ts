@@ -18,7 +18,7 @@ export class OAuthAccessTokenService {
     }
 
     // isAuthenticationSource = should the token returned be set as the token for our API?
-    public loginWithLinkedIn(isAuthenticationSource: boolean) {
+    public loginWithLinkedIn(isAuthenticationSource: boolean, isConnecting?: boolean) {
         let linkedinProvider: LinkedIn = new LinkedIn({
             clientId: "78701vytcosrbk",
             appScope: ["r_emailaddress", "r_basicprofile"],
@@ -29,7 +29,7 @@ export class OAuthAccessTokenService {
         return this.oauth.logInVia(linkedinProvider).then((data: any) => {
             console.log(data);
             return new Promise(resolve => {
-                this.getLinkedInTokenFromServer(data.code, data.state).subscribe(token => {
+                this.getLinkedInTokenFromServer(data.code, data.state, isConnecting).subscribe(token => {
                     console.log('token ' + token);
 
                     if (token && isAuthenticationSource) {
@@ -48,13 +48,21 @@ export class OAuthAccessTokenService {
         });
     }
 
-    public getLinkedInTokenFromServer(code: string, state: string) {
+    public getLinkedInTokenFromServer(code: string, state: string, isConnecting: boolean) {
         let data: any = {
             code: code,
             state: state
         };
 
-        return this.http.post('http://localhost:8000/rest-auth/linkedin/', data).map(res => {
+        let url = '';
+
+        if (isConnecting) {
+            url = 'http://localhost:8000/rest-auth/connect_linkedin/'
+        } else {
+            url = 'http://localhost:8000/rest-auth/linkedin/'
+        }
+
+        return this.http.post(url, data).map(res => {
             let data = res.json();
             return data.key;
         });

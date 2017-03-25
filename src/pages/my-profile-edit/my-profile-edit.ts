@@ -21,10 +21,14 @@ export class MyProfileEditPage {
     }
 
     getProfile() {
-        this.settingsSubscription = this.settings.getSettings().subscribe(profile => this.profile = profile);
+        this.settingsSubscription = this.settings.getSettings().subscribe(profile => {
+            this.profile = profile;
+        });
     }
 
     doRefresh(refresher) {
+        this.settings.refresh();
+        refresher.complete();
         /*
         this.userProfileService.refreshProfileData(8).subscribe(data => {
             console.log(data);
