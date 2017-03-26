@@ -3,6 +3,7 @@ import {ContactPermissions} from './contact-permissions.model';
 
 export class ContactRequest extends ContactPermissions {
     receiver: number;
+    sender: number;
 
     public setPermissions(permissions) {
         this.can_view_phone_number = permissions.can_view_phone_number;

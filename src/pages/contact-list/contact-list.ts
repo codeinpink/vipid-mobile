@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Contact } from '../../shared/contact.model';
+import { ContactRequest } from '../../shared/contact-request.model';
 import { ContactService } from '../../shared/contact.service';
 import { ContactRequestService } from '../../shared/contact-request.service';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
@@ -16,12 +17,17 @@ import {Observable} from 'rxjs/Observable';
 })
 export class ContactListPage {
     contactSubscription: any;
-    refresher: any;
+    contactRequestSubscription: any;
 
-    listType: string;
+    refresher: any;
+    numOutstanding = 0;
+
     contacts: Contact[];
     filteredContacts: Contact[];
     contactRequests: any;
+    filteredContactRequests: ContactRequest[];
+
+    numContactRequests = 0;
     showSearch: Boolean;
 
     allContactsPage = AllContactsPage;
@@ -30,23 +36,63 @@ export class ContactListPage {
     search: any;
     searchObserver: any;
 
+    refresh: any;
+    refreshObserver: any;
+
     constructor(private nav: NavController, private contactService: ContactService, private crService: ContactRequestService,
     private nm: NotificationManager) {
         this.search = Observable.create(observer => {
             this.searchObserver = observer;
         });
+
+        this.refresh = Observable.create(observer => {
+            this.refreshObserver = observer;
+        });
     }
 
-    doRefresh(refresher) {
-        this.refresher = refresher;
-        this.getContactRequests();
+    getContacts() {
+        if (this.refresher && this.contactSubscription) {
+            this.contactService.getContacts(true);
+            this.numOutstanding += 1;
+        } else {
+            this.numOutstanding += 1;
+            this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
+                this.contacts = contacts;
+                this.filteredContacts = contacts;
+
+                this.numOutstanding -= 1;
+                console.log(this.numOutstanding);
+                if (this.refresher && this.numOutstanding == 0) {
+                    this.refresher.complete();
+                    this.nm.showSuccessMessage('Refreshed');
+                }
+            });
+        }
+
+        if (this.refresher && this.contactRequestSubscription) {
+            this.crService.getContactRequests(true);
+            this.numOutstanding += 1;
+        } else {
+            this.numOutstanding += 1;
+            this.contactRequestSubscription = this.crService.getContactRequests().subscribe(requests => {
+                this.contactRequests = requests;
+                this.filteredContactRequests = requests;
+                this.numContactRequests = this.contactRequests.length;
+
+                this.numOutstanding -= 1;
+                console.log(this.numOutstanding);
+                if (this.refresher && this.numOutstanding == 0) {
+                    this.refresher.complete();
+                    this.nm.showSuccessMessage('Refreshed');
+                }
+            });
+        }
     }
 
-    // Should probably change this in the future to update whenever contacts gets updated
     getContactRequests() {
-        //this.contactRequests = [];
-        this.crService.getContactRequests().subscribe(requests => {
+        this.contactRequestSubscription = this.crService.getContactRequests().subscribe(requests => {
             this.contactRequests = requests;
+            this.numContactRequests = this.contactRequests.length;
         });
     }
 
@@ -68,13 +114,15 @@ export class ContactListPage {
         this.toggleSearch();
     }
 
-    ionViewDidEnter() {
-        console.log('entered contact list');
-    }
-
     ngOnInit() {
         this.showSearch = false;
         console.log('ngOnInit');
-        this.getContactRequests();
+        this.refresh.subscribe(refresher => {
+            this.refresher = refresher;
+            this.getContacts();
+            console.log('i should refresh');
+        });
+
+        this.getContacts();
     }
 }

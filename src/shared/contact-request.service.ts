@@ -2,27 +2,66 @@ import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 import {HttpService} from './http.service';
 import {Observable} from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/Rx';
+import { ContactRequest } from './contact-request.model';
 
 @Injectable()
 export class ContactRequestService {
+    private _requests: ContactRequest[] = [];
+    private requests: ReplaySubject<ContactRequest[]> = new ReplaySubject<ContactRequest[]>(1);
+
     private contactRequestsUrl = 'http://localhost:8000/api/contact-requests/';
     private contactRequestDetailUrl = this.contactRequestsUrl + '{ID}' + '/';
 
     constructor(private http: HttpService) {}
 
-    getContactRequests() {
+    public getContactRequests(forceRefresh?: boolean): Observable<ContactRequest[]> {
+        let numSubscribers = this.requests.observers.length;
+        console.log('[CONTACT REQUEST SERVICE] # of subscribers: ' + numSubscribers);
+
+        if (this.requests.observers.length === 0 || forceRefresh) {
+                this._getContactRequests().subscribe(requests => {
+                    this._requests = requests;
+                    console.log(this._requests.length)
+                    this.requests.next(this._requests);
+                }, error => {
+                    this.requests.error(error);
+                    this.requests = new ReplaySubject(1);
+                })
+        }
+
+        return this.requests;
+    }
+
+    private _getContactRequests() {
         return this.http.get(this.contactRequestsUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    send(data: any) {
-        return this.http.post(this.contactRequestsUrl, data).map(this.extractData).catch(this.handleError);
+    public send(data: any) {
+        return this.http.post(this.contactRequestsUrl, data).map(res => {
+            let request = res.json();
+            this._requests.push(request);
+            this.requests.next(this._requests);
+        }).catch(this.handleError);
     }
 
-    deleteContactRequest(data: any) {
+    public accept(data: any) {
+        return this.http.post(this.contactRequestsUrl, data).map(res => {
+            let requests = this._requests.filter(request => request.id !== data.id);
+            this._requests = requests;
+            this.requests.next(this._requests);
+        }).catch(this.handleError);
+    }
+
+    public delete(data: any) {
         return this.http.delete(this.contactRequestDetailUrl.replace('{ID}', data.id))
-            .map(this.extractData)
+            .map(_ => {
+                let requests = this._requests.filter(request => request.id !== data.id);
+                this._requests = requests;
+                this.requests.next(this._requests);
+            })
             .catch(this.handleError);
     }
 
