@@ -8,8 +8,7 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
 
 
 @Component({
-    templateUrl: 'import-outlook-contacts.html',
-    providers: [ContactService]
+    templateUrl: 'import-outlook-contacts.html'
 })
 export class ImportOutlookContactsPage {
     contacts: SelectableOutlookContact[];

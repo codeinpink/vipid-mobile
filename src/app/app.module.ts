@@ -13,6 +13,8 @@ import { ContactCreatePage } from '../pages/contact-create/contact-create';
 import { ContactDetailPage } from '../pages/contact-detail/contact-detail';
 import { ContactEditPage } from '../pages/contact-edit/contact-edit';
 import { ContactListPage } from '../pages/contact-list/contact-list';
+import { AllContactsPage } from '../pages/contact-list/all-contacts';
+import { ContactRequestsPage } from '../pages/contact-list/contact-requests';
 import { ContactNotesDetailPage } from '../pages/contact-notes-detail/contact-notes-detail';
 import { ContactPermissionsDetailPage } from '../pages/contact-permissions-detail/contact-permissions-detail';
 import { ContactProfileDetailPage } from '../pages/contact-profile-detail/contact-profile-detail';
@@ -75,6 +77,8 @@ import { UserSettings } from '../providers/user-settings';
     ContactDetailPage,
     ContactEditPage,
     ContactListPage,
+    AllContactsPage,
+    ContactRequestsPage,
     ContactNotesDetailPage,
     ContactPermissionsDetailPage,
     ContactProfileDetailPage,
@@ -126,6 +130,8 @@ import { UserSettings } from '../providers/user-settings';
     ContactDetailPage,
     ContactEditPage,
     ContactListPage,
+    AllContactsPage,
+    ContactRequestsPage,
     ContactNotesDetailPage,
     ContactPermissionsDetailPage,
     ContactProfileDetailPage,

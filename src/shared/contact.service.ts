@@ -68,24 +68,24 @@ export class ContactService {
     }
 
     importOutlookContacts(data) {
-        console.log(data);
         return this.http.post(this.importOutlookContactsUrl, data).map(this.extractData);
     }
 
     public editContact(data) {
         return this.http.patch(this.contactDetailUrl.replace('{ID}', data.id), data).map(res => {
-            let contact: Contact = res.json();
+            let contact = res.json();
+            /*
+            let contacts = this._contacts;
 
-            for (let i = 0; i < this._contacts.length; i++) {
-                if (this._contacts[i].id === contact.id) {
-                    this._contacts[i] = contact;
-                    break
+            for (let i = 0; i < contacts.length; i++) {
+                if (contacts[i].id === contact.id) {
+                    //contacts[i] = contact;
+                    break;
                 }
             }
 
-            console.log(contact);
             this.contacts.next(this._contacts);
-
+            */
             return contact;
         });
     }

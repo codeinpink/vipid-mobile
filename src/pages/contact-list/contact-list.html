@@ -1,64 +1,27 @@
 <ion-header>
     <ion-navbar>
         <ion-toolbar>
-        <button ion-button icon-only menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-segment [(ngModel)]="listType">
-            <ion-segment-button value="contacts"(ionSelect)="toggleSearch()">
-                All Contacts
-            </ion-segment-button>
-            <ion-segment-button value="requests" (ionSelect)="toggleSearch()">
-                Contact Requests
-            </ion-segment-button>
-        </ion-segment>
-    </ion-toolbar>
-    <ion-toolbar *ngIf="showSearch">
-        <ion-searchbar (input)="filterContacts($event)" [showCancelButton]="true" (ionClear)="resetContacts()" (ionCancel)="clearSearch()" placeholder="Filter Contacts"></ion-searchbar>
-    </ion-toolbar>
+            <ion-title [hidden]="showSearch">Contacts</ion-title>
+            <ion-searchbar (input)="filterContacts($event)" [hidden]="!showSearch" [showCancelButton]="true" (ionClear)="clearSearch()" (ionCancel)="clearSearch()" placeholder="Filter Contacts"></ion-searchbar>
+            <button ion-button icon-only menuToggle>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+            <ion-buttons end>
+                <button ion-button icon-only (click)="toggleSearch()" [hidden]="showSearch">
+                    <ion-icon name="search"></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-toolbar>
     </ion-navbar>
 </ion-header>
-
-<ion-content padding class="contact-list">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-    <ion-scroll scrollY="true"></ion-scroll>
-    <div [ngSwitch]="listType">
-        <div *ngSwitchCase="'contacts'">
-            <div *ngIf="filteredContacts && filteredContacts.length === 0" class="empty-list-message">
-                <h2 ion-text color="primary">No Contacts Yet</h2>
-                <p class="help-text">There are many ways to add a contact! Click the plus button to get started!</p>
-            </div>
-            <ion-list [virtualScroll]="filteredContacts" approxItemHeight="100px">
-                <ion-item *virtualItem="let contact" (click)="onContactSelect(contact)">
-                    <ion-thumbnail item-left>
-                        <ion-img *ngIf="contact.profile.avatar" [src]="contact.profile.avatar"></ion-img>
-                        <ng2-letter-avatar *ngIf="!contact.profile.avatar" [avatar-data]="getAvatarData(contact.profile.first_name, contact.profile.last_name)"
-                        avatar-char-count="2" avatar-custom-bg-color="#4fbfa6" avatar-border="true" avatar-custom-border="border:3px solid #4fbfa6"
-                        avatar-height="80px" avatar-height="80px" dynamic="true"></ng2-letter-avatar>
-                    </ion-thumbnail>
-                    <h2>{{ contact.profile.first_name }} {{ contact.profile.last_name }}</h2>
-                    <h3>{{ contact.profile.company }}</h3>
-                    <p>{{ contact.profile.title }}</p>
-                </ion-item>
-            </ion-list>
-            <ion-fab right bottom>
-                <button ion-fab (click)="onPersonAddClick()">
-                    <ion-icon name="add"></ion-icon>
-                </button>
-            </ion-fab>
-        </div>
-        <ion-list *ngSwitchCase="'requests'">
-            <ion-item *ngFor="let request of contactRequests" (click)="onRequestSelect(contact)">
-                <ion-avatar item-left>
-                    <img *ngIf="request.contact.profile.avatar" src="{{ request.contact.profile.avatar }}">
-                    <img *ngIf="!request.contact.profile.avatar" src="assets/img/profile/default-avatar.png">
-                </ion-avatar>
-                <h2>{{ request.contact.profile.name }}</h2>
-                <h3>{{ request.contact.profile.company }}</h3>
-                <p>{{ request.contact.profile.title }}</p>
-            </ion-item>
-        </ion-list>
-    </div>
-</ion-content>
+<div>
+    <ion-tabs tabsPlacement="top" color="primary">
+        <ion-tab tabTitle="All Contacts" [root]="allContactsPage" [rootParams]="search"></ion-tab>
+        <ion-tab tabTitle="Contact Requests" [root]="contactRequestsPage" [rootParams]="contactRequests"></ion-tab>
+    </ion-tabs>
+    <ion-fab right bottom>
+        <button ion-fab (click)="onPersonAddClick()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+</div>
