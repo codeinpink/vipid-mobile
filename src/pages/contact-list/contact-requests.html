@@ -9,9 +9,13 @@
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <div *ngIf="filteredContactRequests && filteredContactRequests.length === 0" class="empty-list-message">
+    <div *ngIf="filteredContactRequests && filteredContactRequests.length === 0 && !isSearching" class="empty-list-message">
         <h2 ion-text color="primary">No Contacts Requests Yet</h2>
         <p class="help-text">There are many ways to add a contact! Click the plus button to get started!</p>
+    </div>
+    <div *ngIf="filteredContactRequests && filteredContactRequests.length === 0 && isSearching" class="empty-list-message">
+        <h2 ion-text color="primary">No Contact Requests Found</h2>
+        <p class="help-text">No contact requests have a name matching your query.</p>
     </div>
     <ion-list [virtualScroll]="filteredContactRequests" [virtualTrackBy]="trackContact" approxItemHeight="100px">
         <ion-item *virtualItem="let contact">

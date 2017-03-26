@@ -4,7 +4,6 @@ import { Contact } from '../../shared/contact.model';
 import { ContactService } from '../../shared/contact.service';
 import { ContactRequestService } from '../../shared/contact-request.service';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
-import { ContactAddMenuPage } from '../contact-add-menu/contact-add-menu';
 import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 
 @Component({
@@ -18,13 +17,11 @@ export class AllContactsPage {
 
     refresh: any;
 
+    isSearching = false;
+
     constructor(private nav: NavController, private navParams: NavParams, private appCtrl: App, private nm: NotificationManager,
     private contactService: ContactService) {
 
-    }
-
-    resetContacts() {
-        this.filteredContacts = this.contacts;
     }
 
     doRefresh(refresher) {
@@ -49,21 +46,14 @@ export class AllContactsPage {
     ngOnInit() {
         let contacts = this.navParams.data.contacts;
 
-        this.contactSubscription = contacts.subscribe(data => {
-            this.contacts = data;
-            this.filteredContacts = data;
+        this.contactSubscription = contacts.subscribe(filtered => {
+            this.filteredContacts = filtered;
         });
 
         let search = this.navParams.data.search;
 
-        search.subscribe(query => {
-            if (query.trim() === '') {
-                this.resetContacts();
-            } else {
-                this.filteredContacts = this.contacts.filter((contact) => {
-                    return (contact.profile.first_name.toLowerCase().indexOf(query.toLowerCase()) > -1);
-                })
-            }
+        search.subscribe(isSearching => {
+            this.isSearching = isSearching;
         });
 
         this.refresh = this.navParams.data.refresh;

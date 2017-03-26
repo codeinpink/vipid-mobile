@@ -26,10 +26,10 @@ export class ContactListPage {
     refresher: any;
     numOutstanding = 0;
 
-    //contacts: Contact[];
-    //filteredContacts: Contact[];
-    //contactRequests: any;
-    //filteredContactRequests: ContactRequest[];
+    contacts: Contact[];
+    filteredContacts: Contact[];
+    contactRequests: any;
+    filteredContactRequests: ContactRequest[];
 
     numContactRequests = 0;
     showSearch: Boolean;
@@ -39,6 +39,7 @@ export class ContactListPage {
 
     search: any;
     searchObserver: any;
+    isSearching: boolean = false;
 
     refresh: any;
     refreshObserver: any;
@@ -57,8 +58,8 @@ export class ContactListPage {
     getContacts() {
         this.numOutstanding += 1;
         this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
-            //this.contacts = contacts;
-            //this.filteredContacts = contacts;
+            this.contacts = contacts;
+            this.filteredContacts = contacts;
             this.contactList.next(contacts);
 
             this.updateRefreshStatus();
@@ -68,8 +69,8 @@ export class ContactListPage {
     getContactRequests() {
         this.numOutstanding += 1;
         this.contactRequestSubscription = this.crService.getContactRequests().subscribe(requests => {
-            //this.contactRequests = requests;
-            //this.filteredContactRequests = requests;
+            this.contactRequests = requests;
+            this.filteredContactRequests = requests;
             this.numContactRequests = requests.length;
             this.contactRequestList.next(requests);
 
@@ -106,9 +107,38 @@ export class ContactListPage {
         this.nav.push(ContactAddMenuPage);
     }
 
+    resetContacts() {
+        this.filteredContacts = this.contacts;
+    }
+
+    resetContactRequests() {
+        this.filteredContactRequests = this.contactRequests;
+    }
+
     filterContacts(ev: any) {
         let val = ev.target.value;
-        this.searchObserver.next(val);
+        val = val ? val: '';
+
+        if (!val || val === '') {
+            this.resetContacts();
+            this.resetContactRequests();
+            this.isSearching = false;
+        } else {
+            this.isSearching = true;
+
+            this.filteredContacts = this.contacts.filter((contact) => {
+                return (contact.profile.first_name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            });
+
+            this.filteredContactRequests = this.contactRequests.filter((contact) => {
+                return (contact.profile.first_name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            });
+        }
+
+        this.contactList.next(this.filteredContacts);
+        this.contactRequestList.next(this.filteredContactRequests);
+
+        this.searchObserver.next(this.isSearching);
     }
 
     toggleSearch() {

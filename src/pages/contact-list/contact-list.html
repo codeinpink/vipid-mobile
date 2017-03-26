@@ -2,7 +2,7 @@
     <ion-navbar>
         <ion-toolbar>
             <ion-title [hidden]="showSearch">Contacts</ion-title>
-            <ion-searchbar (input)="filterContacts($event)" [hidden]="!showSearch" [showCancelButton]="true" (ionClear)="clearSearch()" (ionCancel)="clearSearch()" placeholder="Filter Contacts"></ion-searchbar>
+            <ion-searchbar (ionInput)="filterContacts($event)" [hidden]="!showSearch" [showCancelButton]="true" (ionClear)="clearSearch()" (ionCancel)="clearSearch()" placeholder="Filter Contacts"></ion-searchbar>
             <button ion-button icon-only menuToggle>
                 <ion-icon name="menu"></ion-icon>
             </button>
