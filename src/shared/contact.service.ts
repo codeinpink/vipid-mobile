@@ -28,7 +28,6 @@ export class ContactService {
         if (this.contacts.observers.length === 0 || forceRefresh) {
                 this._getContacts().subscribe(contacts => {
                     this._contacts = contacts;
-                    console.log(this._contacts.length)
                     this.contacts.next(this._contacts);
                 }, error => {
                     this.contacts.error(error);

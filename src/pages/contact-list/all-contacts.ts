@@ -12,31 +12,15 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
 })
 export class AllContactsPage {
     contactSubscription: any;
-    refresher: any;
 
     contacts: Contact[];
     filteredContacts: Contact[];
 
+    refresh: any;
+
     constructor(private nav: NavController, private navParams: NavParams, private appCtrl: App, private nm: NotificationManager,
     private contactService: ContactService) {
 
-    }
-
-    getContacts() {
-        if (this.refresher && this.contactSubscription) {
-            this.contactService.getContacts(true);
-
-        } else {
-            this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
-                this.contacts = contacts;
-                this.filteredContacts = contacts;
-
-                if (this.refresher) {
-                    this.refresher.complete();
-                    this.nm.showSuccessMessage('Refreshed');
-                }
-            });
-        }
     }
 
     resetContacts() {
@@ -44,8 +28,7 @@ export class AllContactsPage {
     }
 
     doRefresh(refresher) {
-        this.refresher = refresher;
-        this.getContacts();
+        this.refresh.next(refresher);
     }
 
     onContactSelect(contact: Contact) {
@@ -64,7 +47,14 @@ export class AllContactsPage {
     }
 
     ngOnInit() {
-        let search = this.navParams.data;
+        let contacts = this.navParams.data.contacts;
+
+        this.contactSubscription = contacts.subscribe(data => {
+            this.contacts = data;
+            this.filteredContacts = data;
+        });
+
+        let search = this.navParams.data.search;
 
         search.subscribe(query => {
             if (query.trim() === '') {
@@ -76,7 +66,7 @@ export class AllContactsPage {
             }
         });
 
-        this.getContacts();
+        this.refresh = this.navParams.data.refresh;
     }
 
     ngOnDestroy() {

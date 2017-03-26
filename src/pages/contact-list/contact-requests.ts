@@ -12,8 +12,10 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
     templateUrl: 'contact-requests.html'
 })
 export class ContactRequestsPage {
+    contactRequestSubscription: any;
+
     contactRequests: Contact[];
-    filteredContacts: Contact[];
+    filteredContactRequests: Contact[];
 
     refresh: any;
 
@@ -23,7 +25,6 @@ export class ContactRequestsPage {
     }
 
     doRefresh(refresher) {
-        //this.refresher = refresher;
         this.refresh.next(refresher);
     }
 
@@ -65,11 +66,29 @@ export class ContactRequestsPage {
     }
 
     ngOnInit() {
-        console.log(this.navParams.data);
-        this.contactRequests = this.navParams.data.requests;
-        this.refresh = this.navParams.data.refresh;
+        let requests = this.navParams.data.requests;
 
-        console.log(this.contactRequests);
-        this.filteredContacts = this.contactRequests;
+        this.contactRequestSubscription = requests.subscribe(data => {
+            this.contactRequests = data;
+            this.filteredContactRequests = data;
+        });
+
+        let search = this.navParams.data.search;
+
+        search.subscribe(query => {
+            if (query.trim() === '') {
+                //this.resetContacts();
+            } else {
+                this.filteredContactRequests = this.contactRequests.filter((contact) => {
+                    return (contact.profile.first_name.toLowerCase().indexOf(query.toLowerCase()) > -1);
+                })
+            }
+        });
+
+        this.refresh = this.navParams.data.refresh;
+    }
+
+    ngOnDestroy() {
+        this.contactRequestSubscription.unsubscribe();
     }
 }

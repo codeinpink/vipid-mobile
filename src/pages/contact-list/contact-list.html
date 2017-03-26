@@ -16,8 +16,8 @@
 </ion-header>
 <div>
     <ion-tabs tabsPlacement="top" color="primary">
-        <ion-tab tabTitle="All Contacts" [root]="allContactsPage" [rootParams]="search"></ion-tab>
-        <ion-tab tabTitle="Contact Requests" [root]="contactRequestsPage" [rootParams]="{requests: contactRequests, refresh: refreshObserver}" [tabBadge]="numContactRequests || ''" tabBadgeStyle="secondary"></ion-tab>
+        <ion-tab tabTitle="All Contacts" [root]="allContactsPage" [rootParams]="{contacts: contactList, search: search, refresh: refreshObserver}"></ion-tab>
+        <ion-tab tabTitle="Contact Requests" [root]="contactRequestsPage" [rootParams]="{requests: contactRequestList, search: search, refresh: refreshObserver}" [tabBadge]="numContactRequests || ''" tabBadgeStyle="secondary"></ion-tab>
     </ion-tabs>
     <ion-fab right bottom>
         <button ion-fab (click)="onPersonAddClick()">

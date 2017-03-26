@@ -10,6 +10,7 @@ import { NotificationManager } from '../../providers/notification-manager/notifi
 import { AllContactsPage } from './all-contacts';
 import { ContactRequestsPage } from './contact-requests';
 import {Observable} from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/Rx';
 
 
 @Component({
@@ -19,13 +20,16 @@ export class ContactListPage {
     contactSubscription: any;
     contactRequestSubscription: any;
 
+    contactList: ReplaySubject<Contact[]> = new ReplaySubject<Contact[]>(1);
+    contactRequestList: ReplaySubject<ContactRequest[]> = new ReplaySubject<ContactRequest[]>(1);
+
     refresher: any;
     numOutstanding = 0;
 
-    contacts: Contact[];
-    filteredContacts: Contact[];
-    contactRequests: any;
-    filteredContactRequests: ContactRequest[];
+    //contacts: Contact[];
+    //filteredContacts: Contact[];
+    //contactRequests: any;
+    //filteredContactRequests: ContactRequest[];
 
     numContactRequests = 0;
     showSearch: Boolean;
@@ -51,49 +55,51 @@ export class ContactListPage {
     }
 
     getContacts() {
+        this.numOutstanding += 1;
+        this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
+            //this.contacts = contacts;
+            //this.filteredContacts = contacts;
+            this.contactList.next(contacts);
+
+            this.updateRefreshStatus();
+        });
+    }
+
+    getContactRequests() {
+        this.numOutstanding += 1;
+        this.contactRequestSubscription = this.crService.getContactRequests().subscribe(requests => {
+            //this.contactRequests = requests;
+            //this.filteredContactRequests = requests;
+            this.numContactRequests = requests.length;
+            this.contactRequestList.next(requests);
+
+            this.updateRefreshStatus();
+        });
+    }
+
+    getData() {
         if (this.refresher && this.contactSubscription) {
             this.contactService.getContacts(true);
             this.numOutstanding += 1;
         } else {
-            this.numOutstanding += 1;
-            this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
-                this.contacts = contacts;
-                this.filteredContacts = contacts;
-
-                this.numOutstanding -= 1;
-                console.log(this.numOutstanding);
-                if (this.refresher && this.numOutstanding == 0) {
-                    this.refresher.complete();
-                    this.nm.showSuccessMessage('Refreshed');
-                }
-            });
+            this.getContacts();
         }
 
         if (this.refresher && this.contactRequestSubscription) {
             this.crService.getContactRequests(true);
             this.numOutstanding += 1;
         } else {
-            this.numOutstanding += 1;
-            this.contactRequestSubscription = this.crService.getContactRequests().subscribe(requests => {
-                this.contactRequests = requests;
-                this.filteredContactRequests = requests;
-                this.numContactRequests = this.contactRequests.length;
-
-                this.numOutstanding -= 1;
-                console.log(this.numOutstanding);
-                if (this.refresher && this.numOutstanding == 0) {
-                    this.refresher.complete();
-                    this.nm.showSuccessMessage('Refreshed');
-                }
-            });
+            this.getContactRequests();
         }
     }
 
-    getContactRequests() {
-        this.contactRequestSubscription = this.crService.getContactRequests().subscribe(requests => {
-            this.contactRequests = requests;
-            this.numContactRequests = this.contactRequests.length;
-        });
+    updateRefreshStatus() {
+        this.numOutstanding -= 1;
+
+        if (this.refresher && this.numOutstanding == 0) {
+            this.refresher.complete();
+            this.nm.showSuccessMessage('Refreshed');
+        }
     }
 
     onPersonAddClick() {
@@ -119,10 +125,9 @@ export class ContactListPage {
         console.log('ngOnInit');
         this.refresh.subscribe(refresher => {
             this.refresher = refresher;
-            this.getContacts();
-            console.log('i should refresh');
+            this.getData();
         });
 
-        this.getContacts();
+        this.getData();
     }
 }
