@@ -18,6 +18,8 @@ export class ContactDetailPage {
     notesDetailTab: any = ContactNotesDetailPage;
     permissionsDetailTab: any = ContactPermissionsDetailPage;
 
+    displayTabs: boolean;
+
     constructor(private nav: NavController, private navParams: NavParams, private contactService: ContactService) {
 
     }
@@ -36,5 +38,10 @@ export class ContactDetailPage {
 
     ngOnDestroy() {
         this.contactSubscription.unsubscribe();
+    }
+
+    ionViewDidEnter() {
+        // https://github.com/driftyco/ionic/issues/9377#issuecomment-263221516
+        this.displayTabs = true;
     }
 }
