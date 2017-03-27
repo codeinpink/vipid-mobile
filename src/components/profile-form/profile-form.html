@@ -30,7 +30,7 @@
             </div>
             <ion-item *ngIf="isUserProfile">
                 <ion-label stacked>Summary</ion-label>
-                <ion-textarea formControlName="summary"></ion-textarea>
+                <ion-textarea formControlName="summary" rows="5"></ion-textarea>
             </ion-item>
             <div *ngIf="formErrors.summary">
                 <div *ngFor="let error of formErrors.summary">

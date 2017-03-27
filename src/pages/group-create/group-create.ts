@@ -75,7 +75,7 @@ export class GroupCreatePage {
 
         this.validationMessages = {
             'name': {
-                'required': 'This field is required.',
+                'required': 'This field may not be blank.',
                 'maxlength': 'This field cannot exceed 50 characters.'
             },
         };

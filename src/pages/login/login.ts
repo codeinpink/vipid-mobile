@@ -65,12 +65,14 @@ export class LoginPage {
             'non_field_errors': []
         };
 
+        let genericRequiredMsg = 'This field may not be blank.';
+
         this.validationMessages = {
             'email': {
-                'required': 'Email address is required'
+                'required': genericRequiredMsg
             },
             'password': {
-                'required': 'Password is required'
+                'required': genericRequiredMsg
             }
         };
 

@@ -26,18 +26,20 @@ export class SignUpPage {
             'last_name': []
         };
 
+        let genericRequiredMsg = 'This field may not be blank.';
+
         this.validationMessages = {
             'email': {
-                'required': 'Email address is required.'
+                'required': genericRequiredMsg
             },
             'password': {
-                'required': 'Password is required.'
+                'required': genericRequiredMsg
             },
             'first_name': {
-                'required': 'First name is required.'
+                'required': genericRequiredMsg
             },
             'last_name': {
-                'required': 'Last name is required.'
+                'required': genericRequiredMsg
             }
         };
     }

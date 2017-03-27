@@ -38,55 +38,58 @@ export class ProfileForm {
             'instagram': []
         };
 
+        let genericRequiredMsg = 'This field may not be blank.';
+
         this.validationMessages = {
             'first_name': {
-                'required': 'Your first name is required',
-                'maxlength': 'Your name cannot exceed 30 characters'
+                'required': genericRequiredMsg,
+                'maxlength': 'This field cannot exceed 30 characters.'
             },
             'last_name': {
-                'required': 'Your last name is required',
-                'maxlength': 'Your name cannot exceed 30 characters'
+                'required': genericRequiredMsg,
+                'maxlength': 'This field cannot exceed 30 characters.'
             },
             'title': {
-                'maxlength': 'Your name cannot exceed 120 characters'
+                'maxlength': 'This field cannot exceed 120 characters.'
             },
             'industry': {
-                'maxlength': 'Your industry cannot exceed 20 characters'
+                'maxlength': 'This field cannot exceed 20 characters.'
             },
             'company': {
-                'maxlength': 'Your company cannot exceed 50 characters'
+                'maxlength': 'This field cannot exceed 50 characters.'
             },
             'location': {
-                'maxlength': 'Your location cannot exceed 75 characters'
+                'maxlength': 'This field cannot exceed 75 characters.'
             },
             'summary': {
+                'maxlength': 'This field cannot exceed 2000 characters.'
             },
             'email': {
-                'maxlength': 'Your email cannot exceed 80 characters'
+                'maxlength': 'This field cannot exceed 80 characters.'
             },
             'phone_number': {
-                'maxlength': 'Your phone number cannot exceed 25 characters'
+                'maxlength': 'This field cannot exceed 25 characters.'
             },
             'website': {
-                'maxlength': 'Your name cannot exceed 254 characters'
+                'maxlength': 'This field cannot exceed 254 characters.'
             },
             'linkedin': {
-                'maxlength': 'Your linkedin cannot exceed 64 characters'
+                'maxlength': 'This field cannot exceed 64 characters.'
             },
             'twitter': {
-                'maxlength': 'Your twitter cannot exceed 64 characters'
+                'maxlength': 'This field cannot exceed 64 characters.'
             },
             'github': {
-                'maxlength': 'Your github cannot exceed 64 characters'
+                'maxlength': 'This field cannot exceed 64 characters.'
             },
             'facebook': {
-                'maxlength': 'Your facebook cannot exceed 64 characters'
+                'maxlength': 'This field cannot exceed 64 characters.'
             },
             'youtube': {
-                'maxlength': 'Your youtube cannot exceed 64 characters'
+                'maxlength': 'This field cannot exceed 64 characters.'
             },
             'instagram': {
-                'maxlength': 'Your instagram cannot exceed 64 characters'
+                'maxlength': 'This field cannot exceed 64 characters.'
             },
         };
     }

@@ -22,7 +22,7 @@ export class ContactNotesForm {
 
         this.validationMessages = {
             'about': {
-                'maxlength': 'The about field cannot exceed 1000 characters'
+                'maxlength': 'This field cannot exceed 1000 characters.'
             },
         };
     }

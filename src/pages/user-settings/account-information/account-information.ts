@@ -50,15 +50,15 @@ export class AccountInformationPage {
         this.validationMessages = {
             'email': {
                 'required': 'This field may not be blank.',
-                'maxlength': 'Your email cannot exceed 80 characters.'
+                'maxlength': 'This field cannot exceed 80 characters.'
             },
             'first_name': {
                 'required': 'This field may not be blank.',
-                'maxlength': 'Your first name cannot exceed 30 characters.'
+                'maxlength': 'This field cannot exceed 30 characters.'
             },
             'last_name': {
                 'required': 'This field may not be blank.',
-                'maxlength': 'Your last name cannot exceed 30 characters.'
+                'maxlength': 'This field cannot exceed 30 characters.'
             }
         };
 
