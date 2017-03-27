@@ -9,11 +9,14 @@
                 <span class="form-error">{{ error }}</span>
             </div>
         </div>
-        <ion-item class="tag-input-label">
-            <ion-label stacked>Tags</ion-label>
-        </ion-item>
         <ion-item>
-            <tags-input formControlName="tags" maxWordLength="15" (onTagAdded)="onTagAdded($event)" (onTagRemoved)="onTagRemoved($event)"></tags-input>
+            <tags-input formControlName="tags"
+                maxWordLength="15"
+                buttonLabel="Add Tag"
+                alertTitleLabel="Add Tag"
+                (onTagAdded)="onTagAdded($event)"
+                (onTagRemoved)="onTagRemoved($event)">
+            </tags-input>
         </ion-item>
     </ion-item-group>
 </form>
