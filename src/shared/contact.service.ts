@@ -30,7 +30,7 @@ export class ContactService {
                     this._contacts = contacts;
                     this.contacts.next(this._contacts);
                 }, error => {
-                    this.contacts.error(error);
+                    //this.contacts.error(error);
                     this.contacts = new ReplaySubject(1);
                 })
         }

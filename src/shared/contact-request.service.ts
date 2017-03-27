@@ -25,7 +25,7 @@ export class ContactRequestService {
                     console.log(this._requests.length)
                     this.requests.next(this._requests);
                 }, error => {
-                    this.requests.error(error);
+                    //this.requests.error(error);
                     this.requests = new ReplaySubject(1);
                 })
         }
