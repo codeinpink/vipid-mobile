@@ -160,4 +160,9 @@ export class ContactListPage {
 
         this.getData();
     }
+
+    ngOnDestroy() {
+        this.contactSubscription.unsubscribe();
+        this.contactRequestSubscription.unsubscribe();
+    }
 }
