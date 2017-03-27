@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { MyProfileEditPage } from '../pages/my-profile-edit/my-profile-edit';
 import { ContactListPage } from '../pages/contact-list/contact-list';
@@ -11,7 +11,10 @@ import { UserSettingsPage } from '../pages/user-settings/user-settings';
 import { LoginPage } from '../pages/login/login';
 import { HttpService } from '../shared/http.service';
 import { UserSettings } from '../providers/user-settings';
+import { AuthService } from '../providers/auth/auth';
 import { Profile } from '../shared/profile.model';
+
+
 
 
 @Component({
@@ -20,13 +23,23 @@ import { Profile } from '../shared/profile.model';
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
-  rootPage = ContactListPage;
+  rootPage: any;
   pages: any;
   profilePage: any;
 
   picture: string;
 
-  constructor(platform: Platform, http: HttpService, settings: UserSettings) {
+  constructor(platform: Platform, http: HttpService, settings: UserSettings, auth: AuthService) {
+
+    auth.hasLoggedIn().then((hasLoggedIn) => {
+        console.log(hasLoggedIn);
+        if (hasLoggedIn) {
+            this.rootPage = ContactListPage;
+        } else {
+            this.rootPage = LoginPage;
+        }
+    });
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

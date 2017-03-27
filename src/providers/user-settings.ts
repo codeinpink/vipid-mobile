@@ -11,6 +11,7 @@ import { UserSettings as Settings } from '../shared/user-settings.model';
 
 @Injectable()
 export class UserSettings {
+    private _settings: Settings = new Settings();
     private settings: ReplaySubject<Settings> = new ReplaySubject<Settings>(1);
 
     private settingsUrl = 'http://localhost:8000/rest-auth/user/';
@@ -19,15 +20,19 @@ export class UserSettings {
     public settingsA: ReplaySubject<Settings>;
 
     constructor(public http: HttpService, public events: Events) {
-        console.log('Hello UserSettings Provider');
         this.events.subscribe('user:login', () => {
-            console.log('logged in');
-            this.settings.next(new Settings());
+            // clear settings so they will get refreshed
+            this.settings = new ReplaySubject(1);
         });
 
         this.events.subscribe('user:logout', () => {
-            console.log('logged out');
-            this.settings.next(new Settings());
+            this._settings = new Settings();
+            this.settings.next(this._settings);
+        });
+
+        this.events.subscribe('connect:linkedin', () => {
+            this._settings.linkedin_connected = true;
+            this.settings.next(this._settings);
         });
     }
 
@@ -36,9 +41,10 @@ export class UserSettings {
 
         if (this.settings.observers.length === 0 || forceRefresh) {
                 this._getSettings().subscribe(settings => {
-                    this.settings.next(settings);
+                    this._settings = settings;
+                    this.settings.next(this._settings);
                 }, error => {
-                    this.settings.error(error);
+                    //this.settings.error(error);
                     this.settings = new ReplaySubject(1);
                 })
         }
@@ -53,9 +59,10 @@ export class UserSettings {
 
     public refresh() {
         this.http.post(this.settingsRefreshUrl, '').map(this.extractData).catch(this.handleError).subscribe(settings => {
-            this.settings.next(settings);
+            this._settings = settings;
+            this.settings.next(this._settings);
         }, error => {
-            this.settings.error(error);
+            //this.settings.error(error);
             this.settings = new ReplaySubject(1);
         });
     }
@@ -63,7 +70,8 @@ export class UserSettings {
     public updateSettings(data: any) {
         return this.http.patch(this.settingsUrl, data).map(res => {
             let data = res.json();
-            this.settings.next(data);
+            this._settings = data;
+            this.settings.next(this._settings);
             return data;
         }).catch(this.handleError);
     }

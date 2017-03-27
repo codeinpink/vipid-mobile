@@ -6,6 +6,7 @@ import { UserSettings } from '../../providers/user-settings';
 import { AuthService } from '../../providers/auth/auth';
 import { AccountInformationPage } from './account-information/account-information';
 import { ChangePasswordPage } from './change-password/change-password';
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -62,7 +63,11 @@ export class UserSettingsPage implements OnInit {
     }
 
     onLogoutClick() {
-        this.authService.logout().subscribe();
+        this.authService.logout().then(_ => {
+            this.nav.setRoot(LoginPage);
+        }, errors => {
+
+        });
     }
 
     ngOnInit(){

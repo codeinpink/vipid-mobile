@@ -24,7 +24,7 @@ export class ConfirmEmailPage {
     }
 
     onConfirmedClick() {
-        this.authService.login({email: this.email, password: this.password}).subscribe(_ => this.goHome(), errors => {
+        this.authService.login({email: this.email, password: this.password}).then(_ => this.goHome(), errors => {
             this.navCtrl.setRoot(LoginPage);
         });
     }

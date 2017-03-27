@@ -3,6 +3,7 @@ import { Response, Headers } from '@angular/http';
 import { HttpService } from '../../shared/http.service';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
+import { Events } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 import { LinkedIn } from '../../providers/oauth/linkedin';
@@ -13,7 +14,7 @@ import { Outlook } from '../../providers/oauth/outlook';
 export class OAuthAccessTokenService {
     private oauth: OauthCordova = new OauthCordova();
 
-    constructor(private http: HttpService, private storage: Storage) {
+    constructor(private http: HttpService, private storage: Storage, public events: Events) {
 
     }
 
@@ -36,6 +37,8 @@ export class OAuthAccessTokenService {
                         localStorage.setItem('auth_token', token);
                         this.http.refreshToken();
                     }
+
+                    this.events.publish('connect:linkedin');
 
                     resolve(token);
                 }, error => {

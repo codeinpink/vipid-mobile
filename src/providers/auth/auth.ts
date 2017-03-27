@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Events } from 'ionic-angular';
 import { Response } from '@angular/http';
 import { HttpService } from '../../shared/http.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { Storage } from '@ionic/storage';
 
 
 @Injectable()
@@ -13,39 +15,63 @@ export class AuthService {
     private passwordResetUrl = 'http://localhost:8000/rest-auth/password/reset/';
     private passwordChangeUrl = 'http://localhost:8000/rest-auth/password/change/';
 
-    constructor(private http: HttpService) {}
+    private API_TOKEN = 'api_token';
+
+    constructor(private http: HttpService, public events: Events, public storage: Storage) {
+
+    }
+
+    public hasLoggedIn(): Promise<boolean> {
+        return this.storage.get(this.API_TOKEN).then((value) => {
+            return value !== null;
+        });
+    };
 
     public login(credentials: any) {
-        return this.http.post(this.loginUrl, credentials).map(res => {
-            let data = this.extractData(res);
-
-            if (data.key) {
-                localStorage.setItem('auth_token', data.key);
-                this.http.refreshToken();
-            }
-
-            return data;
-        }).catch(this.handleError);
+        return new Promise((resolve, reject) => {
+            this.http.post(this.loginUrl, credentials).map(this.extractData).subscribe(data => {
+                if (data.key) {
+                    this.events.publish('user:login', data.key);
+                    this.storage.set(this.API_TOKEN, data.key).then(_ => {
+                        resolve(data);
+                    });
+                } else {
+                    resolve(data);
+                }
+            }, error => {
+                reject(error.json());
+            });
+        });
     }
 
     public signup(data: any) {
-        return this.http.post(this.signupUrl, data).map(res => {
-            let data = this.extractData(res);
-
-            if (data.key) {
-                localStorage.setItem('auth_token', data.key);
-                this.http.refreshToken();
-            }
-
-            return data;
-        }).catch(this.handleError);
+        return new Promise((resolve, reject) => {
+            this.http.post(this.signupUrl, data).map(this.extractData).subscribe(data => {
+                if (data.key) {
+                    this.events.publish('user:login', data.key);
+                    this.storage.set(this.API_TOKEN, data.key).then(_ => {
+                        resolve(data);
+                    });
+                } else {
+                    resolve(data);
+                }
+            }, error => {
+                reject(error.json());
+            });
+        });
     }
 
     public logout() {
-        return this.http.post(this.logoutUrl, '').map(_ => {
-            localStorage.removeItem('auth_token');
-            this.http.refreshToken();
-        }).catch(this.handleError);
+        return new Promise((resolve, reject) => {
+            this.http.post(this.logoutUrl, '').map(this.extractData).subscribe(_ => {
+                this.events.publish('user:logout');
+                this.storage.remove(this.API_TOKEN).then(_ => {
+                    resolve();
+                });
+            }, error => {
+                reject(error.json());
+            });
+        });
     }
 
     public resetPassword(data: any) {

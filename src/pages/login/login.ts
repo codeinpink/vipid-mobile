@@ -10,7 +10,6 @@ import { ResetPasswordPage } from './reset-password/reset-password';
 
 @Component({
     templateUrl: 'login.html',
-    providers: [FormBuilder, AuthService],
 })
 export class LoginPage {
     form: FormGroup;
@@ -42,7 +41,9 @@ export class LoginPage {
     }
 
     onSubmit(value) {
-        this.authService.login(value).subscribe(_ => this.goHome(), errors => {
+        this.authService.login(value).then(_ => {
+            this.goHome();
+        }, errors => {
             for (const key in errors) {
                 this.formErrors[key] = [];
 

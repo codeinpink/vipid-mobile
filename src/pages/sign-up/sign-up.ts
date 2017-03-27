@@ -63,9 +63,9 @@ export class SignUpPage {
     }
 
     onSubmit(value) {
-        this.authService.signup(value).subscribe(_ => {
+        this.authService.signup(value).then(_ => {
             this.navCtrl.push(ConfirmEmailPage, {email: value.email, password: value.password});
-        }, errors => {
+        }).catch(errors => {
             for (const key in errors) {
                 this.formErrors[key] = [];
 
