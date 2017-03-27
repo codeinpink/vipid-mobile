@@ -59,6 +59,10 @@ export class GroupDetailPage {
         });
     }
 
+    getAvatarData(first: string, last: string) {
+        return first + ' ' + last;
+    }
+
     ngOnInit() {
         this.group = this.navParams.get('group');
     }
