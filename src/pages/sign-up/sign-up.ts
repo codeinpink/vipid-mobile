@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConfirmEmailPage } from '../confirm-email/confirm-email';
 import { ContactListPage } from '../contact-list/contact-list';
 import { AuthService } from '../../providers/auth/auth';
 import { OAuthAccessTokenService } from '../../providers/oauth/oauth-access-token';
@@ -21,7 +22,8 @@ export class SignUpPage {
         this.formErrors = {
             'email': [],
             'password': [],
-            'name': []
+            'first_name': [],
+            'last_name': []
         };
 
         this.validationMessages = {
@@ -31,8 +33,11 @@ export class SignUpPage {
             'password': {
                 'required': 'Password is required.'
             },
-            'name': {
-                'required': 'Name is required.'
+            'first_name': {
+                'required': 'First name is required.'
+            },
+            'last_name': {
+                'required': 'Last name is required.'
             }
         };
     }
@@ -51,12 +56,14 @@ export class SignUpPage {
 
     onSignupWithLinkedInClick() {
         this.accessTokenService.loginWithLinkedIn(true).then(_ => {
-            this.navCtrl.setRoot(ContactListPage);
+            this.goHome();
         });
     }
 
     onSubmit(value) {
-        this.authService.signup(value).subscribe(_ => this.goHome(), errors => {
+        this.authService.signup(value).subscribe(_ => {
+            this.navCtrl.push(ConfirmEmailPage, {email: value.email, password: value.password});
+        }, errors => {
             for (const key in errors) {
                 this.formErrors[key] = [];
 
@@ -71,7 +78,8 @@ export class SignUpPage {
         this.form = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required],
-            name: ['', Validators.required],
+            first_name: ['', Validators.required],
+            last_name: ['', Validators.required],
         });
 
         this.form.valueChanges.subscribe(data => {

@@ -1,0 +1,15 @@
+<ion-content padding class="sign-up">
+    <ion-icon name="close" color="faintgrey" (click)="onCloseClick()"></ion-icon>
+    <ion-grid>
+        <ion-row>
+            <img src="assets/img/logo.png"><br>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <p text-center class="header">Almost There!</p>
+                <p text-center class="help-text">An email was just sent to <strong>{{ email }}</strong>. Confirm your email address to unlock the app.</p>
+                <button ion-button color="primary" class="image-center" (click)="onConfirmedClick()">Okay, I confirmed it</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

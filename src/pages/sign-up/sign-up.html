@@ -41,11 +41,20 @@
                         </div>
                     </div>
                     <ion-item>
-                        <ion-label stacked>Full Name</ion-label>
-                        <ion-input type="text" [formControl]="form.controls['name']"></ion-input>
+                        <ion-label stacked>First Name</ion-label>
+                        <ion-input type="text" [formControl]="form.controls['first_name']"></ion-input>
                     </ion-item>
-                    <div *ngIf="formErrors.name">
-                        <div *ngFor="let error of formErrors.name">
+                    <div *ngIf="formErrors.first_name">
+                        <div *ngFor="let error of formErrors.first_name">
+                            <span class="form-error">{{ error }}</span>
+                        </div>
+                    </div>
+                    <ion-item>
+                        <ion-label stacked>Last Name</ion-label>
+                        <ion-input type="text" [formControl]="form.controls['last_name']"></ion-input>
+                    </ion-item>
+                    <div *ngIf="formErrors.last_name">
+                        <div *ngFor="let error of formErrors.last_name">
                             <span class="form-error">{{ error }}</span>
                         </div>
                     </div>

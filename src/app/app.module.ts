@@ -6,6 +6,7 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { TagsInputModule } from 'ionic2-tags-input';
 
 // Pages
+import { ConfirmEmailPage } from '../pages/confirm-email/confirm-email';
 import { ContactAddMenuPage } from '../pages/contact-add-menu/contact-add-menu';
 import { ContactAddSetNotesPage } from '../pages/contact-add-set-notes/contact-add-set-notes';
 import { ContactAddSetPermissionsPage } from '../pages/contact-add-set-permissions/contact-add-set-permissions';
@@ -70,6 +71,7 @@ import { UserSettings } from '../providers/user-settings';
 @NgModule({
   declarations: [
     MyApp,
+    ConfirmEmailPage,
     ContactAddMenuPage,
     ContactAddSetNotesPage,
     ContactAddSetPermissionsPage,
@@ -123,6 +125,7 @@ import { UserSettings } from '../providers/user-settings';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    ConfirmEmailPage,
     ContactAddMenuPage,
     ContactAddSetNotesPage,
     ContactAddSetPermissionsPage,
