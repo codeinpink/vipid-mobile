@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, XHRBackend, RequestOptionsArgs, Request, Response, RequestOptions} from '@angular/http';
 import {LoadingController} from 'ionic-angular';
+import { Events } from 'ionic-angular';
 import {Observable} from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -18,12 +20,26 @@ export class HttpService extends Http {
     private isAuthenticatedObserver: any;
     public isUnauthenticated: any;
 
-    constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController) {
+    private API_TOKEN = 'api_token';
+
+    constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController, public events: Events, public storage: Storage) {
         super(backend, options);
-        this.authToken = localStorage.getItem('auth_token') || '166d41e98e6dbcbe5167da1c46b75ffecda0b435';
+
+        this.storage.get(this.API_TOKEN).then((token) => {
+            this.authToken = token;
+        });
 
         this.isUnauthenticated = Observable.create(observer => {
             this.isAuthenticatedObserver = observer;
+        });
+
+        this.events.subscribe('user:login', (token) => {
+            console.log(token);
+            this.authToken = token;
+        });
+
+        this.events.subscribe('user:logout', _ => {
+            this.authToken = null;
         });
     }
 
@@ -57,15 +73,8 @@ export class HttpService extends Http {
         return this.intercept(super.delete(url, this.getRequestOptionArgs(options)));
     }
 
-    refreshToken() {
-        this.authToken = localStorage.getItem('auth_token');
-
-        if (!this.authToken) {
-            this.isAuthenticatedObserver.next(true);
-        }
-    }
-
     private intercept(observable: Observable<Response>): Observable<Response> {
+        console.log('intercepting: ' + this.authToken)
         this.onIntercept();
 
         // stupid cast required until rxjs is updated to a newer version
@@ -173,9 +182,9 @@ export class HttpService extends Http {
     }
 
     private logout() {
-        console.log('Logging out');
-        localStorage.removeItem('auth_token');
-        this.authToken = null;
+        this.storage.remove(this.API_TOKEN).then(_ => {
+            this.events.publish('user:logout');
+        });
     }
 
     private parseError(code: any) {

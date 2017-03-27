@@ -32,9 +32,11 @@ export class MyApp {
   constructor(platform: Platform, http: HttpService, settings: UserSettings, auth: AuthService) {
 
     auth.hasLoggedIn().then((hasLoggedIn) => {
-        console.log(hasLoggedIn);
         if (hasLoggedIn) {
             this.rootPage = ContactListPage;
+            settings.getSettings().subscribe(profile => {
+                this.picture = profile.picture;
+            });
         } else {
             this.rootPage = LoginPage;
         }
@@ -48,13 +50,7 @@ export class MyApp {
     });
 
     http.isUnauthenticated.subscribe(_ => {
-        if (!this.nav.isTransitioning()) {
-            this.nav.setRoot(LoginPage);
-        }
-    });
-
-    settings.getSettings().subscribe(profile => {
-        this.picture = profile.picture;
+        this.nav.setRoot(LoginPage);
     });
 
     this.profilePage = {component: MyProfileEditPage};

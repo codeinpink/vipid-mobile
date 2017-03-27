@@ -13,6 +13,7 @@ import { Outlook } from '../../providers/oauth/outlook';
 @Injectable()
 export class OAuthAccessTokenService {
     private oauth: OauthCordova = new OauthCordova();
+    private API_TOKEN = 'api_token';
 
     constructor(private http: HttpService, private storage: Storage, public events: Events) {
 
@@ -28,19 +29,18 @@ export class OAuthAccessTokenService {
         });
 
         return this.oauth.logInVia(linkedinProvider).then((data: any) => {
-            console.log(data);
             return new Promise(resolve => {
                 this.getLinkedInTokenFromServer(data.code, data.state, isConnecting).subscribe(token => {
-                    console.log('token ' + token);
-
-                    if (token && isAuthenticationSource) {
-                        localStorage.setItem('auth_token', token);
-                        this.http.refreshToken();
-                    }
-
                     this.events.publish('connect:linkedin');
 
-                    resolve(token);
+                    if (token && isAuthenticationSource) {
+                        this.events.publish('user:login', token);
+                        this.storage.set(this.API_TOKEN, token).then(_ => {
+                            resolve(token);
+                        });
+                    } else {
+                        resolve(token);
+                    }
                 }, error => {
                     resolve(error);
                 });
