@@ -72,6 +72,13 @@ $navbar-md-color: color($colors, primary);
     text-align: center;
 }
 
+// this is for the tag inputs since they don't work if a label is inside the same ion-item
+.tag-input-label {
+    .item-inner {
+        border-bottom: none !important;
+    }
+}
+
 @import '../pages/login/login.scss';
 @import '../pages/sign-up/sign-up.scss';
 @import '../pages/user-settings/user-settings.scss';
