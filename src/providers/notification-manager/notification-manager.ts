@@ -16,7 +16,7 @@ export class NotificationManager {
         if (!this.isToastDisplayed) {
             this.toast = this.toastCtrl.create({
                 message: message,
-                duration: 3000,
+                duration: 1000,
                 position: 'bottom'
             });
 

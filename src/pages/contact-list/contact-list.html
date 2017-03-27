@@ -1,27 +1,23 @@
-<ion-header>
+<ion-header no-border>
     <ion-navbar>
-        <ion-toolbar>
-            <ion-title [hidden]="showSearch">Contacts</ion-title>
-            <ion-searchbar (ionInput)="filterContacts($event)" [hidden]="!showSearch" [showCancelButton]="true" (ionClear)="clearSearch()" (ionCancel)="clearSearch()" placeholder="Filter Contacts"></ion-searchbar>
-            <button ion-button icon-only menuToggle>
-                <ion-icon name="menu"></ion-icon>
+        <ion-title [hidden]="showSearch">Contacts</ion-title>
+        <ion-searchbar (ionInput)="filterContacts($event)" [hidden]="!showSearch" [showCancelButton]="true" (ionClear)="clearSearch()" (ionCancel)="clearSearch()" placeholder="Filter Contacts"></ion-searchbar>
+        <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="toggleSearch()" [hidden]="showSearch">
+                <ion-icon name="search"></ion-icon>
             </button>
-            <ion-buttons end>
-                <button ion-button icon-only (click)="toggleSearch()" [hidden]="showSearch">
-                    <ion-icon name="search"></ion-icon>
-                </button>
-            </ion-buttons>
-        </ion-toolbar>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
-<div>
-    <ion-tabs tabsPlacement="top" color="primary">
-        <ion-tab tabTitle="All Contacts" [root]="allContactsPage" [rootParams]="{contacts: contactList, search: search, refresh: refreshObserver}"></ion-tab>
-        <ion-tab tabTitle="Contact Requests" [root]="contactRequestsPage" [rootParams]="{requests: contactRequestList, search: search, refresh: refreshObserver}" [tabBadge]="numContactRequests || ''" tabBadgeStyle="secondary"></ion-tab>
-    </ion-tabs>
-    <ion-fab right bottom>
-        <button ion-fab (click)="onPersonAddClick()">
-            <ion-icon name="add"></ion-icon>
-        </button>
-    </ion-fab>
-</div>
+<ion-tabs tabsPlacement="top" color="primary">
+    <ion-tab tabIcon="people" tabTitle="All Contacts" [root]="allContactsPage" [rootParams]="{contacts: contactList, search: search, refresh: refreshObserver}"></ion-tab>
+    <ion-tab tabIcon="person-add" tabTitle="Contact Requests" [root]="contactRequestsPage" [rootParams]="{requests: contactRequestList, search: search, refresh: refreshObserver}" [tabBadge]="numContactRequests || ''" tabBadgeStyle="secondary"></ion-tab>
+</ion-tabs>
+<ion-fab right bottom>
+    <button ion-fab (click)="onPersonAddClick()">
+        <ion-icon name="add"></ion-icon>
+    </button>
+</ion-fab>
