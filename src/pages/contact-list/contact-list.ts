@@ -60,7 +60,7 @@ export class ContactListPage {
         this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
             this.contacts = contacts;
             this.filteredContacts = contacts;
-            this.contactList.next(contacts);
+            this.contactList.next(this.filteredContacts);
 
             this.updateRefreshStatus();
         });
@@ -72,7 +72,7 @@ export class ContactListPage {
             this.contactRequests = requests;
             this.filteredContactRequests = requests;
             this.numContactRequests = requests.length;
-            this.contactRequestList.next(requests);
+            this.contactRequestList.next(this.filteredContactRequests);
 
             this.updateRefreshStatus();
         });
