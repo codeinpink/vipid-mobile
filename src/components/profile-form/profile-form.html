@@ -2,7 +2,7 @@
     <form [formGroup]="profileForm">
         <ion-list>
             <ion-item>
-                <ion-label stacked>First Name</ion-label>
+                <ion-label stacked>First Name <span *ngIf="!profileForm.controls.first_name.disabled" ion-text color="danger">*</span></ion-label>
                 <ion-input type="text" formControlName="first_name"></ion-input>
             </ion-item>
             <div *ngIf="formErrors.first_name">
@@ -11,7 +11,7 @@
                 </div>
             </div>
             <ion-item>
-                <ion-label stacked>Last Name</ion-label>
+                <ion-label stacked>Last Name <span *ngIf="!profileForm.controls.last_name.disabled" ion-text color="danger">*</span></ion-label>
                 <ion-input type="text" formControlName="last_name"></ion-input>
             </ion-item>
             <div *ngIf="formErrors.last_name">
