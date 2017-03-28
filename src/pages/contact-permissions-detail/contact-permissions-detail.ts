@@ -27,8 +27,9 @@ export class ContactPermissionsDetailPage {
 
     onSaveClick() {
         if (this.valid && this.dirty) {
-            this.cpService.updateContactPermissions(this.contact.profile.id, this.permissions).subscribe(permissions => {
+            this.cpService.updateContactPermissions(this.contact.shared_permissions.id, this.permissions).subscribe(permissions => {
                 this.permissions = permissions;
+                this.contact.shared_permissions = permissions;
                 this.nm.showSuccessMessage('Permissions updated');
             });
         }
@@ -65,9 +66,7 @@ export class ContactPermissionsDetailPage {
 
     ngOnInit() {
         this.contact = this.navParams.data;
-        this.cpService.getContactPermissions(this.contact.profile.id).subscribe(permissions => {
-            this.permissions = permissions;
-        });
+        this.permissions = this.contact.shared_permissions;
     }
 
 }

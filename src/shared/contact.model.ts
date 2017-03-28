@@ -6,6 +6,7 @@ export class Contact {
     about: string;
     tags: string[];
     outlook_id: string;
+    shared_permissions: any;
 
     constructor() {
         this.profile = new Profile();

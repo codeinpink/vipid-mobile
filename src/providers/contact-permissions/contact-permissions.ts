@@ -13,13 +13,11 @@ export class ContactPermissionsService {
 
     constructor(private http: HttpService) {}
 
-    // PROFILE'S id, not the id of the contact permission
     getContactPermissions(id: number) {
         return this.http.get(this.contactPermissionsDetailUrl.replace('{ID}', id.toString())).map(this.extractData)
             .catch(this.handleError);
     }
 
-    // PROFILE'S id, not the id of the contact permission
     updateContactPermissions(id: number, data: any) {
         return this.http.patch(this.contactPermissionsDetailUrl.replace('{ID}', id.toString()), data).map(this.extractData)
             .catch(this.handleError);

@@ -2,6 +2,6 @@
     <ion-tabs [selectedIndex]="0">
         <ion-tab tabIcon="contact" tabTitle="Profile" [root]="profileDetailTab" [rootParams]="contact"></ion-tab>
         <ion-tab tabIcon="list-box" tabTitle="Notes" [root]="notesDetailTab" [rootParams]="contact"></ion-tab>
-        <ion-tab *ngIf="contact.profile_read_only" tabIcon="switch" tabTitle="Permissions" [root]="permissionsDetailTab" [rootParams]="contact"></ion-tab>
+        <ion-tab *ngIf="contact.shared_permissions" tabIcon="switch" tabTitle="Permissions" [root]="permissionsDetailTab" [rootParams]="contact"></ion-tab>
     </ion-tabs>
 </div>
