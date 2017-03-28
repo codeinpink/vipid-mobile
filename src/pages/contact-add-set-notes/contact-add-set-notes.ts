@@ -21,14 +21,19 @@ export class ContactAddSetNotesPage {
 
     continue() {
         if (this.valid) {
-            console.log(this.data);
-            if (this.data.referral) {
+            if (!this.data.profile['user']) {
                 this.contactService.addContact(this.data).subscribe(_ => {
                     // this doesn't work right now since it is called before http's
                     // loading determines it's done, which seems to interfere
                     this.navCtrl.popToRoot();
 
                     this.navCtrl.setRoot(ContactListPage);
+                });
+            } else if (this.data.referral) {
+                this.contactService.addReferral(this.data).subscribe(_ => {
+                    this.navCtrl.setRoot(ContactListPage);
+                }, error => {
+                    console.log('could not add referral');
                 });
             } else {
                 let request = new ContactRequest();
@@ -52,12 +57,12 @@ export class ContactAddSetNotesPage {
     }
 
     onChanged(ev) {
-        this.data = ev.data;
+        this.data.about = ev.data.about;
+        this.data.tags = ev.data.tags;
         this.valid = ev.valid;
     }
 
     ngOnInit() {
-        console.log('ngOnInit');
         this.data = this.navParams.data;
     }
 

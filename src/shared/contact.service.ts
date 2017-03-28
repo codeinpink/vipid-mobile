@@ -16,6 +16,7 @@ export class ContactService {
 
     private contactsUrl = 'http://localhost:8000/api/contacts/';
     private contactDetailUrl = this.contactsUrl + '{ID}' + '/';
+    private addReferralUrl = this.contactsUrl + 'create-contact-from-referral';
     private getOutlookContactsUrl = 'https://graph.microsoft.com/v1.0/me/contacts';
     private importOutlookContactsUrl = this.contactsUrl + 'import_outlook_contacts/';
 
@@ -57,6 +58,17 @@ export class ContactService {
 
     public addContact(data) {
         return this.http.post(this.contactsUrl, data).map(res => {
+            let contact: Contact = res.json();
+
+            this._contacts.push(contact);
+            this.contacts.next(this._contacts);
+
+            return contact;
+        });
+    }
+
+    public addReferral(data) {
+        return this.http.post(this.addReferralUrl, data).map(res => {
             let contact: Contact = res.json();
 
             this._contacts.push(contact);
