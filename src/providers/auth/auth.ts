@@ -5,20 +5,25 @@ import { HttpService } from '../../shared/http.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
+import {RoutesConfigService} from "../../shared/routes-config-service";
 
 
 @Injectable()
 export class AuthService {
-    private loginUrl = 'http://localhost:8000/rest-auth/login/';
-    private signupUrl = 'http://localhost:8000/rest-auth/registration/';
-    private logoutUrl = 'http://localhost:8000/rest-auth/logout/';
-    private passwordResetUrl = 'http://localhost:8000/rest-auth/password/reset/';
-    private passwordChangeUrl = 'http://localhost:8000/rest-auth/password/change/';
+    private loginUrl;
+    private signupUrl;
+    private logoutUrl;
+    private passwordResetUrl;
+    private passwordChangeUrl;
 
     private API_TOKEN = 'api_token';
 
-    constructor(private http: HttpService, public events: Events, public storage: Storage) {
-
+    constructor(private http: HttpService, public events: Events, public storage: Storage, routesConfigService: RoutesConfigService) {
+      this.loginUrl = routesConfigService.routes.loginUrl;
+      this.signupUrl = routesConfigService.routes.signupUrl;
+      this.logoutUrl = routesConfigService.routes.logoutUrl;
+      this.passwordResetUrl = routesConfigService.routes.passwordResetUrl;
+      this.passwordChangeUrl = routesConfigService.routes.passwordChangeUrl;
     }
 
     public hasLoggedIn(): Promise<boolean> {

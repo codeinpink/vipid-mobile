@@ -66,6 +66,9 @@ import { NotificationManager } from '../providers/notification-manager/notificat
 import { ContactRequestService } from '../shared/contact-request.service';
 import { OAuthAccessTokenService } from '../providers/oauth/oauth-access-token';
 import { UserSettings } from '../providers/user-settings';
+import {ExportContactsPage} from "../pages/export-contacts/export-contacts";
+import {ExportContactsSelectionPage} from "../pages/export-contacts/export-contacts-selection";
+import {RoutesConfigService} from "../shared/routes-config-service";
 
 
 @NgModule({
@@ -164,18 +167,19 @@ import { UserSettings } from '../providers/user-settings';
     ChangePasswordPage
   ],
   providers: [
-      {provide: ErrorHandler, useClass: IonicErrorHandler},
-      HttpService,
-      ContactService,
-      GroupService,
-      AuthService,
-      ContactPermissionsService,
-      ShareableProfileService,
-      UserProfileService,
-      NotificationManager,
-      ContactRequestService,
-      OAuthAccessTokenService,
-      UserSettings
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    HttpService,
+    ContactService,
+    GroupService,
+    AuthService,
+    ContactPermissionsService,
+    ShareableProfileService,
+    UserProfileService,
+    NotificationManager,
+    ContactRequestService,
+    OAuthAccessTokenService,
+    UserSettings,
+    RoutesConfigService
   ]
 })
 export class AppModule {}

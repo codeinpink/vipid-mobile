@@ -4,15 +4,21 @@ import {HttpService} from '../../shared/http.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {Profile} from '../../shared/profile.model';
+import {RoutesConfigService} from "../../shared/routes-config-service";
 
 
 @Injectable()
 export class UserProfileService {
-    private userProfilesUrl = 'http://localhost:8000/api/user-profiles/';
-    private userProfileDetailUrl = this.userProfilesUrl + '{ID}' + '/';
-    private userProfileRefreshUrl = this.userProfileDetailUrl + 'refresh/';
+    private userProfilesUrl;
+    private userProfileDetailUrl;
+    private userProfileRefreshUrl;
 
-    constructor(private http: HttpService) {}
+    constructor(private http: HttpService, routes: RoutesConfigService) {
+    this.userProfilesUrl = routes.routes.userProfilesUrl;
+    this.userProfileDetailUrl = routes.routes.userProfileDetailUrl;
+    this.userProfileRefreshUrl = routes.routes.userProfileRefreshUrl;
+
+    }
 
     getProfiles(): Observable<Profile[]> {
         return this.http.get(this.userProfilesUrl).map(this.extractData)
