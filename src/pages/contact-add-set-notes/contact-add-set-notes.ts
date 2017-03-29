@@ -28,13 +28,11 @@ export class ContactAddSetNotesPage {
                     this.navCtrl.popToRoot();
 
                     this.navCtrl.setRoot(ContactListPage);
-                });
+                }, error => this.handleAddError(error));
             } else if (this.data.referral) {
                 this.contactService.addReferral(this.data).subscribe(_ => {
                     this.navCtrl.setRoot(ContactListPage);
-                }, error => {
-                    console.log('could not add referral');
-                });
+                }, error => this.handleAddError(error));
             } else {
                 let request = new ContactRequest();
                 request.setPermissions(this.data.permissions);
@@ -42,13 +40,24 @@ export class ContactAddSetNotesPage {
 
                 this.crService.send(request).subscribe(_ => {
                     this.navCtrl.setRoot(ContactListPage);
-                });
+                }, error => this.handleAddError(error));
             }
 
         } else {
             let alert = this.alertCtrl.create({
                 title: 'Error',
-                subTitle: 'Please fix the form errors before continuing',
+                subTitle: 'Please fix the form errors before continuing.',
+                buttons: ['OK']
+            });
+
+            alert.present();
+        }
+    }
+
+    handleAddError(error) {
+        if (error.detail) {
+            let alert = this.alertCtrl.create({
+                subTitle: error.detail,
                 buttons: ['OK']
             });
 
