@@ -5,71 +5,60 @@ import { Contact, ContactName, ContactAddress, ContactOrganization } from 'ionic
 
 
 @Component({
-    templateUrl: 'export-contacts-selection.html',
+  templateUrl: 'export-contacts-selection.html',
 })
 export class ExportContactsSelectionPage {
-    private methods: any; //methods of export (e.g. phone, outlook, etc.)
+  private methods: any; //methods of export (e.g. phone, outlook, etc.)
 
-    constructor(private params: NavParams, private viewCtrl: ViewController , private platform: Platform) {
-        this.platform = platform;
-        this.methods = {
-            phone: false,
-            outlook: false,
-            gmail: false,
-        };
-    }
+  constructor(private params: NavParams, private viewCtrl: ViewController , private platform: Platform) {
+    this.platform = platform;
+    this.methods = {
+      phone: false,
+      outlook: false,
+      gmail: false,
+    };
+  }
 
-    dismiss() {
-        this.viewCtrl.dismiss();
-    }
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
 
-    exportContacts() {
-        if(this.platform.is("android")){
-            console.log(this.params);
+  exportContacts() {
+    if(this.platform.is("android")){
 
-
-            for(let c of this.params.get('contacts')){
-                console.log(c);
-                //Initialize fields
-                let contact = new Contact();
-                let address = new ContactAddress();
-                let name = new ContactName()
-                let organization = new ContactOrganization();
-
-                //Name work
-                name.familyName = "TrumpMAGA";
-                name.givenName = c.name;
-
-                //Address work
-                address.streetAddress = c.location;
-
-                //Organization
-                organization.type = "work";
-                organization.name = c.company;
-                organization.title = c.title;
-                organization.pref = true;
+      for(let c of this.params.get('contacts')){
+        //Initialize fields
+        let contact = new Contact();
+        let address = new ContactAddress();
+        let name = new ContactName()
+        let organization = new ContactOrganization();
 
 
+        contact.displayName = c.profile.first_name + " " + c.profile.last_name;
 
-                contact.displayName = "dankMemeMaster" + c.id;
-                contact.addresses = [];
-                //noinspection TypeScriptUnresolvedFunction
-                contact.addresses.push(address);
-                contact.name = name;
-                contact.organizations = [];
-                //noinspection TypeScriptUnresolvedFunction
-                contact.organizations.push(organization);
+        //Address work
+        address.streetAddress = c.profile.location;
 
-                contact.save().then( response =>
-                    console.log(response)).catch(reject => {
-                        console.log("fk off");
-                        console.log(reject)
-                    }
-                )
+        //Organization
+        organization.type = "work";
+        organization.name = c.profile.company;
+        organization.title = c.profile.title;
+        organization.pref = true;
 
+        contact.addresses = [address];
+        //noinspection TypeScriptUnresolvedFunction
+        contact.name = name;
+        contact.organizations = [organization];
+        //noinspection TypeScriptUnresolvedFunction
+
+        contact.save().then(response =>
+          console.log(response))
+          .catch(reject => {
+              console.log(reject)
             }
-        }
-        console.log(this.params.get('contacts'));
-        this.dismiss();
+          )
+      }
     }
+    this.dismiss();
+  }
 }

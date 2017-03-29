@@ -6,7 +6,8 @@ import {Observable}     from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/Rx';
 import {CONTACTS} from './mock-contacts';
 import {Contact} from './contact.model';
-import 'rxjs/Rx'; // for other Observable methods
+import 'rxjs/Rx';
+import {RoutesConfigService} from "./routes-config-service"; // for other Observable methods
 
 
 @Injectable()
@@ -14,13 +15,20 @@ export class ContactService {
     private _contacts: Contact[] = [];
     private contacts: ReplaySubject<Contact[]> = new ReplaySubject<Contact[]>(1);
 
-    private contactsUrl = 'http://localhost:8000/api/contacts/';
-    private contactDetailUrl = this.contactsUrl + '{ID}' + '/';
-    private addReferralUrl = this.contactsUrl + 'create-contact-from-referral';
-    private getOutlookContactsUrl = 'https://graph.microsoft.com/v1.0/me/contacts';
-    private importOutlookContactsUrl = this.contactsUrl + 'import_outlook_contacts/';
+    private contactsUrl;
+    private contactDetailUrl;
+    private addReferralUrl;
+    private getOutlookContactsUrl;
+    private importOutlookContactsUrl;
 
-    constructor(private http: HttpService) {}
+    constructor(private http: HttpService, routes: RoutesConfigService) {
+    this.contactsUrl = routes.routes.contactsUrl;
+    this.contactDetailUrl = routes.routes.contactDetailUrl;
+    this.addReferralUrl = routes.routes.addReferralUrl;
+    this.getOutlookContactsUrl = routes.routes.getOutlookContactsUrl;
+    this.importOutlookContactsUrl = routes.routes.importOutlookContactsUrl;
+
+    }
 
     public getContacts(forceRefresh?: boolean): Observable<Contact[]> {
         let numSubscribers = this.contacts.observers.length;

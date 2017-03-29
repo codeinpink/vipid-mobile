@@ -4,6 +4,7 @@ import {HttpService} from './http.service';
 import {Observable}     from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/Rx';
 import {Group} from './group.model';
+import {RoutesConfigService} from "./routes-config-service";
 
 
 @Injectable()
@@ -11,10 +12,13 @@ export class GroupService {
     private _groups: Group[];
     private groups: ReplaySubject<Group[]> = new ReplaySubject<Group[]>(1);
 
-    private groupsUrl = 'http://localhost:8000/api/contact-groups/';
-    private grouptDetailUrl = this.groupsUrl + '{ID}' + '/';
+    private groupsUrl;
+    private grouptDetailUrl;
 
-    constructor(private http: HttpService) {}
+    constructor(private http: HttpService, routes: RoutesConfigService) {
+      this.groupsUrl = routes.routes.groupsUrl;
+      this.grouptDetailUrl = routes.routes.grouptDetailUrl
+    }
 
     public getGroups(forceRefresh?: boolean) {
         let numSubscribers = this.groups.observers.length;

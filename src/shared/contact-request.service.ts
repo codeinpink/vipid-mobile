@@ -4,14 +4,15 @@ import {HttpService} from './http.service';
 import {Observable} from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/Rx';
 import { ContactRequest } from './contact-request.model';
+import {routesConfig} from "../routesConfig";
 
 @Injectable()
 export class ContactRequestService {
     private _requests: ContactRequest[] = [];
     private requests: ReplaySubject<ContactRequest[]> = new ReplaySubject<ContactRequest[]>(1);
 
-    private contactRequestsUrl = 'http://localhost:8000/api/contact-requests/';
-    private contactRequestDetailUrl = this.contactRequestsUrl + '{ID}' + '/';
+    private contactRequestsUrl = routesConfig.contactRequestsUrl;
+    private contactRequestDetailUrl = routesConfig.contactRequestDetailUrl;
 
     constructor(private http: HttpService) {}
 

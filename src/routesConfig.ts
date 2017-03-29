@@ -1,0 +1,22 @@
+export const routesConfig = {
+  "loginUrl":"rest-auth/login/",
+  "signupUrl" : "rest-auth/registration/",
+  "logoutUrl" : "rest-auth/logout/",
+  "passwordResetUrl" : "rest-auth/password/reset/",
+  "passwordChangeUrl" : "rest-auth/password/change/",
+  "contactsUrl" : "api/contacts/",
+  "contactDetailUrl" : "api/contacts/{ID}/",
+  "contactRequestsUrl" : "api/contact-requests/",
+  "contactRequestDetailUrl" : "api/contact-requests/{ID}/",
+  "addReferralUrl" : "api/contacts/create-contact-from-referral",
+  "getOutlookContactsUrl" : "https://graph.microsoft.com/v1.0/me/contacts",
+  "importOutlookContactsUrl" : "api/contacts/import_outlook_contacts/",
+  "groupsUrl"  : "api/contact-groups/",
+  "grouptDetailUrl"  : "api/contact-groups/{ID}/",
+  "userProfilesUrl"  : "api/user-profiles/",
+  "userProfileDetailUrl"  : "api/user-profiles/{ID}/",
+  "userProfileRefreshUrl"  : "api/user-profiles/{ID}/refresh/",
+  "shareableProfilesUrl"  : "api/shareable-profiles/",
+  "shareableProfileDetailUrl"  : "api/shareable-profiles/{ID}/",
+  "shareableProfileDecodeUrl"  : "api/shareable-profiles/{ID}/decode_profile_url/"
+};

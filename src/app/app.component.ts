@@ -13,6 +13,7 @@ import { HttpService } from '../shared/http.service';
 import { UserSettings } from '../providers/user-settings';
 import { AuthService } from '../providers/auth/auth';
 import { Profile } from '../shared/profile.model';
+import {RoutesConfigService} from "../shared/routes-config-service";
 
 
 
@@ -29,7 +30,7 @@ export class MyApp {
 
   picture: string;
 
-  constructor(platform: Platform, http: HttpService, settings: UserSettings, auth: AuthService) {
+  constructor(platform: Platform, http: HttpService, settings: UserSettings, auth: AuthService, routes: RoutesConfigService) {
 
     auth.hasLoggedIn().then((hasLoggedIn) => {
         if (hasLoggedIn) {
@@ -59,7 +60,7 @@ export class MyApp {
         {title: 'Contacts', component: ContactListPage },
         {title: 'Groups', component: GroupListPage},
         {title: 'Import', component: ImportContactsMenuPage},
-        //{title: 'Export', component: ExportContactsPage},
+        // {title: 'Export', component: ExportContactsPage},
         {title: 'Shareable Profiles', component: ShareableProfileListPage},
         {title: 'Settings', component: UserSettingsPage}
     ];
