@@ -51,5 +51,6 @@
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
   <plugin name="phonegap-nfc" spec="~0.6.6"/>
   <plugin name="cordova-plugin-inappbrowser" spec="~1.7.0"/>
+  <plugin name="cordova-sqlite-storage" spec="~2.0.2"/>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
 </widget>
