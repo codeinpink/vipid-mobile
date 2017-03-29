@@ -11,7 +11,7 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
-
+*.iml
 .idea/
 .sass-cache/
 .tmp/
@@ -28,6 +28,7 @@ plugins/android.json
 plugins/ios.json
 www/
 $RECYCLE.BIN/
+res/*
 
 .DS_Store
 Thumbs.db
