@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { OAuthAccessTokenService } from '../../providers/oauth/oauth-access-token';
 import { ContactService } from '../../shared/contact.service';
 import { Contact } from '../../shared/contact.model';
@@ -14,12 +14,21 @@ export class ImportOutlookContactsPage {
     contacts: SelectableOutlookContact[];
 
     constructor(private navCtrl: NavController, private accessTokenService: OAuthAccessTokenService,
-    private contactService: ContactService, private nm: NotificationManager) {
+    private contactService: ContactService, private nm: NotificationManager, private alertCtrl: AlertController) {
 
     }
 
     getLocationString(location) {
         return location.city + ', ' + location.state;
+    }
+
+    getAvatarData(contact) {
+        let parts = contact.displayName.split(' ');
+        if (parts.length > 1) {
+            return parts[0] + ' ' + parts[1];
+        }
+
+        return parts[0];
     }
 
     import() {
@@ -50,28 +59,45 @@ export class ImportOutlookContactsPage {
     }
 
     onContactSelect($event, contact) {
-        console.log(contact);
         contact.selected = true;
     }
 
+    handleOutlookError(error) {
+        let title = error.title ? error.title : 'Error';
+        let detail = error.detail ? error.detail : 'Could not authenticate with Outlook. Please try again later.';
+
+        let alert = this.alertCtrl.create({
+            title: title,
+            subTitle: detail,
+            buttons: [
+                {
+                    text: 'OK',
+                    handler: () => {
+                        alert.dismiss().then(_ => {
+                            this.navCtrl.pop();
+                        });
+                    }
+                }
+            ]
+        });
+
+        alert.present();
+    }
+
     getOutlookContacts() {
-        console.log('gettingContacts');
         let token = this.accessTokenService.getOutlookToken();
         this.contactService.getOutlookContacts(token).subscribe(contacts => {
-            console.log(contacts);
             this.contacts = contacts;
-        });
+        }, error => this.handleOutlookError(error));
     }
 
     ngOnInit() {
         if (this.accessTokenService.isLoggedInWithOutlook()) {
-            console.log('isLoggedIn');
             this.getOutlookContacts();
         } else {
             this.accessTokenService.loginWithOutlook().then(res => {
-                console.log(res);
                 this.getOutlookContacts();
-            });
+            }, error => this.handleOutlookError(error));
         }
 
     }

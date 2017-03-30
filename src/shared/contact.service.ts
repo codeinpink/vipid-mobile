@@ -61,7 +61,19 @@ export class ContactService {
         options.headers = new Headers();
         options.headers.set('Authorization', `Bearer ${token}`);
 
-        return this.http.get(this.getOutlookContactsUrl, options).map(res => res.json().value).catch(this.handleError);
+        return this.http.get(this.getOutlookContactsUrl, options).map(res => res.json().value).catch(error => {
+            let msg: any = {};
+
+            if (error.status === 401) {
+                msg.title = 'Unauthorized';
+                msg.detail = 'Please authenticate with Outlook and try again.';
+            } else {
+                msg.title = 'Error';
+                msg.detail = 'Could not get contact list from Outlook. Try again later.';
+            }
+
+            return Observable.throw(msg);
+        });
     }
 
     public addContact(data) {

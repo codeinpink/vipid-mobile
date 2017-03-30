@@ -2,7 +2,7 @@
     <ion-navbar>
         <ion-title>Select Outlook Contacts to Import</ion-title>
         <ion-buttons end>
-            <button (click)="import()">
+            <button ion-button clear (click)="import()">
                 IMPORT
             </button>
         </ion-buttons>
@@ -14,9 +14,22 @@
     <ion-list>
         <ion-item *ngFor="let contact of contacts">
             <ion-checkbox [(ngModel)]="contact.selected" (ionChange)="onContactSelect($event, contact)" item-left></ion-checkbox>
-            <ion-avatar item-left>
-                <img src="/img/profile/default-avatar.png">
-            </ion-avatar>
+            <ion-thumbnail item-left>
+                <ng2-letter-avatar
+                    [avatar-data]="getAvatarData(contact)"
+                    avatar-char-count="2"
+                    avatar-custom-bg-color="white"
+                    avatar-border="true"
+                    avatar-custom-border="border:3px solid #4fbfa6"
+                    avatar-text-color="#4fbfa6"
+                    avatar-font-family="Roboto, 'Helvetica Neue', sans-serif"
+                    avatar-height="80px"
+                    avatar-width="80px"
+                    dynamic="true"
+                    style="margin: 0 0"
+                    item-left>
+                </ng2-letter-avatar>
+            </ion-thumbnail>
             <ion-label>
                 <h2>{{ contact.displayName }}</h2>
                 <h3>{{ contact.companyName }}</h3>
