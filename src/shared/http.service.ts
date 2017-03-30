@@ -34,7 +34,6 @@ export class HttpService extends Http {
         });
 
         this.events.subscribe('user:login', (token) => {
-            console.log(token);
             this.authToken = token;
         });
 
@@ -74,7 +73,6 @@ export class HttpService extends Http {
     }
 
     private intercept(observable: Observable<Response>): Observable<Response> {
-        console.log('intercepting: ' + this.authToken)
         this.onIntercept();
 
         // stupid cast required until rxjs is updated to a newer version
@@ -138,6 +136,7 @@ export class HttpService extends Http {
 
     private onCatch(error: any): Observable<any> {
         console.log('onCatch');
+        this.parseError(error.status, error.url);
         // TODO: display message if it's a server error
         return Observable.throw(error);
     }
