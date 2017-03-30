@@ -82,14 +82,13 @@ export class UserSettings {
     }
 
     private handleError (error: Response | any) {
-        let errorMsg: any;
+        let body = {};
 
-        if (error instanceof Response) {
-            errorMsg = error.json();
-        } else {
-            errorMsg = error.message ? error.message : error.toString();
+        if (error.text()) {
+            body = error.json();
         }
-        return Observable.throw(errorMsg);
+
+        return Observable.throw(body);
     }
 
 }
