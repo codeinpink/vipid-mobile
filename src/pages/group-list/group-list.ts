@@ -63,8 +63,16 @@ export class GroupListPage {
 
         } else {
             this.groupSubscription = this.groupService.getGroups().subscribe(groups => {
-                this.groups = groups;
-                this.filteredGroups = groups;
+                this.groups = groups.sort((a, b) => {
+                    if (a.name > b.name) {
+                        return 1;
+                    } else if (a.name < b.name) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                });
+                this.filteredGroups = this.groups;
 
                 if (this.refresher) {
                     this.refresher.complete();
