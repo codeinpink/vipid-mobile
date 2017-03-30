@@ -103,7 +103,7 @@ export class ContactListPage {
     }
 
     updateRefreshStatus() {
-        this.numOutstanding -= 1;
+        this.numOutstanding = this.numOutstanding - 1;
 
         if (this.refresher && this.numOutstanding == 0) {
             this.refresher.complete();
