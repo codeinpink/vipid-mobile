@@ -12,11 +12,13 @@ export class NotificationManager {
 
     constructor(private toastCtrl: ToastController) {}
 
-    public showSuccessMessage(message: string) {
+    public showSuccessMessage(message: string, duration?: number) {
+        let msgDur = duration ? duration : 1000;
+
         if (!this.isToastDisplayed) {
             this.toast = this.toastCtrl.create({
                 message: message,
-                duration: 1000,
+                duration: msgDur,
                 position: 'bottom'
             });
 

@@ -27,7 +27,7 @@ export class ResetPasswordPage {
 
     onSubmit(value) {
         this.authService.resetPassword(value).subscribe(_ => {
-            this.navCtrl.pop().then(_ => this.nm.showSuccessMessage('Password reset email sent'));
+            this.navCtrl.pop().then(_ => this.nm.showSuccessMessage('Password reset email sent', 3500));
         }, errors => {
             for (const key in errors) {
                 this.formErrors[key] = [];
