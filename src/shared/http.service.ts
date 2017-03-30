@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
-//import {environment} from '../../environments/environment';
+import { ENV } from "../environment/env";
 
 
 @Injectable()
@@ -138,19 +138,8 @@ export class HttpService extends Http {
 
     private onCatch(error: any): Observable<any> {
         console.log('onCatch');
-
-        let errMsg: string;
-        if (error instanceof Response) {
-            const body = error.json() || '';
-            this.parseError(error.status);
-            const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-        } else {
-            errMsg = error.message ? error.message : error.toString();
-        }
         // TODO: display message if it's a server error
         return Observable.throw(error);
-
     }
 
     private onSubscribeSuccess(res: Response): void {
@@ -187,11 +176,13 @@ export class HttpService extends Http {
         });
     }
 
-    private parseError(code: any) {
+    private parseError(code: any, url: string) {
         switch (code) {
             case 401:
-                this.logout();
-                this.isAuthenticatedObserver.next(true);
+                if (url.indexOf(ENV) === 0) {
+                    this.logout();
+                    this.isAuthenticatedObserver.next(true);
+                }
                 break;
             default:
                 break;
