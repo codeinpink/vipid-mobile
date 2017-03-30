@@ -39,13 +39,18 @@ export class ContactAddMenuPage {
         }).then((barcodeData) => {
             if (barcodeData.cancelled === false) {
                 this.shareableProfileService.decodeProfileURL(barcodeData.text).subscribe(data => {
-                    console.log('opening profile');
                     let contactFormData = new ContactFormData();
                     contactFormData.profile = data.profile;
                     contactFormData.referral = data.unique_link;
                     this.nav.push(SharedProfileViewPage, contactFormData);
                 }, errors => {
-                    console.log(errors);
+                    let alert = this.alertCtrl.create({
+                        title: 'Profile Not Found',
+                        subTitle: 'The profile associated with that code could not be found.',
+                        buttons: ['OK']
+                    });
+
+                    alert.present();
                 });
             }
         }, (error) => {
@@ -55,16 +60,7 @@ export class ContactAddMenuPage {
                 buttons: ['OK']
             });
 
-            this.shareableProfileService.decodeProfileURL('4cc91dcc-1303-4d22-b317-86069a60b4f7').subscribe(data => {
-                console.log('opening profile');
-                let contactFormData = new ContactFormData();
-                contactFormData.profile = data.profile;
-                contactFormData.referral = data.unique_link;
-                this.nav.push(SharedProfileViewPage, contactFormData);
-            }, errors => {
-                console.log(errors);
-            });
-            //alert.present();
+            alert.present();
         });
     }
 }

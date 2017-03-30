@@ -26,11 +26,13 @@
             <ion-icon *ngIf="!isLoggedInWithLinkedIn" color="faintgrey" name="link" item-right></ion-icon>
             <ion-icon *ngIf="isLoggedInWithLinkedIn" color="primary" name="link" item-right></ion-icon>
         </ion-item>
+        <!--
         <ion-item-divider>Support</ion-item-divider>
         <ion-item>
             <ion-icon name="bug" color="secondary" item-left></ion-icon>
             Report a Problem
         </ion-item>
+        -->
     </ion-item-group>
 
     <button ion-button full color="danger" (click)="onLogoutClick()" class="logout-button">Log Out</button>

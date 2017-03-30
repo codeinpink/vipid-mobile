@@ -46,7 +46,6 @@ export class OAuthAccessTokenService {
                 });
             });
         }, (error) => {
-            this.clearLinkedInConnection();
             console.log(error);
         });
     }
@@ -96,7 +95,6 @@ export class OAuthAccessTokenService {
         });
 
         return this.oauth.logInVia(outlookProvider).then((data: any) => {
-            console.log(data);
             return new Promise(resolve => {
                 this.getOutlookTokenFromServer(data.code).subscribe(token => {
                     console.log('token ' + token);
@@ -107,7 +105,6 @@ export class OAuthAccessTokenService {
             });
         }, (error) => {
             this.clearOutlookToken();
-            console.log(error);
         });
     }
 
@@ -133,12 +130,6 @@ export class OAuthAccessTokenService {
         });
     }
 
-    // so someone can tell us that our token has expired; in the future we should
-    // subscribe to HttpService's errors or something so we know when our token has expired ourselves
-    public clearLinkedInConnection() {
-        localStorage.removeItem('is_linkedin_connected');
-        localStorage.removeItem('linkedin_expiration');
-    }
 
     // so someone can tell us that our token has expired; in the future we should
     // subscribe to HttpService's errors or something so we know when our token has expired ourselves
