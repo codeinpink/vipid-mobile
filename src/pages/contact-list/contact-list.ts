@@ -58,8 +58,16 @@ export class ContactListPage {
     getContacts() {
         this.numOutstanding += 1;
         this.contactSubscription = this.contactService.getContacts().subscribe(contacts => {
-            this.contacts = contacts;
-            this.filteredContacts = contacts;
+            this.contacts = contacts.sort((a, b) => {
+                if (a.profile.first_name > b.profile.first_name) {
+                    return 1;
+                } else if (a.profile.first_name < b.profile.first_name) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+            this.filteredContacts = this.contacts;
             this.contactList.next(this.filteredContacts);
 
             this.updateRefreshStatus();
