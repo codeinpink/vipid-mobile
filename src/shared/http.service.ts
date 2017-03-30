@@ -4,6 +4,7 @@ import {LoadingController} from 'ionic-angular';
 import { Events } from 'ionic-angular';
 import {Observable} from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
+import { NotificationManager } from '../providers/notification-manager/notification-manager';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -22,7 +23,8 @@ export class HttpService extends Http {
 
     private API_TOKEN = 'api_token';
 
-    constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController, public events: Events, public storage: Storage) {
+    constructor(backend: XHRBackend, options: RequestOptions, private loadingCtrl: LoadingController, public events: Events,
+    public storage: Storage, private nm: NotificationManager) {
         super(backend, options);
 
         this.storage.get(this.API_TOKEN).then((token) => {
@@ -182,6 +184,12 @@ export class HttpService extends Http {
                     this.logout();
                     this.isAuthenticatedObserver.next(true);
                 }
+                break;
+            case 503:
+                this.nm.showFailureMessage('The server is currently unavailable');
+                break;
+            case 500:
+                this.nm.showFailureAlert('Error', 'An unexpected error has occured. Please try again later.');
                 break;
             default:
                 break;

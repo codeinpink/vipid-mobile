@@ -13,7 +13,7 @@ export const routesConfig = {
   "importOutlookContactsUrl" : "api/contacts/import_outlook_contacts/",
   "groupsUrl"  : "api/contact-groups/",
   "grouptDetailUrl"  : "api/contact-groups/{ID}/",
-  "userProfilesUrl"  : "api/user-profiles/",
+  "userProfilesUrl"  : "api/users/",
   "userProfileDetailUrl"  : "api/user-profiles/{ID}/",
   "userProfileRefreshUrl"  : "api/user-profiles/{ID}/refresh/",
   "shareableProfilesUrl"  : "api/shareable-profiles/",
