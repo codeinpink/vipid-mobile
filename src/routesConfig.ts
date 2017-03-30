@@ -14,8 +14,6 @@ export const routesConfig = {
   "groupsUrl"  : "api/contact-groups/",
   "grouptDetailUrl"  : "api/contact-groups/{ID}/",
   "userProfilesUrl"  : "api/users/",
-  "userProfileDetailUrl"  : "api/user-profiles/{ID}/",
-  "userProfileRefreshUrl"  : "api/user-profiles/{ID}/refresh/",
   "shareableProfilesUrl"  : "api/shareable-profiles/",
   "shareableProfileDetailUrl"  : "api/shareable-profiles/{ID}/",
   "shareableProfileDecodeUrl"  : "api/shareable-profiles/{ID}/decode_profile_url/"
