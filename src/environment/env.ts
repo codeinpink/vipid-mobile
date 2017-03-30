@@ -1,1 +1,1 @@
-export const ENV = "http://localhost:8000/"
+export const ENV = "https://www.vipidapp.com/"
