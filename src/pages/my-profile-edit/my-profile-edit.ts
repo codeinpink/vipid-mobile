@@ -29,13 +29,6 @@ export class MyProfileEditPage {
     doRefresh(refresher) {
         this.settings.refresh();
         refresher.complete();
-        /*
-        this.userProfileService.refreshProfileData(8).subscribe(data => {
-            console.log(data);
-            this.profile = data;
-            refresher.complete();
-        });
-        */
     }
 
     ngOnInit() {

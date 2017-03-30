@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, AlertController} from 'ionic-angular';
 import {NFC, Ndef} from 'ionic-native';
-import {ShareProfilePage} from '../share-profile/share-profile';
 import { ContactPermissions } from '../../shared/contact-permissions.model';
 
 
@@ -18,7 +17,7 @@ export class NfcAddPage {
 
     continue() {
         let permissions = new ContactPermissions();
-        this.navCtrl.push(ShareProfilePage, {permissions: permissions, isCreating: true});
+        //this.navCtrl.push(ShareProfilePage, {permissions: permissions, isCreating: true});
     }
 
     onNfcTagReceived() {

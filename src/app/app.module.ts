@@ -39,7 +39,6 @@ import { ShareableProfileListPage } from '../pages/shareable-profile-list/sharea
 import { SharedProfileViewPage } from '../pages/shared-profile-view/shared-profile-view';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { UserFindPage } from '../pages/user-find/user-find';
-import { UserFindResultPage } from '../pages/user-find-result/user-find-result';
 import { UserSettingsPage } from '../pages/user-settings/user-settings';
 import { AccountInformationPage } from '../pages/user-settings/account-information/account-information';
 import { ChangePasswordPage } from '../pages/user-settings/change-password/change-password';
@@ -107,7 +106,6 @@ import {RoutesConfigService} from "../shared/routes-config-service";
     SharedProfileViewPage,
     SignUpPage,
     UserFindPage,
-    UserFindResultPage,
     UserSettingsPage,
     AccountInformationPage,
     ChangePasswordPage,
@@ -161,7 +159,6 @@ import {RoutesConfigService} from "../shared/routes-config-service";
     SharedProfileViewPage,
     SignUpPage,
     UserFindPage,
-    UserFindResultPage,
     UserSettingsPage,
     AccountInformationPage,
     ChangePasswordPage

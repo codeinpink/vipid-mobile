@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserProfileService } from '../../providers/user-profile/user-profile';
-import { UserFindResultPage } from '../user-find-result/user-find-result';
 import { SharedProfileViewPage } from '../shared-profile-view/shared-profile-view';
 import { ContactFormData } from '../../shared/contact-form-data.model';
 
