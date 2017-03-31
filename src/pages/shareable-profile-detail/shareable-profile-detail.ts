@@ -22,7 +22,7 @@ export class ShareableProfileDetailPage {
     }
 
     getProfileLink(profile) {
-        return 'http://vipidapp.com/profiles/' + profile.unique_link + '/';
+        return 'https://vipidapp.com/profiles/' + profile.unique_link + '/';
     }
 
     onQRScanClick() {
