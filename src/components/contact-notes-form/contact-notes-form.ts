@@ -32,7 +32,8 @@ export class ContactNotesForm {
     }
 
     onTagAdded(tag) {
-
+        let tags = this.form.controls['tags'].value;
+        this.form.controls['tags'].setValue(tags);
     }
 
     onTagRemoved(tag) {
