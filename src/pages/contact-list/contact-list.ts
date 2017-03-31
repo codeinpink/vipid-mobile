@@ -109,6 +109,8 @@ export class ContactListPage {
             this.refresher.complete();
             this.nm.showSuccessMessage('Refreshed');
         }
+
+        console.log(this.numOutstanding);
     }
 
     onPersonAddClick() {
@@ -172,5 +174,10 @@ export class ContactListPage {
     ngOnDestroy() {
         this.contactSubscription.unsubscribe();
         this.contactRequestSubscription.unsubscribe();
+        this.numOutstanding = 0;
+
+        if (this.refresher) {
+            this.refresher.complete();
+        }
     }
 }
