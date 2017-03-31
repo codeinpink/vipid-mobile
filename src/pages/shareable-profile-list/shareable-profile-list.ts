@@ -35,6 +35,45 @@ export class ShareableProfileListPage {
             });
         }
     }
+
+    getPermissions(profile) {
+        let perms = '';
+
+        if (profile.can_view_phone_number) {
+            perms = perms + 'Phone Number ';
+        }
+
+        if (profile.can_view_website) {
+            perms = perms + 'Website ';
+        }
+
+        if (profile.can_view_linkedin) {
+            perms = perms + 'LinkedIn ';
+        }
+
+        if (profile.can_view_github) {
+            perms = perms + 'GitHub ';
+        }
+
+        if (profile.can_view_twitter) {
+            perms = perms + 'Twitter ';
+        }
+
+        if (profile.can_view_facebook) {
+            perms = perms + 'Facebook ';
+        }
+
+        if (profile.can_view_instagram) {
+            perms = perms + 'Instagram ';
+        }
+
+        if (profile.can_view_youtube) {
+            perms = perms + 'Youtube ';
+        }
+
+        return perms;
+    }
+
     doRefresh(refresher) {
         this.refresher = refresher;
         this.getProfiles();
