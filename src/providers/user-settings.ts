@@ -8,18 +8,22 @@ import 'rxjs/add/operator/publishReplay';
 import { ReplaySubject } from 'rxjs/Rx';
 import { Profile } from '../shared/profile.model';
 import { UserSettings as Settings } from '../shared/user-settings.model';
+import { RoutesConfigService } from "../shared/routes-config-service";
+
 
 @Injectable()
 export class UserSettings {
     private _settings: Settings = new Settings();
     private settings: ReplaySubject<Settings> = new ReplaySubject<Settings>(1);
 
-    private settingsUrl = 'http://localhost:8000/rest-auth/user/';
-    private settingsRefreshUrl = 'http://localhost:8000/rest-auth/user/refresh/';
+    private settingsUrl;
+    private settingsRefreshUrl;
 
-    public settingsA: ReplaySubject<Settings>;
 
-    constructor(public http: HttpService, public events: Events) {
+    constructor(public http: HttpService, public events: Events, routes: RoutesConfigService) {
+        this.settingsUrl = routes.routes.settingsUrl;
+        this.settingsRefreshUrl = routes.routes.settingsRefreshUrl;
+
         this.events.subscribe('user:login', () => {
             // clear settings so they will get refreshed
             this.settings = new ReplaySubject(1);

@@ -4,14 +4,18 @@ import {HttpService} from '../../shared/http.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {ContactPermissions} from '../../shared/contact-permissions.model';
+import { RoutesConfigService } from "../../shared/routes-config-service";
 
 
 @Injectable()
 export class ContactPermissionsService {
-    private contactPermissionsUrl = 'http://localhost:8000/api/contact-permissions/';
-    private contactPermissionsDetailUrl = this.contactPermissionsUrl + '{ID}' + '/';
+    private contactPermissionsUrl;
+    private contactPermissionsDetailUrl;
 
-    constructor(private http: HttpService) {}
+    constructor(private http: HttpService, routes: RoutesConfigService) {
+        this.contactPermissionsUrl = routes.routes.contactPermissionsUrl;
+        this.contactPermissionsDetailUrl = routes.routes.contactPermissionsDetailUrl;
+    }
 
     getContactPermissions(id: number) {
         return this.http.get(this.contactPermissionsDetailUrl.replace('{ID}', id.toString())).map(this.extractData)

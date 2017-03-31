@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import {ShareableProfile} from '../../shared/shareable-profile.model';
+import { RoutesConfigService } from "../../shared/routes-config-service";
 
 
 @Injectable()
@@ -12,11 +13,15 @@ export class ShareableProfileService {
     private _profiles: ShareableProfile[];
     private profiles: ReplaySubject<ShareableProfile[]> = new ReplaySubject<ShareableProfile[]>(1);
 
-    private shareableProfilesUrl = 'http://localhost:8000/api/shareable-profiles/';
-    private shareableProfileDetailUrl = this.shareableProfilesUrl + '{ID}' + '/';
-    private shareableProfileDecodeUrl = this.shareableProfilesUrl + 'decode_profile_url/';
+    private shareableProfilesUrl;
+    private shareableProfileDetailUrl;
+    private shareableProfileDecodeUrl;
 
-    constructor(private http: HttpService) {}
+    constructor(private http: HttpService, routes: RoutesConfigService) {
+        this.shareableProfilesUrl = routes.routes.shareableProfilesUrl;
+        this.shareableProfileDetailUrl = routes.routes.shareableProfileDetailUrl;
+        this.shareableProfileDecodeUrl = routes.routes.shareableProfileDecodeUrl;
+    }
 
 
     public getProfiles(forceRefresh?: boolean) {

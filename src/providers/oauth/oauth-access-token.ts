@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 import { LinkedIn } from '../../providers/oauth/linkedin';
 import { Outlook } from '../../providers/oauth/outlook';
+import { RoutesConfigService } from "../../shared/routes-config-service";
 
 
 @Injectable()
@@ -15,8 +16,14 @@ export class OAuthAccessTokenService {
     private oauth: OauthCordova = new OauthCordova();
     private API_TOKEN = 'api_token';
 
-    constructor(private http: HttpService, private storage: Storage, public events: Events) {
+    private linkedinConnectUrl;
+    private linkedinLoginUrl;
+    private outlookTokenUrl;
 
+    constructor(private http: HttpService, private storage: Storage, public events: Events, routes: RoutesConfigService) {
+        this.linkedinConnectUrl = routes.routes.linkedinConnectUrl;
+        this.linkedinLoginUrl = routes.routes.linkedinLoginUrl;
+        this.outlookTokenUrl = routes.routes.outlookTokenUrl;
     }
 
     // isAuthenticationSource = should the token returned be set as the token for our API?
@@ -59,9 +66,9 @@ export class OAuthAccessTokenService {
         let url = '';
 
         if (isConnecting) {
-            url = 'http://localhost:8000/rest-auth/connect_linkedin/'
+            url = this.linkedinConnectUrl;
         } else {
-            url = 'http://localhost:8000/rest-auth/linkedin/'
+            url = this.linkedinLoginUrl;
         }
 
         return this.http.post(url, data).map(res => {
@@ -117,7 +124,7 @@ export class OAuthAccessTokenService {
             code: code
         };
 
-        return this.http.post('http://localhost:8000/api/get-outlook-token/', data).map(res => {
+        return this.http.post(this.outlookTokenUrl, data).map(res => {
             let data = res.json();
             let token = data.access_token;
             let expiration = Date.now() + data.expires_in;
