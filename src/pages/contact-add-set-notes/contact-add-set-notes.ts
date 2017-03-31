@@ -5,6 +5,7 @@ import { ContactService } from '../../shared/contact.service';
 import { ContactRequestService } from '../../shared/contact-request.service';
 import { ContactRequest } from '../../shared/contact-request.model';
 import { ContactListPage } from '../contact-list/contact-list';
+import { NotificationManager } from '../../providers/notification-manager/notification-manager';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class ContactAddSetNotesPage {
     valid: boolean = true;
 
     constructor(private navCtrl: NavController, private alertCtrl: AlertController, private navParams: NavParams,
-    private contactService: ContactService, private crService: ContactRequestService) {
+    private contactService: ContactService, private crService: ContactRequestService, private nm: NotificationManager) {
 
     }
 
@@ -31,7 +32,9 @@ export class ContactAddSetNotesPage {
                 }, error => this.handleAddError(error));
             } else if (this.data.referral) {
                 this.contactService.addReferral(this.data).subscribe(_ => {
-                    this.navCtrl.setRoot(ContactListPage);
+                    this.navCtrl.popTo(this.navCtrl.getByIndex(this.data.popDestination)).then(_ => {
+                        this.nm.showSuccessMessage('Contact added');
+                    });
                 }, error => this.handleAddError(error));
             } else {
                 let request = new ContactRequest();

@@ -15,7 +15,21 @@
 
 <ion-content padding class="shareable-profile-detail">
     <div *ngIf="profile">
-        <qr-code [value]="getProfileLink(profile)" [size]="300"></qr-code>
-        <shareable-profile-form [permissions]="profile" [disabled]="true" (onChanged)="onChanged($event)"></shareable-profile-form>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-12>
+                    <qr-code [value]="getProfileLink(profile)" [size]="300"></qr-code>
+                    <div style="border-bottom: 1px solid #dedede; padding: 10px;"></div>
+                    <ion-fab edge right bottom>
+                        <button ion-fab (click)="onQRScanClick()">
+                            <ion-icon name="qr-scanner"></ion-icon>
+                        </button>
+                    </ion-fab>
+                </ion-col>
+                <ion-col col-12>
+                    <shareable-profile-form [permissions]="profile" [disabled]="true" (onChanged)="onChanged($event)"></shareable-profile-form>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </div>
 </ion-content>
