@@ -104,7 +104,6 @@ export class OAuthAccessTokenService {
         return this.oauth.logInVia(outlookProvider).then((data: any) => {
             return new Promise(resolve => {
                 this.getOutlookTokenFromServer(data.code).subscribe(token => {
-                    console.log('token ' + token);
                     resolve(token);
                 }, error => {
                     resolve(error);
@@ -129,7 +128,6 @@ export class OAuthAccessTokenService {
             let token = data.access_token;
             let expiration = Date.now() + data.expires_in;
 
-            console.log('token: ' + token + ', expiration: ' + expiration);
             localStorage.setItem('outlook_access_token', token);
             localStorage.setItem('outlook_expiration', expiration);
 

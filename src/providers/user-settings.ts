@@ -37,6 +37,9 @@ export class UserSettings {
         this.events.subscribe('connect:linkedin', () => {
             this._settings.linkedin_connected = true;
             this.settings.next(this._settings);
+
+            // clear settings so the profile will get updated
+            this.settings = new ReplaySubject(1);
         });
     }
 
