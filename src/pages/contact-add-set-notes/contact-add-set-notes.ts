@@ -67,6 +67,7 @@ export class ContactAddSetNotesPage {
 
     onChanged(ev) {
         this.data.about = ev.data.about;
+        this.data.meet = ev.data.meet;
         this.data.tags = ev.data.tags;
         this.valid = ev.valid;
     }
