@@ -50,27 +50,22 @@ export class HttpService extends Http {
     }
 
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        url = this.updateUrl(url);
         return this.intercept(super.get(url, this.getRequestOptionArgs(options)));
     }
 
     post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-        url = this.updateUrl(url);
         return this.intercept(super.post(url, body, this.getRequestOptionArgs(options)));
     }
 
     put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-        url = this.updateUrl(url);
         return this.intercept(super.put(url, body, this.getRequestOptionArgs(options)));
     }
 
     patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-        url = this.updateUrl(url);
         return this.intercept(super.patch(url, body, this.getRequestOptionArgs(options)));
     }
 
     delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        url = this.updateUrl(url);
         return this.intercept(super.delete(url, this.getRequestOptionArgs(options)));
     }
 
@@ -89,13 +84,6 @@ export class HttpService extends Http {
             .finally(() => {
                 this.onFinally();
             });
-    }
-
-    private updateUrl(req: string) {
-        /* use when all services have been updated to remove the origin from their URLs
-        return environment.origin + req;
-        */
-        return req;
     }
 
     private getRequestOptionArgs(options?: RequestOptionsArgs) : RequestOptionsArgs {
@@ -123,7 +111,7 @@ export class HttpService extends Http {
     }
 
     private onIntercept(): void {
-        console.log('onIntercept');
+        //console.log('onIntercept');
         this.pendingRequests++;
 
         if (!this.isLoading) {
@@ -137,14 +125,14 @@ export class HttpService extends Http {
     }
 
     private onCatch(error: any): Observable<any> {
-        console.log('onCatch');
+        //console.log('onCatch');
         this.parseError(error.status, error.url);
         // TODO: display message if it's a server error
         return Observable.throw(error);
     }
 
     private onSubscribeSuccess(res: Response): void {
-        console.log('onSubscribeSuccess');
+        //console.log('onSubscribeSuccess');
         /*
         let data = res.json();
 
@@ -154,7 +142,7 @@ export class HttpService extends Http {
     }
 
     private onSubscribeError(error: any): void {
-        console.log('onSubscribeError');
+        //console.log('onSubscribeError');
         /*this.toastService.showMessage({ message: error, duration: 3000 });*/
     }
 
