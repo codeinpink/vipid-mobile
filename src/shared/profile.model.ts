@@ -24,7 +24,7 @@ export class Profile {
             this.last_name = '';
             this.email = '';
             this.picture = '';
-            this.phone_number = null;
+            this.phone_number = '';
             this.title = '';
             this.industry = '';
             this.company = '';
