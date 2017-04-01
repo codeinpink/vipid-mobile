@@ -103,6 +103,7 @@ export class ContactListPage {
     }
 
     updateRefreshStatus() {
+        // cors pre-flight requests
         if (this.numOutstanding !== 0) {
             this.numOutstanding = this.numOutstanding - 1;
         }
@@ -111,8 +112,6 @@ export class ContactListPage {
             this.refresher.complete();
             this.nm.showSuccessMessage('Refreshed');
         }
-
-        console.log(this.numOutstanding);
     }
 
     onPersonAddClick() {
