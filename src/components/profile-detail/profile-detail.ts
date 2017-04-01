@@ -25,6 +25,10 @@ export class ProfileDetail {
         let browser = this.iab.create(url, '_system');
     }
 
+    openEmail(email) {
+        let browser = this.iab.create('mailto:' + email, '_system');
+    }
+
     isValidURL(text, domain) {
         if (text.indexOf('http') === -1) {
             return true;

@@ -32,6 +32,10 @@
         <ion-item [hidden]="hideMissing(profile.email)">
             <ion-label stacked>Email</ion-label>
             <ion-input type="text" value="{{ profile.email }}" [disabled]="disabled"></ion-input>
+            <button *ngIf="profile.email" ion-button outline item-right icon-left (click)="openEmail(profile.email)">
+                <ion-icon name="open"></ion-icon>
+                Send Email
+            </button>
         </ion-item>
         <ion-item [hidden]="hideMissing(profile.phone_number)">
             <ion-label stacked>Phone Number</ion-label>
