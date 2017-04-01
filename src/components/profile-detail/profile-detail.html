@@ -40,22 +40,42 @@
         <ion-item [hidden]="hideMissing(profile.website)">
             <ion-label stacked>Website</ion-label>
             <ion-input type="text" value="{{ profile.website }}" disabled></ion-input>
+            <button *ngIf="profile.website" ion-button outline item-right icon-left (click)="openURL(profile.website)">
+                <ion-icon name="open"></ion-icon>
+                Open
+            </button>
         </ion-item>
         <ion-item [hidden]="hideMissing(profile.linkedin)">
             <ion-label stacked>Linkedin</ion-label>
             <ion-input type="text" value="{{ profile.linkedin }}" disabled></ion-input>
+            <button *ngIf="profile.linkedin" ion-button outline item-right icon-left (click)="openURL(profile.linkedin)">
+                <ion-icon name="open"></ion-icon>
+                Open
+            </button>
         </ion-item>
         <ion-item [hidden]="hideMissing(profile.twitter)">
             <ion-label stacked>Twitter</ion-label>
             <ion-input type="text" value="{{ profile.twitter }}" disabled></ion-input>
+            <button *ngIf="profile.twitter && isValidURL(profile.twitter, 'twitter')" ion-button outline item-right icon-left (click)="openURL(getURL(profile.twitter, 'twitter.com'))">
+                <ion-icon name="open"></ion-icon>
+                Open
+            </button>
         </ion-item>
         <ion-item [hidden]="hideMissing(profile.github)">
             <ion-label stacked>Github</ion-label>
             <ion-input type="text" value="{{ profile.github }}" disabled></ion-input>
+            <button *ngIf="profile.github && isValidURL(profile.github, 'github')" ion-button outline item-right icon-left (click)="openURL(getURL(profile.github, 'github.com'))">
+                <ion-icon name="open"></ion-icon>
+                Open
+            </button>
         </ion-item>
         <ion-item [hidden]="hideMissing(profile.facebook)">
             <ion-label stacked>Facebook</ion-label>
             <ion-input type="text" value="{{ profile.facebook }}" disabled></ion-input>
+            <button *ngIf="profile.facebook" ion-button outline item-right icon-left (click)="openURL(profile.facebook)">
+                <ion-icon name="open"></ion-icon>
+                Open
+            </button>
         </ion-item>
         <ion-item [hidden]="hideMissing(profile.youtube)">
             <ion-label stacked>Youtube</ion-label>
@@ -64,6 +84,10 @@
         <ion-item [hidden]="hideMissing(profile.instagram)">
             <ion-label stacked>Instagram</ion-label>
             <ion-input type="text" value="{{ profile.instagram }}" disabled></ion-input>
+            <button *ngIf="profile.instagram && isValidURL(profile.instagram, 'instagram')" ion-button outline item-right icon-left (click)="openURL(getURL(profile.instagram, 'instagram.com'))">
+                <ion-icon name="open"></ion-icon>
+                Open
+            </button>
         </ion-item>
     </ion-list>
 </div>
