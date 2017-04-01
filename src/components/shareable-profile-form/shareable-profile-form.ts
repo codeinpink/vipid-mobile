@@ -19,7 +19,7 @@ export class ShareableProfileForm {
     }
 
     getProfileLink(permissions) {
-        return 'http://vipidapp.com/profiles/' + permissions.unique_link + '/';
+        return 'https://vipidapp.com/profiles/' + permissions.unique_link + '/';
     }
 
     ngOnInit() {

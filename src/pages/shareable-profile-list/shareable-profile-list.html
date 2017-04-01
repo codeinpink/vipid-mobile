@@ -18,7 +18,7 @@
             are perfect for career fairs, conferences, and even your resume! Click the plus button to get started!</p>
     </div>
     <ion-list>
-        <ion-item *ngFor="let profile of profiles" (click)="onProfileSelect(profile)">
+        <ion-item *ngFor="let profile of profiles" (click)="onProfileSelect(profile)" text-wrap>
             <ng2-letter-avatar [avatar-data]="profile.title"
                 avatar-char-count="1"
                 avatar-custom-bg-color="white"
@@ -32,7 +32,7 @@
                 item-left>
             </ng2-letter-avatar>
             <h2>{{ profile.title }}</h2>
-            <h3>{{ profile.unique_link }}</h3>
+            <p>{{ getPermissions(profile) }}</p>
         </ion-item>
     </ion-list>
     <ion-fab right bottom>

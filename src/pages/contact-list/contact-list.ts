@@ -103,14 +103,15 @@ export class ContactListPage {
     }
 
     updateRefreshStatus() {
-        this.numOutstanding = this.numOutstanding - 1;
+        // cors pre-flight requests
+        if (this.numOutstanding !== 0) {
+            this.numOutstanding = this.numOutstanding - 1;
+        }
 
         if (this.refresher && this.numOutstanding == 0) {
             this.refresher.complete();
             this.nm.showSuccessMessage('Refreshed');
         }
-
-        console.log(this.numOutstanding);
     }
 
     onPersonAddClick() {

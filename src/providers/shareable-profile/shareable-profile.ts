@@ -78,8 +78,14 @@ export class ShareableProfileService {
     }
 
     public decodeProfileURL(url: string) {
+        let parsedUrl = url.replace('https://vipidapp.com/profiles/', '');
+
+        if (parsedUrl[parsedUrl.length - 1] === "/") {
+            parsedUrl = parsedUrl.slice(0, -1);
+        }
+
         let params: URLSearchParams = new URLSearchParams();
-        params.set('url', url);
+        params.set('url', parsedUrl);
         return this.http.get(this.shareableProfileDecodeUrl, {search: params}).map(this.extractData)
             .catch(this.handleError);
     }

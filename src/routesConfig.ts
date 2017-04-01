@@ -16,7 +16,7 @@ export const routesConfig = {
   "userProfilesUrl"  : "api/users/",
   "shareableProfilesUrl"  : "api/shareable-profiles/",
   "shareableProfileDetailUrl"  : "api/shareable-profiles/{ID}/",
-  "shareableProfileDecodeUrl"  : "api/shareable-profiles/{ID}/decode_profile_url/",
+  "shareableProfileDecodeUrl"  : "api/shareable-profiles/decode_profile_url/",
   "settingsUrl" : "rest-auth/user/",
   "settingsRefreshUrl": "rest-auth/user/refresh/",
   "contactPermissionsUrl": "api/contact-permissions/",

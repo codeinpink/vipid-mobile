@@ -17,18 +17,23 @@ export class ContactNotesForm {
 
     constructor(private formBuilder: FormBuilder) {
         this.formErrors = {
-            'about': []
+            'about': [],
+            'meet': []
         };
 
         this.validationMessages = {
             'about': {
                 'maxlength': 'This field cannot exceed 1000 characters.'
             },
+            'meet': {
+                'maxlength': 'This field cannot exceed 80 characters.'
+            },
         };
     }
 
     onTagAdded(tag) {
-
+        let tags = this.form.controls['tags'].value;
+        this.form.controls['tags'].setValue(tags);
     }
 
     onTagRemoved(tag) {
@@ -51,6 +56,7 @@ export class ContactNotesForm {
         this.form = this.formBuilder.group({
             profile: [this.contact.profile],
             about: [this.contact.about, Validators.maxLength(1000)],
+            meet: [this.contact.meet, Validators.maxLength(80)],
             tags: [formTags]
         });
 

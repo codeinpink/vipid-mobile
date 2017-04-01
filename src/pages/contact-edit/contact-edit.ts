@@ -29,6 +29,7 @@ export class ContactEditPage implements OnInit {
             this.contact.profile = ev.data;
         } else {
             this.contact.about = ev.data.about;
+            this.contact.meet = ev.data.meet;
             this.contact.tags = ev.data.tags;
         }
 

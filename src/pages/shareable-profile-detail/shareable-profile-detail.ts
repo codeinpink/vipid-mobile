@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
 import { ShareableProfile } from '../../shared/shareable-profile.model';
 import { ShareableProfileService } from '../../providers/shareable-profile/shareable-profile';
 import { ShareableProfileEditPage } from '../shareable-profile-edit/shareable-profile-edit';
 import { PopoverPage } from './popover';
+import { BarcodeScanner } from 'ionic-native';
+import { ContactFormData } from '../../shared/contact-form-data.model';
+import { SharedProfileViewPage } from '../shared-profile-view/shared-profile-view';
 
 
 @Component({
@@ -13,12 +16,46 @@ export class ShareableProfileDetailPage {
     profileSubscription: any;
     profile: ShareableProfile;
 
-    constructor(private navCtrl: NavController, private navParams: NavParams, private shareableProfileService: ShareableProfileService, private popoverCtrl: PopoverController) {
+    constructor(private navCtrl: NavController, private navParams: NavParams, private shareableProfileService: ShareableProfileService,
+    private popoverCtrl: PopoverController, private alertCtrl: AlertController) {
 
     }
 
     getProfileLink(profile) {
-        return 'http://vipidapp.com/profiles/' + profile.unique_link + '/';
+        return 'https://vipidapp.com/profiles/' + profile.unique_link + '/';
+    }
+
+    onQRScanClick() {
+        BarcodeScanner.scan({
+            formats: "QR_CODE",
+            prompt: "Place a QR code inside the scan area"
+        }).then((barcodeData) => {
+            if (barcodeData.cancelled === false) {
+                this.shareableProfileService.decodeProfileURL(barcodeData.text).subscribe(data => {
+                    let contactFormData = new ContactFormData();
+                    contactFormData.profile = data.profile;
+                    contactFormData.referral = data.unique_link;
+                    contactFormData.popDestination = 1;
+                    this.navCtrl.push(SharedProfileViewPage, contactFormData);
+                }, errors => {
+                    let alert = this.alertCtrl.create({
+                        title: 'Profile Not Found',
+                        subTitle: 'The profile associated with that code could not be found.',
+                        buttons: ['OK']
+                    });
+
+                    alert.present();
+                });
+            }
+        }, (error) => {
+            let alert = this.alertCtrl.create({
+                title: 'Error',
+                subTitle: 'The QR Scanner could not be opened.',
+                buttons: ['OK']
+            });
+
+            alert.present();
+        });
     }
 
     onMoreClick(event) {
