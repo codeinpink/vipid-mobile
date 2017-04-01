@@ -40,6 +40,9 @@ export class ContactAddSetNotesPage {
                 let request = new ContactRequest();
                 request.setPermissions(this.data.permissions);
                 request.receiver = this.data.profile.id;
+                request.contact_notes.about = this.data.about;
+                request.contact_notes.meet = this.data.meet;
+                request.contact_notes.tags = this.data.tags;
 
                 this.crService.send(request).subscribe(_ => {
                     this.navCtrl.setRoot(ContactListPage);
