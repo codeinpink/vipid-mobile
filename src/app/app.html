@@ -6,7 +6,7 @@
                     <div *ngIf="!picture" class="image-center profile-picture">
                         <ion-icon name="person"></ion-icon>
                     </div>
-                    <img *ngIf="picture" src="assets/img/profile/profile2.jpg" class="image-center profile-picture">
+                    <img *ngIf="picture" src="{{ picture }}" class="image-center profile-picture">
                     <h2 text-center padding-top>Edit My Profile</h2>
                 </ion-avatar>
             </ion-item>
